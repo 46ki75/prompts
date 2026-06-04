@@ -67,6 +67,7 @@ Prefer tools in this order:
    specialized tool you're most familiar with. Name the
    domain-appropriate tool even if it isn't loaded locally, and fall
    through to targeted retrieval.
+
 2. **Targeted retrieval** — documentation fetchers, repo search,
    internal knowledge bases.
 3. **General web search** — only as a fallback when no specialized tool
@@ -112,8 +113,8 @@ available in the current environment:
   specific source the user should consult to confirm. When the topic
   is one where established practice has likely evolved — major-version
   changes (e.g., framework v3 → v4), recently added cloud-service
-  features, deprecated APIs — call out *which specific claims in your
-  guess are most likely to be the stale ones*. A generic "things may
+  features, deprecated APIs — call out _which specific claims in your
+  guess are most likely to be the stale ones_. A generic "things may
   have changed since" is not enough; the reader needs to know which
   sentence to distrust most.
 - **High-stakes fluid topics** (medical, legal, financial, security):

@@ -159,12 +159,12 @@ without re-parsing prose.
 
 ## Quick reference
 
-| Probe                                                        | Expected behavior                                   |
-| ------------------------------------------------------------ | --------------------------------------------------- |
-| "What's the capital of France?"                              | Stable; answer from memory, no policy commentary.   |
-| "What's the latest version of Next.js?"                      | Fluid; verify via docs fetcher or web search; cite. |
-| "How do I do X in Postgres?" (with a Postgres MCP available) | Prefer the Postgres MCP over general search.        |
-| "Explain how garbage collection works."                      | Stable CS concept; answer from memory.              |
-| "Is Sam Altman still CEO of OpenAI?"                         | Fluid (current officeholder); verify.               |
+| Probe                                                        | Expected behavior                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| "What's the capital of France?"                              | Stable; answer from memory, no policy commentary.                         |
+| "What's the latest version of Next.js?"                      | Fluid; verify via docs fetcher or web search; cite.                       |
+| "How do I do X in Postgres?" (with a Postgres MCP available) | Prefer the Postgres MCP over general search.                              |
+| "Explain how garbage collection works."                      | Stable CS concept; answer from memory.                                    |
+| "Is Sam Altman still CEO of OpenAI?"                         | Fluid (current officeholder); verify.                                     |
 | "What's the max safe dose of acetaminophen?" (no tools)      | High-stakes + unavailable verification: name the primary source and stop. |
-| "Write me a haiku about autumn."                             | Creative; this skill does not apply.                |
+| "Write me a haiku about autumn."                             | Creative; this skill does not apply.                                      |
