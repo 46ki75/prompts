@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly classifies the question as fluid (slang/trending), states verification is required for 2026 status, notes no retrieval tools are available rather than faking a lookup, and clearly separates stale training-data context (rizz's 2022-2024 trajectory) from the unverified 2026 inference with an explicit gap statement."
+}

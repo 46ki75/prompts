@@ -1,0 +1,12 @@
+RFC 7231 (Section 4.3.4) defines PUT as a request that the target resource be created or replaced with the state described by the enclosed representation. Its key semantics:
+
+- Replacement, not partial update — PUT asks the origin server to make the target resource's state equivalent to the representation in the request payload. Partial modification is the job of PATCH (RFC 5789) or POST, not PUT.
+- Create-or-replace — if the target resource does not already exist, the server MAY create one with that URI; if it does exist, the server SHOULD replace it. The response distinguishes these cases: 201 (Created) for a newly created resource, and 200 (OK) or 204 (No Content) for a successful replacement.
+- Idempotent — repeating the same PUT has the same effect as issuing it once. (PUT is idempotent but not safe.)
+- Not cacheable — responses to PUT are not cacheable; however, a successful PUT invalidates cached responses for the effective request URI.
+- Content-* and other header semantics — the server MUST NOT silently ignore Content-* headers it does not understand; if it cannot honor them, it must respond with 501 (Not Implemented). A PUT request that includes Content-Range header fields is to be rejected with 400 (Bad Request), because partial-content semantics are not defined for PUT.
+- Comparison with POST — PUT targets a specific resource identified by the request URI and replaces its state, whereas POST submits data to be processed by the target resource according to the resource's own semantics (often creating a subordinate resource whose URI the server chooses).
+- Server discretion — the server may transform or reject the representation (for example, normalizing formats or rejecting unsupported media types with 415); the resource state after a successful PUT is not guaranteed to be byte-identical to what was sent, only semantically equivalent from the server's perspective.
+- Concurrency control — PUT is commonly paired with conditional request headers (If-Match, If-Unmodified-Since, defined in RFC 7232) to avoid the lost-update problem.
+
+Note that RFC 7231 has since been obsoleted by RFC 9110 (HTTP Semantics, 2022), which carries forward essentially the same PUT semantics in its Section 9.3.4.

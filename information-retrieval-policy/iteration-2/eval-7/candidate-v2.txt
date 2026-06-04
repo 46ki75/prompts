@@ -1,0 +1,23 @@
+RFC 7231 (Section 4.3.4) defines the semantics of the HTTP PUT method as follows:
+
+PUT requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload. The key properties it specifies are:
+
+- Replacement semantics: A successful PUT suggests that a subsequent GET on the same target resource will return an equivalent representation (modulo any server-side transformations the origin server has documented).
+
+- Create-or-replace: If the target resource does not exist, the origin server can create it with that state (responding with 201 Created); if it already exists, the origin server replaces its state to reflect the enclosed representation (responding with 200 OK or 204 No Content).
+
+- Idempotent: PUT is defined as idempotent — multiple identical PUT requests have the same effect as a single one.
+
+- Not safe: PUT modifies server state, so it is not a "safe" method.
+
+- Not cacheable: Responses to PUT are not cacheable (though a PUT can invalidate cached responses for the target URI).
+
+- Distinction from POST: The fundamental difference is that the URI in a PUT request identifies the entity enclosed with the request — the client is asking the server to store the supplied representation under that URI — whereas POST identifies a resource that will handle the enclosed representation as a subordinate.
+
+- Partial updates: PUT is not defined for partial modifications; RFC 7231 explicitly points to PATCH (RFC 5789) for that purpose. A server that receives a PUT with a Content-Range header may reject it (409 Conflict is suggested) because PUT bodies are not meant to be partial.
+
+- Unrecognized header fields: An origin server SHOULD verify that the PUT representation is consistent with any constraints the server has for the target resource, and SHOULD NOT silently ignore unrecognized header fields (it ought to either store them as metadata or respond with an appropriate error such as 501 Not Implemented).
+
+- Conflict handling: If the server cannot or will not reconcile the new representation with the target resource's current state (e.g., a versioning conflict), an appropriate error response such as 409 (Conflict) or 415 (Unsupported Media Type) should be sent.
+
+Source: RFC 7231, "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content," Section 4.3.4 (PUT), with related properties summarized from Section 4.2 (Common Method Properties). RFC 7231 is a stable published standard (June 2014); it has since been obsoleted by RFC 9110 (June 2022), but the PUT semantics described above are what RFC 7231 itself specifies.

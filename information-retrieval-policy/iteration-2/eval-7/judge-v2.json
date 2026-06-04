@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate answered the question directly without refusing or deferring to an external fetch, accurately describing PUT's core semantics: create-or-replace at the target URI and idempotent. It also correctly distinguishes PUT from PATCH rather than misrepresenting it as a partial update."
+}

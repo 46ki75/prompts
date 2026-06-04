@@ -1,0 +1,54 @@
+Tailwind CSS configuration is a fluid topic (the standard setup changed significantly between v3 and v4 — v3 centers on a `tailwind.config.js` file with a `theme` / `extend` object, while v4 shifts to a CSS-first `@theme` directive in your stylesheet). A verified, current answer requires retrieval I cannot perform in this environment; the preferred tool would be the `context7` MCP server (resolve `tailwindcss` and query its docs).
+
+Based on training data, not freshly verified, here is the v3-era standard setup:
+
+1. Install and initialize:
+
+```
+npm install -D tailwindcss
+npx tailwindcss init
+```
+
+2. `tailwind.config.js` — extend the default theme rather than replacing it:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50:  '#f5f7ff',
+          500: '#4f46e5',
+          900: '#1e1b4b',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+      },
+      spacing: {
+        '128': '32rem',
+      },
+      borderRadius: {
+        xl: '1rem',
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+Keys directly under `theme` replace defaults; keys under `theme.extend` merge with them — the latter is the standard pattern.
+
+3. Add the Tailwind directives to your CSS entry file:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+In Tailwind v4 the equivalent is done in CSS via `@import "tailwindcss";` and an `@theme { --color-brand-500: #4f46e5; ... }` block instead of `tailwind.config.js`. Confirm which version you are on before copying the above.
+
+Source to verify against: the official Tailwind CSS documentation at tailwindcss.com (Theme Configuration page), ideally fetched via the `context7` MCP server for the version you have installed.

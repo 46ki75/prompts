@@ -1,0 +1,42 @@
+Tailwind's theme configuration has changed significantly between major versions, and verifying the current standard setup requires retrieval I cannot perform in this environment (the appropriate tool would be the `context7` MCP server for library/framework documentation). Please confirm against the official Tailwind CSS documentation at https://tailwindcss.com/docs/theme before relying on the snippet below.
+
+Based on training data through my knowledge cutoff, not freshly verified:
+
+For Tailwind CSS v3.x, the standard setup is a `tailwind.config.js` file at the project root:
+
+```js
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{html,js,jsx,ts,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50:  '#f5f8ff',
+          500: '#3b5bdb',
+          900: '#1a2a6c',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+      spacing: {
+        '128': '32rem',
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+Use `theme.extend` to add to defaults; use `theme` directly only to fully replace a key.
+
+Claims most likely to be stale:
+- **The config-file approach itself.** Tailwind v4 shifted the recommended configuration model toward a CSS-first approach using `@theme { ... }` directives inside your stylesheet (with `@import "tailwindcss";`), and `tailwind.config.js` is no longer the default path. If you are on v4, the snippet above is the wrong shape entirely.
+- **The `content` globs.** v4 auto-detects template sources, so explicit `content` arrays may no longer be required.
+- **PostCSS / build integration.** The plugin package and PostCSS wiring changed in v4 (`@tailwindcss/postcss`, dedicated Vite plugin).
+
+Consult the official Tailwind CSS docs (or query `context7` for `tailwindcss`) to confirm which version's setup applies to your project.

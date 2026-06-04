@@ -1,0 +1,7 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate cites a primary docs.aws.amazon.com URL, includes a clear freshness marker (retrieved 2026-05-31 with GA timing), accurately describes AgentCore's purpose, and lists all canonical core services (Runtime, Memory, Identity, Gateway, Code Interpreter, Browser, Observability) plus newer ones (Payments, Evaluations, Policy, Registry) without fabrications.",
+  "grounded_in_docs": true,
+  "cited_aws_primary_source": true,
+  "included_freshness_marker": true
+}

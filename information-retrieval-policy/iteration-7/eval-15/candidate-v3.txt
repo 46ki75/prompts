@@ -1,0 +1,7 @@
+Line 2 returns a reversed copy of `x` using slice notation.
+
+`x[::-1]` is a full slice with a step of `-1`:
+- start and stop are omitted, so it spans the entire sequence
+- the step `-1` walks through it backwards
+
+So if `x` is `"hello"`, it returns `"olleh"`; if `x` is `[1, 2, 3]`, it returns `[3, 2, 1]`. This works on any sliceable sequence (strings, lists, tuples, bytes), and it produces a new object — the original `x` is not modified.

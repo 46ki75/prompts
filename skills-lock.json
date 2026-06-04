@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "prompt-evaluation-claude-code": {
+      "source": "46ki75/skills",
+      "sourceType": "github",
+      "skillPath": "skills/prompt-evaluation-claude-code/SKILL.md",
+      "computedHash": "df5b884a5fcaa914dd76f19ce01daf8a83f7b19e25d6fc4cb6e25507de31321f"
+    }
+  }
+}

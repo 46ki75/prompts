@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate answered 'Paris' directly without demanding verification, tool calls, or treating the geography fact as fluid. This satisfies all must-do and avoids all must-not-do criteria."
+}

@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly classifies the question as fluid, states verification is required, marks the Sam Altman answer as 'unverified internal knowledge' from training data, and directs the user to verify via OpenAI's official site or current reputable news. No sources are fabricated."
+}

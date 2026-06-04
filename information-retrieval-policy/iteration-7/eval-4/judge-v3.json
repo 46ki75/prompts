@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The candidate answers directly from knowledge, treating mark-and-sweep as classical CS. It clearly explains both phases (mark from roots, sweep the heap), covers key properties (cycle handling, stop-the-world pauses, fragmentation, refinements like tri-color marking), and never defers to web search or demands external verification."}

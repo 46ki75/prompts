@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "Candidate treats the question as fluid, labels the answer as unverified training-data recall, names context7 as the preferred specialized tool, flags specific stale claims (maturity, backend support, schema/codegen API), and points to the upstream tokio-rs/toasty repo as the primary source.",
+  "named_context7": true,
+  "flagged_stale_claims": true
+}

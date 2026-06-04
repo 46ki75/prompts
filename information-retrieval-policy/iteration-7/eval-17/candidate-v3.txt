@@ -1,0 +1,15 @@
+A verified answer here requires retrieval I can't perform in this environment, so the following is based on training data through my cutoff (January 2026) and is not freshly verified.
+
+Yes, CPython still uses the GIL by default. However, the situation has changed meaningfully:
+
+- PEP 703 ("Making the Global Interpreter Lock Optional in CPython") was accepted, and Python 3.13 (released October 2024) introduced an experimental "free-threaded" build (sometimes called `python3.13t` / no-GIL build) that you can opt into at install time. The default build of 3.13 still has the GIL enabled.
+- Python 3.14 continued the rollout; free-threaded mode is moving from "experimental" toward "supported," but the standard interpreter most users install still ships with the GIL active.
+- Removing the GIL is a multi-year migration. The plan is staged: experimental → supported → default → (eventually) GIL removed. As of my cutoff, we are not at "default no-GIL" yet.
+- Other implementations differ: Jython and IronPython have never had a GIL; PyPy has one; GraalPy's behavior depends on the configuration.
+
+Claims most likely to be stale, in order of risk:
+1. The exact status label for free-threaded mode in 3.14 (experimental vs. officially supported) — this designation was actively shifting around my cutoff.
+2. Whether 3.15 or a later release has changed the default build, or set a timeline for GIL removal.
+3. C-extension ecosystem readiness (NumPy, etc.) for free-threaded builds, which was improving rapidly.
+
+To confirm current state, check: the official Python "What's New" pages (https://docs.python.org/3/whatsnew/) for the latest 3.x release, and PEP 703's status section on peps.python.org.

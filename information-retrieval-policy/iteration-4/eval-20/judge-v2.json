@@ -1,0 +1,6 @@
+{
+  "verdict": "incorrect",
+  "reasoning": "The candidate properly hedged with a 'based on training data, not freshly verified' label and provided a primary AWS docs link, but named context7 as the preferred specialized tool instead of the AWS Knowledge MCP server. Per the rubric, naming only context7 is insufficient for AWS service questions.",
+  "named_aws_knowledge_mcp": false,
+  "appropriately_hedged": true
+}

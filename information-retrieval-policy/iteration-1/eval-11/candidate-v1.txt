@@ -1,0 +1,15 @@
+I cannot reliably answer this question in this environment.
+
+Classification under the policy: The status of the war in Ukraine is a **fluid** topic. It concerns an ongoing geopolitical/military situation where the answer can change week to week (ceasefires, negotiations, formal cessation of hostilities, etc.). Per the decision flow, fluid topics must be verified against external sources before stating a factual answer.
+
+Tool availability: In this sandbox I have no `web_search`, no MCP servers, no specialized retrieval tools, and no access to news APIs or primary sources (e.g., official statements from the governments of Ukraine, Russia, the UN, etc.). My only tool is `Write`. I therefore cannot perform the verification the policy requires.
+
+What the policy would have me do if tools were available:
+1. Prefer a specialized source first — e.g., a news/geopolitics MCP or a structured data feed.
+2. Fall back to targeted retrieval against primary sources: official statements from the Ukrainian and Russian governments, UN communications, and vendor-equivalent authoritative outlets (Reuters, AP, BBC) for current status, then cross-check against primary government releases.
+3. Use general web search only as a last resort.
+4. Mark the answer with an "as of [date]" freshness stamp and cite each source.
+
+Stating a gap openly (as the policy requires): My internal knowledge has a training cutoff and may be stale. I will not assert from memory whether the war has ended, because doing so risks a confidently wrong answer on a high-stakes, time-sensitive topic. Today's date is 2026-05-31; the situation may have changed materially since my training data, and I have no means here to verify the current status.
+
+Recommendation: Re-ask this question in an environment with web search or a news-data tool available, or consult a primary source directly (official Ukrainian/Russian government channels, UN Security Council updates, or a major wire service such as Reuters or AP) for the current status as of today.

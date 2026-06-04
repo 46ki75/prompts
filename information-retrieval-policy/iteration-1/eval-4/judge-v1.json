@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly classifies mark-and-sweep as stable per the policy, answers from internal knowledge without refusing or demanding external retrieval, and correctly explains both the mark phase (traversal from roots tagging reachable objects) and the sweep phase (linear heap scan reclaiming unmarked objects and clearing mark bits)."
+}

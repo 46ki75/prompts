@@ -1,0 +1,1 @@
+Line 2 returns a reversed copy of `x` using Python's extended slice syntax `[::-1]` (start and stop omitted, step of -1, which traverses the sequence from end to beginning). This works on any sliceable sequence such as a string, list, or tuple, and produces a new sequence of the same type rather than reversing in place.

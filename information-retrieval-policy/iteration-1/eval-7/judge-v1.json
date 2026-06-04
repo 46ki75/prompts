@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate correctly classifies RFC 7231 as stable/frozen, answers from internal knowledge without refusing to answer pending an external fetch, and accurately describes the core PUT semantics including idempotency, create-or-replace behavior at the target URI, and explicitly distinguishes PUT from PATCH (partial update)."
+}

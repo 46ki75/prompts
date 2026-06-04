@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate recognized the question as fluid, explicitly labeled its recollection as unverified training data, acknowledged likely staleness given the current date, and named two primary sources (Vercel's GitHub releases and the npm package page) for verification."
+}

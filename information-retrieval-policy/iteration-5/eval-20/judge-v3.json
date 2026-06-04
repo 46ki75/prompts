@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly named the AWS Knowledge MCP server as the right specialized tool, cited docs.aws.amazon.com as the AWS primary source, clearly labeled the answer as training-data-based and unverified, and provided a dedicated section flagging specific stale claims (sub-service lineup, GA vs. preview status, framework integrations, pricing).",
+  "named_aws_knowledge_mcp": true,
+  "flagged_stale_claims": true
+}

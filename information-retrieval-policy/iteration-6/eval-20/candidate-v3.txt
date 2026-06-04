@@ -1,0 +1,20 @@
+Amazon Bedrock AgentCore is an AWS agentic platform for building, deploying, and operating AI agents securely at scale, without managing infrastructure. It is framework-agnostic (works with CrewAI, LangGraph, LlamaIndex, Strands Agents, OpenAI Agents SDK, Google ADK, etc.) and model-agnostic (works with foundation models in or outside Amazon Bedrock, including Anthropic Claude, Amazon Nova, OpenAI, Google Gemini, Meta Llama, and Mistral).
+
+It is what it is for: taking AI agents from proof-of-concept to production by providing the "undifferentiated heavy lifting" (runtime, identity/auth, tool connectivity, memory, observability, governance) that teams would otherwise build themselves. The services can be used together or independently.
+
+Core modular services:
+- Runtime — serverless, session-isolated environment for deploying and scaling agents and tools; supports MCP and A2A.
+- Harness — a managed agent loop invokable with a single API call; each session runs in an isolated microVM.
+- Memory — short-term (multi-turn) and long-term (cross-session) context, shareable across agents.
+- Gateway — turns APIs, Lambda functions, and existing services into MCP-compatible tools; connects to existing MCP servers.
+- Identity — agent identity, access, and authentication that integrates with existing IdPs (Cognito, Okta, Entra ID, Auth0, etc.).
+- Code Interpreter — sandboxed code execution (Python, JavaScript, TypeScript).
+- Browser — managed cloud browser runtime for web automation (Playwright, BrowserUse).
+- Observability — OpenTelemetry-based tracing, debugging, and monitoring of agent execution.
+- Payments — microtransaction payments for agents via the x402 protocol (Coinbase CDP, Stripe/Privy).
+- Evaluations — automated assessment of agent/tool quality across sessions, traces, and spans.
+- Policy — deterministic guardrails authored in natural language or Cedar, enforced at the Gateway tool-call boundary.
+- Registry — centralized, governed catalog for discovering agents, MCP servers, tools, and skills.
+
+Source: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html
+Freshness: retrieved 2026-05-31; AgentCore became generally available in October 2025, and some capabilities (e.g., Registry, Payments) were in preview at GA.

@@ -1,0 +1,17 @@
+I can't give you a verified answer here.
+
+Per the policy:
+
+Step 1 — Classify. "Is 'rizz' still common slang on TikTok in 2026?" is squarely in the fluid category. Slang, memes, and trending terminology shift on a scale of months, and the question explicitly asks about current status ("still... in 2026"). This is exactly the kind of question where "as of [date]" changes the answer, so it must be verified against external sources rather than answered from training data.
+
+Step 2 — Tool selection. The policy prefers specialized tools (a trends/social-listening MCP, TikTok's own analytics, etc.), then targeted retrieval, then general web search as a fallback. In this sandbox I have no web_search, no MCP servers, and no specialized retrieval tools — my only available tool is Write. I therefore cannot execute the required verification step.
+
+Step 3 — Source selection. If I could retrieve, I would look for: TikTok's own trend reports or Creative Center data (primary), linguistics outlets like the American Dialect Society or Merriam-Webster updates (primary-ish), and recent practitioner/journalist writing on Gen Z slang lifecycles (user-driven secondary) for orientation — then cross-check before stating anything as fact.
+
+What I can say honestly:
+
+- "Rizz" (short for charisma) broke into mainstream awareness around 2022–2023, was named Oxford's Word of the Year in 2023, and was still in wide circulation through 2024 in my training data.
+- Slang terms that cross into mainstream/parental/brand use typically lose cachet on the platforms that birthed them, so a plausible inference is that by 2026 "rizz" is more "common vocabulary" than "current TikTok trend slang" — but this is an inference about slang lifecycle dynamics, not a verified observation about 2026 TikTok.
+- I do not have reliable information about TikTok slang trends in 2026, and I cannot verify it in this environment.
+
+Gap statement: the specific question you asked — current 2026 status on TikTok — is unanswered. To resolve it you'd want a recent (2026) trend report or social listening data; I'd recommend TikTok's Creative Center trend explorer or a recent piece from a culture desk (e.g., NYT Styles, The Verge, Vox) dated within the last few months as of 2026-05-31.

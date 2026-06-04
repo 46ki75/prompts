@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explains the spec mechanics (OPTIONS, Access-Control-Request-Method/Headers, Access-Control-Allow-* response headers), cites the Fetch Standard at whatwg.org as the normative source with MDN as secondary, and treats it as stable spec knowledge without refusing pending an external fetch or recommending Stack Overflow."
+}

@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate directly answers 'The capital of France is Paris', explicitly classifies the question as stable under the policy, and does not demand external verification or a tool call. All must-do criteria are met and no must-not behaviors occur."
+}

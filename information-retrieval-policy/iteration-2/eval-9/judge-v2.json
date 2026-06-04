@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The response provides a working answer covering WITH RECURSIVE, anchor and recursive members joined by UNION ALL, and two clear examples. It treats the syntax as stable, does not refuse pending verification, and only mentions official PostgreSQL docs as a confirmation reference rather than recommending a general web search."
+}

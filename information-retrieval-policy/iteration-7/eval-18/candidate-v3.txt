@@ -1,0 +1,65 @@
+A CORS preflight is an `OPTIONS` request the browser sends automatically before a "non-simple" cross-origin request, to ask the server whether the real request is allowed. The server's job is to inspect three request headers and answer with the matching `Access-Control-*` response headers, using a `2xx` status (typically `204 No Content`).
+
+## When the browser sends one
+
+The Fetch Standard requires a preflight when the cross-origin request is not a CORS-safelisted request — in practice, any of the following triggers it:
+
+- Method is anything other than `GET`, `HEAD`, or `POST`.
+- A request header is set that is not on the CORS-safelisted request-header list (e.g. `Authorization`, `Content-Type: application/json`, or any custom `X-…` header).
+- `Content-Type` is set to something other than `application/x-www-form-urlencoded`, `multipart/form-data`, or `text/plain`.
+- The request has readable streams, certain `ReadableStream` bodies, or other non-safelisted features.
+
+## What the preflight request looks like
+
+```
+OPTIONS /resource HTTP/1.1
+Origin: https://app.example.com
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: authorization, content-type
+```
+
+The three headers to read are:
+
+- `Origin` — the requesting origin.
+- `Access-Control-Request-Method` — the method the real request will use.
+- `Access-Control-Request-Headers` — comma-separated list of non-safelisted headers the real request will include (lowercased).
+
+## How to respond correctly
+
+Return a `2xx` (usually `204`) with the relevant subset of these headers:
+
+- `Access-Control-Allow-Origin` — either the exact value of the request's `Origin` (echoed back), or `*`. Do **not** echo `Origin` blindly; check it against an allowlist first. `*` is forbidden when the request carries credentials.
+- `Access-Control-Allow-Methods` — the methods you permit for this resource. Must include the method named in `Access-Control-Request-Method`.
+- `Access-Control-Allow-Headers` — the header names you permit. Must cover every header listed in `Access-Control-Request-Headers` (case-insensitive). `*` is allowed here for non-credentialed requests and acts as a wildcard except for `Authorization`, which must always be named explicitly.
+- `Access-Control-Allow-Credentials: true` — only if the real request will be made with credentials (cookies, HTTP auth, client certs). When this is present, `Allow-Origin` must be a specific origin (not `*`) and `Allow-Headers` / `Allow-Methods` cannot use `*` as a wildcard.
+- `Access-Control-Max-Age` — seconds the browser may cache this preflight result. Browsers cap this (Chromium ~2 hours, Firefox ~24 hours); a common value is `600` or `86400`.
+- `Vary: Origin` — required whenever `Allow-Origin` varies by request, so intermediate caches don't serve the wrong response to a different origin. Add `Vary: Access-Control-Request-Method, Access-Control-Request-Headers` if those influence your response.
+
+A minimal correct response:
+
+```
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: https://app.example.com
+Access-Control-Allow-Methods: GET, PUT, DELETE
+Access-Control-Allow-Headers: Authorization, Content-Type
+Access-Control-Max-Age: 600
+Vary: Origin
+```
+
+## Algorithm in plain terms
+
+1. If the request method is `OPTIONS` and both `Origin` and `Access-Control-Request-Method` are present, treat it as a preflight — do not run normal route handlers, auth checks, or body parsing.
+2. Check `Origin` against your allowlist. If it doesn't match, respond without any `Access-Control-*` headers (the browser will then block the real request). Do not return `403` — returning `200`/`204` with no CORS headers is the spec-correct way to deny.
+3. Check that `Access-Control-Request-Method` is in your allowed set for this resource.
+4. Check that every header in `Access-Control-Request-Headers` is in your allowed set (case-insensitive).
+5. If all checks pass, return `204` with the headers above. If any check fails, omit the `Access-Control-*` headers — the browser fails the CORS check and never sends the real request.
+
+## Things that commonly go wrong
+
+- Sending `Access-Control-Allow-Origin: *` together with `Access-Control-Allow-Credentials: true` — the browser rejects this combination.
+- Forgetting `Vary: Origin` behind a CDN, causing one origin's response to be cached and served to another.
+- Returning `Allow-Headers: *` and expecting `Authorization` to be covered — it isn't; name it explicitly.
+- Running authentication middleware on the `OPTIONS` request and returning `401` — preflights are unauthenticated by spec; auth must be skipped for them.
+- Echoing the `Origin` header back without an allowlist check — that's effectively `*` with credentials enabled, and defeats CORS entirely.
+
+The authoritative reference is the WHATWG Fetch Standard, §"CORS protocol" and §"CORS-preflight fetch" at https://fetch.spec.whatwg.org/. MDN's "Preflight request" page is a more readable summary of the same rules.

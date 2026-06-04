@@ -1,0 +1,12 @@
+`Array.prototype.flat(depth = 1)` returns a new array with all sub-array elements concatenated into it recursively up to the specified depth. Empty slots in sparse arrays are removed. Pass `Infinity` to fully flatten an arbitrarily nested array. It does not mutate the original.
+
+Example:
+```js
+[1, [2, [3, [4]]]].flat();        // [1, 2, [3, [4]]]
+[1, [2, [3, [4]]]].flat(2);       // [1, 2, 3, [4]]
+[1, [2, [3, [4]]]].flat(Infinity); // [1, 2, 3, 4]
+```
+
+---
+
+Latest Node.js LTS version: a verified answer requires retrieval I cannot perform in this environment. Based on training data (not freshly verified), Node.js 22 ("Jod") entered Active LTS in late 2024, and Node.js 24 was expected to move to Active LTS around October 2025, which would make it the current LTS as of today (2026-05-31). Please confirm against the official source: https://nodejs.org/en/about/previous-releases (or the release schedule at https://github.com/nodejs/release).

@@ -1,0 +1,64 @@
+Use `WITH RECURSIVE`. The CTE has two parts joined by `UNION ALL` (or `UNION`):
+
+1. An **anchor** member — the seed rows (non-recursive).
+2. A **recursive** member — a query that references the CTE itself to produce the next iteration. PostgreSQL keeps iterating until the recursive member returns no new rows.
+
+## Basic shape
+
+```sql
+WITH RECURSIVE cte_name (col1, col2, ...) AS (
+    -- anchor
+    SELECT ...
+    FROM some_table
+    WHERE <starting condition>
+
+    UNION ALL
+
+    -- recursive step: references cte_name
+    SELECT ...
+    FROM some_table t
+    JOIN cte_name c ON t.parent_id = c.id
+)
+SELECT * FROM cte_name;
+```
+
+## Example 1: integers 1..10
+
+```sql
+WITH RECURSIVE nums(n) AS (
+    SELECT 1
+    UNION ALL
+    SELECT n + 1 FROM nums WHERE n < 10
+)
+SELECT n FROM nums;
+```
+
+## Example 2: walking a parent/child tree
+
+Given `employees(id, manager_id, name)`, list everyone under manager 1:
+
+```sql
+WITH RECURSIVE subordinates AS (
+    SELECT id, manager_id, name, 1 AS depth
+    FROM employees
+    WHERE id = 1
+
+    UNION ALL
+
+    SELECT e.id, e.manager_id, e.name, s.depth + 1
+    FROM employees e
+    JOIN subordinates s ON e.manager_id = s.id
+)
+SELECT * FROM subordinates;
+```
+
+## Notes and gotchas
+
+- `UNION ALL` keeps duplicates and is the common choice; `UNION` deduplicates each iteration (slower, but useful when cycles produce repeats).
+- The recursive member must reference the CTE **exactly once**, and only in a `FROM` clause — not inside a subquery, aggregate, `LEFT JOIN` on the wrong side, etc.
+- Cycle protection: in graphs with cycles you'll loop forever. Either:
+  - Use the built-in `CYCLE` clause (PostgreSQL 14+): `... CYCLE id SET is_cycle USING path` — Postgres tracks visited rows and a path array for you.
+  - Or do it manually by carrying an array of visited ids and adding `WHERE NOT (e.id = ANY(s.path))`.
+- Depth limit: add a `depth` column and `WHERE depth < N` in the recursive step if you want to cap iterations.
+- Ordering: a recursive CTE doesn't guarantee traversal order. If you need depth-first or breadth-first output, add an explicit `ORDER BY` on a path/depth column in the outer `SELECT`. The `SEARCH BREADTH FIRST BY ... SET ...` / `SEARCH DEPTH FIRST BY ... SET ...` clause (PostgreSQL 14+) does this for you.
+- `WITH RECURSIVE` enables recursion for *every* CTE in that `WITH` clause; you only need the keyword once even if you have multiple CTEs and only one is recursive.

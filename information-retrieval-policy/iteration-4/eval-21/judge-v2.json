@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly flags the v3 vs v4 split upfront, notes v4's CSS-first @theme directive, caveats that the recipe shown is the v3 era and not freshly verified, and names the context7 MCP server (plus tailwindcss.com) as the source to verify against.",
+  "named_context7": true,
+  "surfaced_v3_v4_change": true
+}

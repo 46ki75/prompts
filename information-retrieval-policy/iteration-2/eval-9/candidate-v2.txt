@@ -1,0 +1,59 @@
+Use the `WITH RECURSIVE` syntax. A recursive CTE has two parts joined by `UNION ALL` (or `UNION`): a non-recursive anchor term that seeds the result, and a recursive term that references the CTE itself.
+
+General form:
+
+```sql
+WITH RECURSIVE cte_name (col1, col2, ...) AS (
+    -- anchor (base case)
+    SELECT ...
+    FROM some_table
+    WHERE ...
+
+    UNION ALL
+
+    -- recursive term (references cte_name)
+    SELECT ...
+    FROM some_table t
+    JOIN cte_name c ON t.parent_id = c.id
+    WHERE ...   -- termination condition
+)
+SELECT * FROM cte_name;
+```
+
+Example 1 — generate integers 1 through 10:
+
+```sql
+WITH RECURSIVE counter(n) AS (
+    SELECT 1
+    UNION ALL
+    SELECT n + 1 FROM counter WHERE n < 10
+)
+SELECT n FROM counter;
+```
+
+Example 2 — walk an employee hierarchy (find everyone under a given manager):
+
+```sql
+WITH RECURSIVE subordinates AS (
+    SELECT id, name, manager_id, 1 AS depth
+    FROM employees
+    WHERE id = 1                          -- starting manager
+
+    UNION ALL
+
+    SELECT e.id, e.name, e.manager_id, s.depth + 1
+    FROM employees e
+    JOIN subordinates s ON e.manager_id = s.id
+)
+SELECT * FROM subordinates;
+```
+
+Key points:
+
+- The `RECURSIVE` keyword is required and goes on the `WITH`, not on each CTE.
+- The anchor must come first; the recursive term references the CTE name.
+- Use `UNION ALL` unless you specifically need duplicate elimination via `UNION` (which is more expensive and changes termination semantics).
+- Ensure the recursive term has a condition that eventually produces no new rows, or the query will not terminate. For graphs with cycles, track visited nodes (e.g., carry an array of seen ids and filter with `NOT (e.id = ANY(path))`) or use the `CYCLE` clause (`CYCLE id SET is_cycle USING path`).
+- You can reference the CTE only once in the recursive term, and not inside a subquery, aggregate, or outer join's nullable side.
+
+Source to consult for confirmation: PostgreSQL official documentation, "WITH Queries (Common Table Expressions)" — https://www.postgresql.org/docs/current/queries-with.html

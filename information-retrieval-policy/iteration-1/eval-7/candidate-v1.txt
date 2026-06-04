@@ -1,0 +1,38 @@
+## Classification under the policy
+
+RFC 7231 is a published, frozen standards-track document (it does not change once issued; it can only be obsoleted by a later RFC). The semantics of the PUT method as defined in that specific document are therefore **stable** knowledge — the text of RFC 7231 will not differ tomorrow from what it said on the day it was published. Under Step 1 of the policy, this is answerable from internal knowledge.
+
+A caveat worth flagging: RFC 7231 has since been obsoleted by RFC 9110 (HTTP Semantics). The user asked specifically about RFC 7231, so that is what I answer below, but if their underlying interest is "current HTTP semantics," RFC 9110 would be the live primary source.
+
+## Tool/source note
+
+The policy's Step 2/Step 3 would call for verifying against the primary source (the IETF RFC itself) before stating claims as fact. In this sandbox I have no web_search, no fetcher, and no MCP server — only Write. I therefore cannot perform the verification the policy prefers. What follows is from internal knowledge of RFC 7231 Section 4.3.4, presented without a fresh primary-source check; treat specific wording as paraphrase rather than quotation.
+
+## What RFC 7231 defines as the semantics of PUT
+
+RFC 7231 ("Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content," June 2014) defines PUT in Section 4.3.4. The core semantics it specifies are:
+
+1. **Replacement of state at the target resource.** A PUT request asks that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload. The server is being told, "make the resource at this URI have this representation."
+
+2. **Create-or-replace behavior.**
+   - If the target resource does not exist and the PUT successfully creates it, the origin server MUST send a `201 (Created)` response.
+   - If the target resource does exist and is successfully modified to reflect the enclosed representation, the origin server sends either `200 (OK)` or `204 (No Content)` to indicate successful completion.
+
+3. **Idempotent, but not safe.** PUT is defined as idempotent: the intended effect on the server of multiple identical PUT requests is the same as for a single such request. It is not "safe" because it does modify resource state.
+
+4. **Distinction from POST.** The fundamental difference between POST and PUT is reflected in the request URI. With PUT, the enclosed representation is the desired state for the URI in the request line; with POST, the URI identifies a resource that will *process* the representation. Consequently, PUT to a collection-style URI does not mean "append a new member" — it means "replace the collection's representation."
+
+5. **Server discretion over the representation.** The server is not required to store the representation byte-for-byte. It may transform, validate, or reject the representation. If the server applies transformations such that a subsequent GET would return something materially different from what was PUT, the server SHOULD send a `200 (OK)` response containing a representation describing the result, and it ought to inform the user agent (e.g., via response headers) of the divergence. The server MAY reject a PUT whose representation it considers inconsistent with the resource's constraints, typically with `409 (Conflict)` or `415 (Unsupported Media Type)`.
+
+6. **Interaction with caches and validators.** A successful PUT invalidates stored cache responses for the effective request URI. RFC 7231 also notes that PUT requests can carry conditional headers (e.g., `If-Match`, `If-Unmodified-Since`) to avoid the "lost update" problem when multiple clients are writing concurrently.
+
+7. **Content-Range with PUT is discouraged.** RFC 7231 (and the related range spec) note that a PUT request with a `Content-Range` header is not defined by the standard semantics and SHOULD be rejected; partial updates are the province of PATCH (defined separately in RFC 5789), not PUT.
+
+8. **No defined request body semantics for safe interpretation.** Unlike GET or HEAD, PUT has no defined cacheable response semantics in the general case; responses to PUT are not cacheable unless explicit cache-control information makes them so.
+
+## Gaps and caveats
+
+- I have stated specific status codes and section structure from memory of RFC 7231. The policy would prefer these be verified against the RFC text; in this environment I could not do that. The substantive semantics (replacement, idempotency, create-or-replace, distinction from POST) are well-established and I am confident in them; exact MUST/SHOULD wording in any given sentence should be checked against the document if precision matters.
+- RFC 7231 has been obsoleted by RFC 9110. The PUT semantics carried over largely unchanged in substance, but section numbering and some wording differ. If the user needs to cite "the current HTTP standard," RFC 9110 Section 9.3.4 is the appropriate reference.
+
+Source (not freshly retrieved): IETF RFC 7231, Section 4.3.4, "PUT," June 2014.

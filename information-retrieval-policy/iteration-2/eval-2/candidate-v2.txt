@@ -1,0 +1,5 @@
+A verified answer requires retrieval I cannot perform in this environment. Based on training data (not freshly verified), Next.js 15 was the latest stable major line, with 15.x point releases ongoing. Given today's date (2026-05-31), the current stable version has very likely advanced beyond what I can recall.
+
+Please confirm against a primary source:
+- https://github.com/vercel/next.js/releases
+- https://www.npmjs.com/package/next

@@ -1,0 +1,31 @@
+Mark-and-sweep is a tracing garbage collection algorithm that reclaims memory in two phases: a **mark** phase that identifies live objects, and a **sweep** phase that frees everything else.
+
+## How it works
+
+**Setup.** Every heap-allocated object carries a single bit of metadata (the "mark bit"), initially cleared. The collector also knows a set of *roots* — references that are definitely live: CPU registers, the call stack, global/static variables, and (in some runtimes) thread-local storage.
+
+**Phase 1 — Mark.** Starting from each root, the collector performs a graph traversal (typically depth-first) over the object reference graph:
+
+1. For each root reference, visit the target object.
+2. If its mark bit is already set, skip it (this prevents cycles and redundant work).
+3. Otherwise, set the mark bit, then recursively visit every object reference contained inside it (fields, array elements, etc.).
+
+When this completes, exactly the objects reachable from the roots are marked.
+
+**Phase 2 — Sweep.** The collector linearly scans the entire heap:
+
+- If an object's mark bit is set, clear the bit (resetting state for the next cycle) and leave the object alone.
+- If the mark bit is not set, the object is unreachable garbage; add its memory to the free list (or otherwise reclaim it).
+
+After the sweep, all unreachable objects have been freed and all surviving objects are unmarked, ready for the next cycle.
+
+## Key properties
+
+- **Handles cycles correctly.** Unlike naive reference counting, a cycle of mutually-referencing dead objects is unreachable from roots, so none get marked, so all get swept.
+- **Stop-the-world (in the basic form).** The mutator (application) must be paused during collection, because mutating references mid-mark would corrupt reachability. Pause time is proportional to live-set size (mark) plus heap size (sweep).
+- **Causes fragmentation.** Sweep only reclaims; it does not relocate. Over time the heap develops holes, which is why production collectors often add a **compact** phase (mark-sweep-compact) or use a moving collector (copying / mark-compact / generational).
+- **Two bits of state often used.** Tri-color marking (white = unvisited, gray = visited but children pending, black = fully scanned) generalizes the algorithm and is the basis for incremental and concurrent variants that reduce pause times.
+
+## Where it's used
+
+The classical algorithm and its descendants underlie collectors in many runtimes, including historical and current implementations in the JVM, CPython's cyclic collector (which supplements its reference counter), Go's concurrent mark-sweep, V8's old-generation collector, and most Lisp/Scheme/OCaml implementations.

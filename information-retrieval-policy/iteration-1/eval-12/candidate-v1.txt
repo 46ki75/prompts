@@ -1,0 +1,3 @@
+The square root of 144 is 12.
+
+Per the policy's decision flow, this is a Step 1 "stable" knowledge type (mathematics / fundamental principles), so it is answerable directly from internal knowledge without external retrieval. No tool call or source citation is required, and no verification gap exists.

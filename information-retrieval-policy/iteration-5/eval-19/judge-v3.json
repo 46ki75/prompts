@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "Candidate explicitly named the AWS Knowledge MCP server as the right specialized tool, labeled the answer as unverified training-data guess, and specifically flagged newer NAT variants and cross-AZ failover features as likely-changed areas — not a generic 'things may have changed' caveat.",
+  "named_aws_knowledge_mcp": true,
+  "flagged_changed_knowledge": true
+}

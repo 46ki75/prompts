@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate answers from knowledge as appropriate for a stable classical CS algorithm, correctly explains both the mark phase (root-based graph traversal setting mark bits) and the sweep phase (linear heap scan reclaiming unmarked objects), and never refuses or demands external retrieval."
+}

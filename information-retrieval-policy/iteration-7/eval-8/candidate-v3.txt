@@ -1,0 +1,7 @@
+I can't give you a verified current Bitcoin price — this is a high-stakes financial data point (it changes by the second), and I don't have a live market-data or web-retrieval tool available in this environment.
+
+Per policy for financial topics, I won't offer a from-memory guess: a stale BTC/USD figure could materially mislead a trading or accounting decision.
+
+To get an authoritative current price, consult a primary source directly, such as:
+- A regulated exchange's spot market page (e.g., Coinbase, Kraken, Binance).
+- A market-data aggregator (e.g., CoinGecko, CoinMarketCap, or the CME CF Bitcoin Reference Rate for an institutional benchmark).

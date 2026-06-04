@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate correctly classifies recursive CTE syntax as stable knowledge answerable from training data, provides WITH RECURSIVE syntax with anchor + recursive member joined by UNION ALL, and includes multiple working examples (counter, org chart, graph traversal). It does not refuse pending verification and does not recommend a general web search as the first retrieval option; instead it notes specialized doc sources like the official PostgreSQL docs page."
+}

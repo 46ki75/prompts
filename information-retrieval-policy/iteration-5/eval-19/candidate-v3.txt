@@ -1,0 +1,10 @@
+A verified answer here requires retrieval I cannot perform in this environment (the AWS Knowledge MCP server would be the appropriate specialized tool for AWS service behavior and architectural guidance). Based on training data, not freshly verified:
+
+- A NAT Gateway is a zonal resource: it lives in a single Availability Zone, and if that AZ fails, instances in other AZs that route through it lose outbound internet connectivity.
+- For a fault-tolerant design, AWS's documented best practice is to deploy one NAT Gateway per AZ you use, and configure each private subnet's route table to send 0.0.0.0/0 to the NAT Gateway in its own AZ. This both removes the cross-AZ single point of failure and avoids cross-AZ data transfer charges.
+- For dev/test or cost-sensitive workloads, a single NAT Gateway shared across AZs works functionally but trades availability and incurs cross-AZ data transfer fees on traffic from other AZs.
+- NAT Gateway itself is highly available *within* its AZ (AWS manages redundancy inside the zone), so you do not need multiple NAT Gateways in the same AZ for HA.
+
+Claims most likely to be stale: pricing and data-transfer-charge specifics, and any newer NAT variants or features (for example, behavior or availability of public vs. private NAT Gateways, or any newly added cross-AZ failover features) — verify these against the current AWS VPC NAT Gateway documentation before relying on them.
+
+Source to consult to confirm: the official AWS VPC User Guide page "NAT gateways" (docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and the AWS NAT Gateway pricing page.

@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The candidate directly states that Python 3.10.0 was released on October 4, 2021, which satisfies the must_do requirement of answering with the October 2021 release date from knowledge. It does not refuse, does not invoke the 'software versions are fluid' rule, and does not confuse historical release with current version."}

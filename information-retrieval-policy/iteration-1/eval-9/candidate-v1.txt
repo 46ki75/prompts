@@ -1,0 +1,122 @@
+# Recursive CTEs in PostgreSQL
+
+## Policy classification
+
+Per the Information Retrieval Policy, I first classify the knowledge type.
+
+Recursive Common Table Expressions are part of the SQL standard
+(SQL:1999, refined in later revisions) and have been supported in
+PostgreSQL since version 8.4 (2009). The syntax and core semantics are
+**stable**: they belong to the "well-established language
+specifications" category. This is answerable from internal knowledge
+without external retrieval.
+
+If a user were asking about a recently added option (e.g., a
+PostgreSQL 17-specific extension to `WITH`), that sub-question would
+be **fluid** and I would need to verify against the official
+PostgreSQL docs. In this sandbox I have no `web_search`, no
+`context7`, and no MCP retrieval tool available — only `Write` — so
+if such verification were required I would have to state that I
+cannot perform it. For the general syntax below, no lookup is needed.
+
+## Answer
+
+A recursive CTE uses `WITH RECURSIVE` and consists of two parts joined
+by `UNION ALL` (or `UNION`):
+
+1. **Anchor member** — a non-recursive seed query.
+2. **Recursive member** — a query that references the CTE name itself,
+   producing the next iteration from the previous one.
+
+PostgreSQL evaluates it by:
+
+- running the anchor to produce an initial working set,
+- repeatedly running the recursive member against the current working
+  set to produce a new working set,
+- accumulating all rows into the final CTE result,
+- stopping when an iteration produces no new rows.
+
+### Minimal example: count 1 through 10
+
+```sql
+WITH RECURSIVE counter(n) AS (
+    SELECT 1                              -- anchor
+    UNION ALL
+    SELECT n + 1 FROM counter WHERE n < 10 -- recursive step
+)
+SELECT n FROM counter;
+```
+
+### Practical example: walk a tree (employees -> manager)
+
+Given `employees(id, name, manager_id)`:
+
+```sql
+WITH RECURSIVE org_chart AS (
+    SELECT id, name, manager_id, 1 AS depth
+    FROM employees
+    WHERE manager_id IS NULL              -- roots
+
+    UNION ALL
+
+    SELECT e.id, e.name, e.manager_id, oc.depth + 1
+    FROM employees e
+    JOIN org_chart oc ON e.manager_id = oc.id
+)
+SELECT * FROM org_chart ORDER BY depth, id;
+```
+
+### Practical example: graph traversal with cycle protection
+
+For graphs that may contain cycles, accumulate the path and exclude
+already-visited nodes. PostgreSQL 14+ also supports a built-in
+`CYCLE` clause, and `SEARCH` for ordering — these are the more recent
+additions, so if you need exact current behavior I would normally
+verify against the official docs (which I cannot fetch here):
+
+```sql
+WITH RECURSIVE reachable AS (
+    SELECT src, dst, ARRAY[src, dst] AS path, false AS cycle
+    FROM edges
+    WHERE src = 1
+
+    UNION ALL
+
+    SELECT r.src, e.dst, r.path || e.dst, e.dst = ANY(r.path)
+    FROM reachable r
+    JOIN edges e ON e.src = r.dst
+    WHERE NOT r.cycle
+)
+SELECT * FROM reachable;
+```
+
+## Key rules and gotchas
+
+- The keyword is `WITH RECURSIVE`, even if only one CTE in the
+  statement is actually recursive.
+- The recursive member must reference the CTE name **exactly once**
+  and cannot use it inside an aggregate, `LEFT JOIN` on the recursive
+  side, subquery `NOT IN`, or other constructs that would break the
+  fixed-point evaluation. The docs enumerate the exact restrictions.
+- Use `UNION ALL` unless you specifically need duplicate elimination;
+  `UNION` forces a distinctness check each iteration and is slower.
+- Always include a terminating condition (e.g., `WHERE n < 10`,
+  `WHERE NOT cycle`). Without one, the query runs until it errors or
+  exhausts resources.
+- For unbounded exploration, guard with either the `CYCLE` clause
+  (PostgreSQL 14+) or a manual visited-set as shown above.
+
+## Sources and freshness
+
+- Syntax and semantics above are from internal knowledge of the SQL
+  standard and PostgreSQL behavior that has been stable since 8.4.
+- Claims about the `CYCLE` and `SEARCH` clauses being introduced in
+  PostgreSQL 14 are from internal knowledge; I have not verified them
+  against `postgresql.org/docs` in this session because no retrieval
+  tool is available. Treat these as "based on training data" rather
+  than freshly confirmed.
+- The authoritative reference is the PostgreSQL documentation page
+  "7.8. WITH Queries (Common Table Expressions)" at
+  `https://www.postgresql.org/docs/current/queries-with.html`. Consult
+  it directly for the exact list of restrictions and for any
+  version-specific options.

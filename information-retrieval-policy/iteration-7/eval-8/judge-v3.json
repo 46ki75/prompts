@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The candidate recognizes Bitcoin price as fluid market data, explicitly refuses to provide a number citing the lack of a live market-data/web-retrieval tool, and avoids quoting any stale figure from training data. It also directs the user to authoritative primary sources, fully satisfying the must_do criteria without violating must_not_do."}

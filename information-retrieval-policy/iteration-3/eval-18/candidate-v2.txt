@@ -1,0 +1,43 @@
+A CORS preflight is an `OPTIONS` request the browser sends automatically before a "non-simple" cross-origin request (anything that isn't a `GET`/`HEAD`/`POST` with only CORS-safelisted headers and a safelisted `Content-Type`, or that uses credentials in certain ways, or that sets custom headers). The server's job is to answer that `OPTIONS` correctly so the browser will then issue the real request.
+
+Per the Fetch Standard (the living spec that defines CORS; it superseded RFC 6454/the old W3C CORS Recommendation):
+
+1. Recognize the preflight. It is an `OPTIONS` request that carries:
+   - `Origin: <origin>`
+   - `Access-Control-Request-Method: <method>` (the method the real request will use)
+   - optionally `Access-Control-Request-Headers: <comma-separated header names>` (headers the real request will set)
+
+2. Decide whether to allow it. Validate the `Origin`, the requested method, and each requested header against your policy. Do not just echo blindly.
+
+3. Respond with status `2xx` (typically `204 No Content`, or `200`). A non-2xx status fails the preflight, even if the CORS headers are present. The response body is ignored; do not rely on it.
+
+4. Set the CORS response headers:
+   - `Access-Control-Allow-Origin`: either the exact request `Origin` (recommended; echo only after allowlist check) or `*`. `*` is not allowed when credentials are in play.
+   - `Access-Control-Allow-Methods`: the methods you permit for this resource. Must include the value from `Access-Control-Request-Method` for the preflight to pass. `*` is permitted but, again, not with credentials.
+   - `Access-Control-Allow-Headers`: must cover every header listed in `Access-Control-Request-Headers` (case-insensitive). `*` is permitted but not with credentials, and `*` does **not** cover `Authorization` — that one must be named explicitly.
+   - `Access-Control-Allow-Credentials: true` — only if the actual request will be made with credentials (cookies, HTTP auth, client certs). When this is set, `Allow-Origin`, `Allow-Methods`, and `Allow-Headers` must all be specific values, never `*`. `Allow-Origin` must also be a single origin, not a list, and you should add `Vary: Origin` so caches don't serve the wrong origin's response.
+   - `Access-Control-Max-Age: <seconds>` (optional) — how long the browser may cache this preflight result. Browsers cap this (Chromium caps at 2 hours, Firefox at 24 hours); a sensible value is `600`–`86400`.
+   - `Access-Control-Expose-Headers` is **not** relevant on the preflight response; it belongs on the actual response.
+
+5. Add `Vary: Origin` (and `Vary: Access-Control-Request-Method, Access-Control-Request-Headers` if your response varies on them) whenever the response depends on the request origin, so intermediate caches behave correctly.
+
+6. Do not require authentication on the preflight itself. The browser does not send credentials or custom headers (including `Authorization`) on the `OPTIONS` preflight, so gating it behind auth will cause it to fail. Authenticate the actual request that follows.
+
+Minimal example of a correct preflight response:
+
+```
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: https://app.example.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+Access-Control-Allow-Headers: Content-Type, Authorization
+Access-Control-Allow-Credentials: true
+Access-Control-Max-Age: 600
+Vary: Origin
+```
+
+The browser then validates each `Allow-*` header against what it asked for; if any check fails the actual request is never sent and a CORS error is surfaced to the page.
+
+Notes on freshness and verification: the above reflects the Fetch Standard's CORS-preflight fetch algorithm as I understand it from training data, not a freshly retrieved copy. The Fetch Standard is a living document and is the normative source; specific browser behavior (notably `Max-Age` caps and the `Authorization`/`*` interaction) is implementation-defined and has changed over time. Confirm specifics against:
+
+- Fetch Standard, "CORS-preflight fetch": https://fetch.spec.whatwg.org/#cors-preflight-fetch
+- MDN, "Preflight request" and "Access-Control-Allow-Headers": https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

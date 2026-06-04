@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "Candidate explicitly labels the answer as an unverified training-data guess, names context7 (with resolve-library-id/query-docs) as the preferred specialized tool, and points to github.com/tokio-rs/toasty as the primary source. No specific API/syntax fabrication.",
+  "named_context7": true,
+  "appropriately_hedged": true
+}

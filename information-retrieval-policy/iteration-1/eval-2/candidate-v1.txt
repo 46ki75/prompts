@@ -1,0 +1,20 @@
+The latest stable version of Next.js is a **fluid** fact under this policy: software versions change frequently, and "as of [date]" materially changes the correct answer. Per the decision flow, I should verify rather than answer from internal knowledge.
+
+**I cannot complete that verification in this environment.** The tools that the policy would direct me to use are unavailable here:
+
+- No specialized MCP/docs tool (e.g., `context7`) to query the Next.js documentation or npm registry.
+- No targeted retrieval tool to fetch `https://nextjs.org/`, the Next.js GitHub releases page, or `https://registry.npmjs.org/next/latest`.
+- No general `web_search` fallback.
+
+The only tool available is `Write`, which cannot perform retrieval.
+
+**What the policy would have me do if tools were available**, in order:
+
+1. Query a specialized docs tool (e.g., `context7` resolved to the Next.js library) for the current version.
+2. If unavailable, fetch a primary source directly — preferably the npm registry endpoint `https://registry.npmjs.org/next/latest` (authoritative for the published "latest" dist-tag) or the Next.js GitHub releases page (`https://github.com/vercel/next.js/releases`).
+3. Cross-check against the official Next.js blog/release notes to confirm it is a stable release (not a canary, RC, or pre-release).
+4. Report the version with a freshness marker, e.g., "Next.js X.Y.Z, as of [retrieval date]."
+
+**What I will not do**: state a specific version number from internal knowledge. My training data has a cutoff, Next.js ships new minor and patch releases frequently (often multiple per month), and a confidently wrong version number is exactly the failure mode ("under-searching" / false-stable classification) the policy is designed to prevent.
+
+**Gap statement**: I cannot answer the factual question as asked in this sandbox. To get a trustworthy answer, check `https://registry.npmjs.org/next/latest` or run `npm view next version` in a shell with network access.

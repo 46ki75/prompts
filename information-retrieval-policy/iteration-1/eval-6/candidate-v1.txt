@@ -1,0 +1,18 @@
+This is a medical dosing question, which the policy classifies as a high-stakes domain. Per the policy's "Exception for high-stakes domains," I am required to go directly to primary sources (e.g., FDA labeling, manufacturer prescribing information, or peer-reviewed clinical guidance) rather than relying on internal knowledge or user-driven secondary sources.
+
+In this sandbox I have no access to web search, MCP servers, or any specialized retrieval tool — only file Write. I therefore cannot perform the primary-source verification the policy requires for a medical question of this kind. I am stating that gap openly rather than filling it with plausible-sounding text.
+
+What I can offer, clearly marked as unverified internal knowledge rather than a sourced fact:
+
+- Commonly cited guidance (e.g., U.S. OTC labeling for products like Tylenol) has historically stated a maximum of 4,000 mg per 24 hours for healthy adults, with the manufacturer (McNeil) lowering its recommended OTC maximum to 3,000 mg/day for Extra Strength Tylenol around 2011 to reduce risk of accidental overdose.
+- Lower ceilings (often cited around 2,000–3,000 mg/day) are commonly recommended for people with hepatic impairment, chronic alcohol use, low body weight, malnutrition, or concurrent use of other acetaminophen-containing products.
+- Single-dose and dosing-interval limits (commonly 1,000 mg per dose, no more often than every 4–6 hours) also apply and are part of the "safe daily dose" picture.
+
+Important caveats:
+- These figures are from memory and are not verified against current FDA labeling or a current clinical reference as the policy requires for medical topics. Labeling and clinical guidance can change.
+- "Safe" depends on the individual: liver function, alcohol intake, weight, other medications (including combination cold/flu products that contain acetaminophen), and duration of use all matter.
+- For an actual dosing decision, the authoritative sources to consult are the current FDA-approved product labeling, the manufacturer's prescribing information, or guidance from a pharmacist or physician — not this answer.
+
+Freshness: my internal knowledge has a cutoff and I have not retrieved a dated primary source, so I cannot mark an "as of" date for these figures with confidence.
+
+Bottom line per the policy: I should not state a specific maximum daily dose as fact for a medical question without primary-source verification, and in this environment that verification is not available to me.

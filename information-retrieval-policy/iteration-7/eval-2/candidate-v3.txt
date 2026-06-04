@@ -1,0 +1,8 @@
+I can't verify this fresh — no retrieval tools (web search, docs fetcher, context7, etc.) are available in this environment, and Next.js versions are a fluid topic that turns over quickly.
+
+Based on training data, not freshly verified: the latest stable major line was Next.js 15 (15.x), with Next.js 16 likely released or imminent by now. The specific minor/patch version is the claim most likely to be stale — and if a new major (16+) has shipped, treat the "15.x" answer as outdated.
+
+To confirm, check one of:
+- The official releases page: https://github.com/vercel/next.js/releases
+- npm: `npm view next version`
+- The Next.js blog: https://nextjs.org/blog

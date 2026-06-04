@@ -1,0 +1,7 @@
+The capital of France is Paris.
+
+Policy reasoning: Under Step 1 of the Information Retrieval Policy, this question falls clearly into the "stable" category. National capitals are established geopolitical facts comparable to historical events and well-established reference knowledge. Paris has been the capital of France continuously since well before any plausible training data cutoff, and there is no "as of [date]" qualifier that would change the answer. This is answerable from internal knowledge without external verification.
+
+No tool call is required, and none would be possible in this sandbox in any case (no web_search, MCP servers, or specialized retrieval tools are available — only Write). Since the policy does not call for verification here, the absence of those tools does not affect the answer.
+
+Source: internal knowledge (stable fact).

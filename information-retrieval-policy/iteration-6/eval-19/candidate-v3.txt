@@ -1,0 +1,24 @@
+A NAT Gateway's availability depends on which mode you use:
+
+**Zonal NAT Gateway (the original / default mode)**
+- Each NAT Gateway lives in a single Availability Zone. AWS provides redundancy *within* that AZ, but if the entire AZ becomes unreachable, the NAT Gateway in it is unreachable too.
+- For a fault-tolerant architecture across AZs, AWS recommends deploying **one NAT Gateway per AZ** and pointing each private subnet's route table to the NAT Gateway in its own AZ. This also avoids cross-AZ data-transfer charges (traffic that crosses AZs to reach a NAT Gateway in another AZ is billed as inter-AZ transfer in addition to NAT data-processing fees).
+- Limit: up to 8 IP addresses per zonal NAT Gateway.
+
+**Regional NAT Gateway (newer availability mode)**
+- A single NAT Gateway resource that automatically expands and contracts across the AZs where your workloads have ENIs. You reference one NAT Gateway ID from route tables across all AZs and don't need to create one per AZ yourself.
+- It maintains zonal affinity (traffic from a given AZ is NATed in that same AZ once expansion completes), so you still get AZ-isolated fault tolerance without managing zonal resources.
+- No public subnet required to host it. Supports up to 32 IP addresses per AZ.
+- Expansion to a newly used AZ can take up to ~60 minutes; during that window, traffic from the new AZ is processed cross-zone by an existing AZ's NAT Gateway.
+- Recommended for most use cases. Exception: **private** NAT (private connectivity scenarios) is not supported on regional mode — use zonal NAT Gateways for that.
+
+**Short answer to "do I need one per AZ?"**
+- If you use zonal NAT Gateways: yes, deploy one per AZ for AZ-level fault tolerance and to avoid inter-AZ charges. A single zonal NAT Gateway still works, but it becomes a single-AZ point of failure and incurs cross-AZ traffic costs.
+- If you use a regional NAT Gateway: no — one regional NAT Gateway covers all AZs in the VPC automatically.
+
+Sources:
+- https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html
+- https://aws.amazon.com/blogs/networking-and-content-delivery/using-nat-gateways-with-multiple-amazon-vpcs-at-scale/
+- https://aws.amazon.com/blogs/networking-and-content-delivery/introducing-amazon-vpc-regional-nat-gateway/
+
+Freshness: retrieved from AWS documentation on 2026-05-31.

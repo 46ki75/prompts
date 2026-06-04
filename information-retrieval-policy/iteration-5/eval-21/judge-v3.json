@@ -1,0 +1,6 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly surfaced the v3 vs v4 distinction including the CSS-first @theme directive approach, named context7 as the preferred specialized tool for retrieval, and specifically flagged which claims (config-file approach, content globs, PostCSS wiring) are most likely stale. The v3 recipe was provided with a clear version caveat upfront.",
+  "named_context7": true,
+  "surfaced_v3_v4_change": true
+}

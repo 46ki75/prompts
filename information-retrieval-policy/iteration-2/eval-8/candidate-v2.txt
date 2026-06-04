@@ -1,0 +1,3 @@
+A verified current Bitcoin price requires live market data retrieval, which I cannot perform in this environment. Please consult a primary source such as CoinGecko (https://www.coingecko.com/en/coins/bitcoin), CoinMarketCap (https://coinmarketcap.com/currencies/bitcoin/), or a major exchange like Coinbase or Kraken for the current USD price.
+
+I am not providing an unverified guess here: cryptocurrency prices are highly volatile and fall within the financial high-stakes category, where a stale recalled figure could be materially misleading.

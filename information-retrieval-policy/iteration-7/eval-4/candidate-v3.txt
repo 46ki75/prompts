@@ -1,0 +1,21 @@
+Mark-and-sweep is a tracing garbage collector that runs in two phases. It periodically reclaims memory occupied by objects the program can no longer reach, rather than relying on the program to free memory explicitly.
+
+The core idea: an object is "live" if and only if the program can still reach it by following references starting from a known set of roots. Anything unreachable is garbage and its memory can be reused.
+
+The two phases:
+
+- Mark — Starting from the roots (CPU registers, the call stack, global/static variables, and sometimes other runtime-internal references), the collector traverses the object graph, following every reference. Each object it visits is tagged "marked" (typically by setting a bit in the object's header, or in a side table). The traversal is usually a depth-first or breadth-first walk and only visits each object once because already-marked objects are skipped. When the traversal finishes, every reachable object is marked and everything else is, by definition, unreachable.
+
+- Sweep — The collector then linearly scans the entire heap. For each object it encounters, it checks the mark bit. Marked objects are kept and their mark bit is cleared (ready for the next cycle). Unmarked objects are reclaimed — their memory is returned to a free list (or to the allocator's bookkeeping) so future allocations can reuse it.
+
+A few important properties:
+
+- It handles cycles correctly. Reference counting struggles with cycles (two objects pointing at each other keep each other alive even when nothing else references them); mark-and-sweep doesn't care, because if the cycle isn't reachable from a root it simply won't be marked.
+
+- The classic "stop-the-world" version pauses program execution during collection so the object graph doesn't change mid-trace. Pause time is roughly proportional to the live set (mark) plus the heap size (sweep), which is why naive mark-and-sweep can cause noticeable hiccups on large heaps.
+
+- It does not, by itself, compact memory. After many cycles the free list becomes fragmented, which can hurt allocation speed and locality. This is why real-world collectors often combine marking with compaction (mark-compact) or with copying (as in generational collectors, where the young generation is copied and the old generation is mark-swept or mark-compacted).
+
+- Production implementations refine the basic scheme heavily: tri-color marking (white/gray/black) to make incremental and concurrent collection possible, write barriers to track mutations the mutator makes during a concurrent mark, generational hypotheses to focus work on young objects, and parallel workers to shrink pause time. The two-phase mark-then-sweep skeleton remains the foundation underneath all of these.
+
+In short: mark everything reachable from the roots, then sweep up everything that wasn't marked.

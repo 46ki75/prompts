@@ -1,0 +1,10 @@
+A verified answer requires retrieval I can't perform in this environment (ideally a `context7` lookup for the library's docs, or a GitHub repo search).
+
+Based on training data through my cutoff, not freshly verified: Toasty is an asynchronous ORM for Rust, originally announced by Carl Lerche (of Tokio fame). It targets both SQL databases (e.g., SQLite, PostgreSQL) and NoSQL stores like DynamoDB through a unified schema and query API, with code generation from a schema file. At announcement it was explicitly pre-alpha / not production-ready.
+
+Claims most likely to be stale, and which you should re-verify first:
+- Its maturity status ("pre-alpha") — this may well have advanced.
+- The exact set of supported backends — additional drivers (e.g., MySQL) may have landed.
+- The schema/codegen workflow and public API surface — these were flagged as unstable and have very likely changed.
+
+Confirm against the primary source: the `tokio-rs/toasty` GitHub repository (README and CHANGELOG) and any posts on tokio.rs.

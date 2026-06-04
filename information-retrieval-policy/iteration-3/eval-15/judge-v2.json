@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate directly answers the question, correctly describing x[::-1] as a reversed copy via extended slicing with step -1, without invoking policy machinery, citing external sources, or refusing."
+}

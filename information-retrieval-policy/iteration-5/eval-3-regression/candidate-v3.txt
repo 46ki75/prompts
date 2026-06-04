@@ -1,0 +1,7 @@
+Verification required: I cannot access external sources in this environment to confirm current leadership.
+
+Unverified best guess (from training data): Sam Altman is CEO of OpenAI. He was briefly removed in November 2023 and reinstated within days; that has been the stable status since then.
+
+Most likely stale claims to double-check: whether Altman is still CEO as of today (leadership at OpenAI has been turbulent, and any change since the training cutoff would invalidate this answer), and whether the corporate structure (the OpenAI nonprofit / for-profit arrangement) has been restructured in a way that changes the title.
+
+Source to consult: OpenAI's official site (openai.com), specifically the "Our structure" or leadership/about pages, or a recent reputable news source.

@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly classifies software versions as fluid, refuses to assert a version number from memory, cites primary sources (npm registry endpoint `https://registry.npmjs.org/next/latest` and the Next.js GitHub releases page), and signals that verification is required but cannot be performed in this sandbox — satisfying all must-do criteria and avoiding all must-not behaviors."
+}

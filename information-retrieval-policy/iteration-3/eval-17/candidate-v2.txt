@@ -1,0 +1,5 @@
+Verifying the current state of CPython's GIL requires retrieval I cannot perform in this environment, so the following is based on training data through my cutoff and is not freshly verified.
+
+Based on training data (not freshly verified): Yes, CPython still uses the Global Interpreter Lock by default. However, PEP 703 ("Making the Global Interpreter Lock Optional in CPython") was accepted, and CPython 3.13 introduced an experimental free-threaded build (often called "no-GIL" or `python3.13t`) that can be compiled without the GIL. In standard builds, the GIL remains enabled by default; the free-threaded build is opt-in and still maturing. Alternative implementations like Jython and IronPython have never had a GIL, and PyPy still has one.
+
+To confirm the current status (including whether free-threaded builds have moved from experimental to default in any release after 3.13), consult the official Python documentation and the "What's New in Python" pages at https://docs.python.org/3/whatsnew/, along with PEP 703 at https://peps.python.org/pep-0703/.

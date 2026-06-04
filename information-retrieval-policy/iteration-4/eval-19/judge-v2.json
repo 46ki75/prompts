@@ -1,0 +1,6 @@
+{
+  "verdict": "incorrect",
+  "reasoning": "The candidate confidently asserted NAT Gateway is a zonal resource and one-per-AZ as the recommended HA pattern without flagging that this model may have changed, did not name the AWS Knowledge MCP server (only referenced absent context7/AWS docs MCP and a generic AWS docs URL), and did not surface that AWS has evolved the NAT Gateway model with a cross-AZ/regional variant.",
+  "named_aws_knowledge_mcp": false,
+  "flagged_changed_knowledge": false
+}

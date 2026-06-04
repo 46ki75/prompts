@@ -1,0 +1,5 @@
+A verified answer requires retrieval I cannot perform in this environment (no context7 or web search available).
+
+Based on training data through my cutoff, not freshly verified: "Toasty" rings a bell as the name of an in-development ORM for Rust by Carl Lerche (the author of Tokio and Mio), announced around late 2024. It was positioned as an async-first ORM with a schema-driven, code-generation approach, and was described as early/experimental at the time of announcement. I cannot confirm its current status, API, or whether "new ORM" is the most accurate characterization as of today.
+
+To confirm, consult the project's primary source: the GitHub repository at github.com/tokio-rs/toasty (and its README / release notes). For library documentation specifically, the preferred specialized tool per policy would be context7 (resolve-library-id then query-docs for "toasty"), which is not available here.

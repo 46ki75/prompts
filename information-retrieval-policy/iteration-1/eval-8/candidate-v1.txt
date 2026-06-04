@@ -1,0 +1,18 @@
+I cannot answer this question with a current price.
+
+Per the Information Retrieval Policy:
+
+Step 1 — Classify the knowledge type: The price of Bitcoin in USD is unambiguously **fluid**. It is market data that changes second-by-second, and any answer would necessarily be qualified with "as of [timestamp]." This is a textbook fluid-knowledge case where internal/training-data knowledge must not be used as the source of a stated fact.
+
+Step 2 — Select the tool: The policy directs me to prefer a specialized tool (e.g., a finance/markets MCP server or crypto-price API), then targeted retrieval (e.g., an exchange's official ticker endpoint such as Coinbase, Kraken, or Binance), and only fall back to general web search.
+
+Step 3 — Select the source: Bitcoin pricing is a financial topic, which the policy flags as a high-stakes domain. That means I should go directly to a primary source — an exchange's official ticker API, or an established market-data provider's official feed — rather than relying on user-driven content (forum posts, blogs) or general secondary sources.
+
+Gap disclosure: In this sandbox environment I have no `web_search`, no MCP servers, and no specialized retrieval tools available — my only tool is `Write`. I therefore cannot perform the verification the policy requires. Quoting a number from training data would violate the policy's rule against answering fluid questions from stale internal knowledge, and would be especially inappropriate given the high-stakes (financial) classification.
+
+Recommended next step for the user: query a primary source directly, for example:
+- Coinbase: https://api.coinbase.com/v2/prices/BTC-USD/spot
+- Kraken: https://api.kraken.com/0/public/Ticker?pair=XBTUSD
+- CoinGecko: https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd
+
+Any returned figure should be reported with the timestamp of retrieval ("as of [date/time]") because the value will be stale within seconds.

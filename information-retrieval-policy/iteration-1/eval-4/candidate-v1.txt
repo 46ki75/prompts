@@ -1,0 +1,99 @@
+# Mark-and-Sweep Garbage Collection
+
+## Policy classification
+
+Per the Information Retrieval Policy, I first classify the knowledge
+type. Mark-and-sweep is a classical algorithm in computer science,
+originally described by John McCarthy in 1960 for Lisp. It falls
+squarely into the **stable** category: "Algorithms, data structures,
+classical computer science." The fundamentals have not changed, so
+this question is answerable from internal knowledge without external
+retrieval. No tool call is required.
+
+(Note on tool availability: in this environment I have no
+`web_search`, no MCP servers, and no specialized retrieval tools
+available — only `Write`. Even if the topic were fluid, I could not
+verify externally and would have to say so. For this stable topic,
+that limitation does not affect the answer.)
+
+## How mark-and-sweep works
+
+Mark-and-sweep is a **tracing** garbage collector. It identifies which
+heap-allocated objects are still reachable from the program and
+reclaims the memory of those that are not. It runs in two distinct
+phases over a set of "roots" — references the program can directly
+access, typically including CPU registers, the call stack, and global
+variables.
+
+### Phase 1 — Mark
+
+Starting from the root set, the collector performs a traversal
+(depth-first or breadth-first) of the object graph, following every
+reference it encounters. Each object visited is tagged as "live,"
+usually by setting a single mark bit in the object header (or in a
+separate side table / bitmap).
+
+- Begin with every root reference.
+- For each referenced object: if it is already marked, skip it
+  (this prevents cycles from causing infinite recursion); otherwise
+  mark it and recurse into all references it contains.
+- When traversal completes, every object reachable from a root is
+  marked; everything else is, by definition, unreachable and
+  therefore garbage.
+
+### Phase 2 — Sweep
+
+The collector linearly scans the entire heap. For each object:
+
+- If marked, clear the mark bit (resetting state for the next cycle)
+  and leave the object alone.
+- If unmarked, reclaim its memory by returning it to a free list (or
+  otherwise marking the region as available for future allocation).
+
+After the sweep, the heap contains only live objects plus free
+regions ready for reuse.
+
+## Key properties and trade-offs
+
+- **Handles cycles correctly.** Unlike reference counting, mark-and-
+  sweep reclaims cyclic garbage because reachability — not reference
+  count — is the criterion.
+- **Stop-the-world (in the basic form).** The classical algorithm
+  requires pausing mutator threads so the heap does not change
+  underfoot during traversal. This causes GC pauses proportional to
+  heap size.
+- **Fragmentation.** Sweep leaves live objects in place, so the free
+  space becomes fragmented over time. This is why many real systems
+  pair mark-and-sweep with compaction (mark-compact) or use it as
+  one phase of a generational/region-based collector.
+- **Cost model.** Mark cost is proportional to the live set; sweep
+  cost is proportional to the entire heap. Allocation remains cheap
+  if a free list is well-maintained.
+- **Mark bit storage.** The mark bit can live in the object header
+  or in an external bitmap. External bitmaps improve cache behavior
+  during the sweep and are common in modern implementations.
+
+## Common refinements (mentioned for context, not detailed here)
+
+- **Tri-color marking** (white / gray / black) is the standard
+  formalism enabling **incremental** and **concurrent** collectors,
+  which interleave GC work with the mutator to shrink pauses. These
+  variants require write barriers to preserve the tri-color
+  invariant.
+- **Mark-compact** adds a compaction phase after sweep to eliminate
+  fragmentation.
+- **Generational collection** applies mark-and-sweep (or variants)
+  to a subset of the heap based on object age, exploiting the weak
+  generational hypothesis that most objects die young.
+
+## Source note
+
+This explanation is drawn from internal knowledge of standard
+computer-science material (e.g., the algorithm as originally
+described by McCarthy, 1960, and as presented in standard
+references such as Jones, Hosking, and Moss, "The Garbage Collection
+Handbook"). No external retrieval was performed because the topic is
+stable per the policy's classification and because no retrieval tools
+are available in this environment. The explanation distinguishes
+established algorithmic facts (the two phases, cycle handling,
+fragmentation) from design-space context (refinements, trade-offs).

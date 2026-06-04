@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate explicitly classifies BTC price as fluid market data, refuses to quote any number from training data, identifies it as high-stakes (financial) requiring a primary source, and recommends primary exchange APIs (Coinbase, Kraken, CoinGecko) with timestamped retrieval. No stale price is quoted."
+}

@@ -1,0 +1,15 @@
+Per the Information Retrieval Policy, this question must be classified before answering.
+
+**Step 1 — Classification**: "Current CEO of OpenAI" is a **fluid** fact. Corporate leadership can change at any time (OpenAI itself demonstrated this vividly in November 2023, when the CEO role changed multiple times within a single week). The phrasing "current" and the implicit "as of [today]" qualifier are exactly the markers the policy flags as fluid. Therefore the policy requires external verification rather than an answer from internal knowledge.
+
+**Step 2 — Tool selection**: The policy prefers specialized tools, then targeted retrieval (e.g., OpenAI's official "About" / newsroom pages, SEC-style filings, vendor press releases), then general web search as a fallback.
+
+**Step 3 — Source selection**: A primary source is appropriate here — OpenAI's own website (openai.com/our-structure, openai.com/about, or an official press release) or a reputable news outlet reporting on an official announcement.
+
+**Gap disclosure (required by the policy's "State gaps openly" rule)**:
+In this environment I have no web_search, no MCP servers, and no specialized retrieval tools available — only a file-writing tool. I therefore cannot perform the verification step that the policy mandates for fluid facts. I will not fabricate a lookup or cite sources I did not actually consult.
+
+**What I can offer, clearly marked as unverified internal knowledge**:
+Based on training data (not a fresh retrieval), Sam Altman was CEO of OpenAI as of my knowledge cutoff. He was briefly removed and reinstated in November 2023, and to my knowledge has held the role since. I cannot confirm this reflects the situation as of today's date (2026-05-31) without a live source.
+
+**Recommended next step for the user**: Verify against OpenAI's official site (https://openai.com/about) or a current reputable news source before relying on the answer.

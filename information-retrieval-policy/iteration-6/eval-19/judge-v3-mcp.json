@@ -1,0 +1,7 @@
+{
+  "verdict": "correct",
+  "reasoning": "The candidate covered both zonal and regional NAT Gateway modes with specific details (8 IPs/AZ for zonal, 32 IPs/AZ for regional, ~60min expansion, private NAT exception), cited primary AWS sources from docs.aws.amazon.com and aws.amazon.com, and included an explicit freshness marker dated 2026-05-31.",
+  "covered_regional_mode": true,
+  "cited_aws_primary_source": true,
+  "included_freshness_marker": true
+}

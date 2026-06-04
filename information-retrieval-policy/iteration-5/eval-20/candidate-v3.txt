@@ -1,0 +1,11 @@
+A verified answer requires retrieval I can't perform in this environment. The right tool for this would be the AWS Knowledge MCP server (or failing that, the official AWS Bedrock documentation at docs.aws.amazon.com/bedrock).
+
+Based on training data through my cutoff, not freshly verified: Amazon Bedrock AgentCore is an AWS offering (announced around mid-2025) that provides infrastructure and runtime services for building, deploying, and operating production-grade AI agents. It is positioned as a set of composable services — including an agent runtime, memory, identity/auth, gateway for tool integration, code interpreter, browser tool, and observability — that you can use independently of the rest of Bedrock and with agents built on any framework (LangGraph, CrewAI, Strands, etc.) or any underlying model. The pitch is to handle the operational "plumbing" (session isolation, scaling, secure tool access, long- and short-term memory, identity) so teams can focus on agent logic.
+
+Claims most likely to be stale or wrong:
+- The exact list of sub-services and their names (AgentCore Runtime, Memory, Identity, Gateway, Code Interpreter, Browser, Observability) — the lineup and naming may have changed or expanded since launch.
+- General-availability vs. preview status — it was in preview at announcement; GA status and regional availability may have shifted.
+- Framework/model neutrality claims and specific integrations — these are the kind of details AWS updates frequently.
+- Pricing and quotas — not stated above, and would need to be looked up fresh in any case.
+
+Please confirm specifics against the AWS Bedrock AgentCore documentation before relying on them.
