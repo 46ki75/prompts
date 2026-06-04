@@ -9,7 +9,7 @@ lint:
     cargo clippy --workspace --all-targets -- -D warnings
 
 lint-md:
-    npm run lint
+    pnpm lint
 
 test:
     cargo test --workspace

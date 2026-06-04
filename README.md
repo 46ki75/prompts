@@ -28,6 +28,6 @@ Tasks are run through [`just`](https://github.com/casey/just):
 ```bash
 just build      # build dist/
 just ci         # fmt-check + clippy + tests (what PR CI runs)
-just lint-md    # markdownlint (requires `npm install` once)
+just lint-md    # markdownlint (requires `pnpm install` once)
 just coverage   # per-file coverage table with uncovered lines
 ```
