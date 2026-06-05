@@ -1,6 +1,6 @@
-# Build the static site into ./dist
+# Build the static site into ./dist from prompts under ./prompts
 build:
-    cargo run --release --package builder
+    cargo run --release --package builder -- prompts
 
 fmt-check:
     cargo fmt --all -- --check
