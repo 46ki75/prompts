@@ -21,6 +21,35 @@ writes:
 Pushes to `main` deploy `dist/` to GitHub Pages via
 `.github/workflows/deploy.yml`.
 
+## MCP server
+
+`crates/mcp-prompts` re-exposes the published distribution over the
+Model Context Protocol: `resources/list` projects `list.json` onto
+`prompts://<name>` resources and `resources/read` returns a prompt's
+markdown. Reads resolve through `list.json`, so unlisted files are
+unreachable.
+
+```bash
+cargo run --package mcp-prompts -- stdio          # what an MCP host launches
+cargo run --package mcp-prompts -- http           # streamable HTTP at /mcp
+```
+
+`--base-url` (env `MCP_PROMPTS_BASE_URL`) points the server at another
+static host — e.g. a local preview of an unpublished `dist/`.
+
+Example MCP host configuration:
+
+```json
+{
+  "mcpServers": {
+    "prompts": {
+      "command": "mcp-prompts",
+      "args": ["stdio"]
+    }
+  }
+}
+```
+
 ## Development
 
 Tasks are run through [`just`](https://github.com/casey/just):
@@ -28,6 +57,7 @@ Tasks are run through [`just`](https://github.com/casey/just):
 ```bash
 just build      # build dist/
 just ci         # fmt-check + clippy + tests (what PR CI runs)
+just test-live  # #[ignore]'d tests against the real GitHub Pages site
 just lint-md    # markdownlint (requires `pnpm install` once)
 just coverage   # per-file coverage table with uncovered lines
 ```

@@ -1,0 +1,27 @@
+name: ci-live
+
+# Live tests hit the real GitHub Pages distribution. Per the org
+# standards, live-test failures MUST NOT block PR merges — they fail
+# for reasons unrelated to the diff (network, Pages outage, an empty
+# deployment). So this workflow runs only on manual dispatch and on a
+# weekly schedule.
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays at 06:00 UTC — early enough that any breakage is visible
+    # at the start of the week.
+    - cron: "0 6 * * 1"
+
+concurrency:
+  group: ci-live-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ci-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # rustup picks up rust-toolchain.toml automatically on first cargo call.
+      - uses: Swatinem/rust-cache@v2
+      - uses: extractions/setup-just@v3
+      - run: just ci-live

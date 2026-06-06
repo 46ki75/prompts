@@ -14,6 +14,10 @@ lint-md:
 test:
     cargo test --workspace
 
+# Live tests — hit the real GitHub Pages distribution. Not part of `ci`.
+test-live:
+    cargo test --workspace -- --ignored
+
 # Instrumented unit / hermetic test run (no report yet)
 test-cov:
     cargo llvm-cov --no-report --workspace
@@ -31,3 +35,5 @@ coverage-ci: test-cov
     cargo llvm-cov report --lcov --output-path lcov.info
 
 ci: fmt-check lint test
+
+ci-live: fmt-check lint test test-live

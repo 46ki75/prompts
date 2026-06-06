@@ -1,5 +1,5 @@
 # Must match `rust-version` in [workspace.package] so builds are a real MSRV test.
 [toolchain]
-channel = "1.85"
+channel = "1.90"
 components = ["rustfmt", "clippy"]
 profile = "minimal"
