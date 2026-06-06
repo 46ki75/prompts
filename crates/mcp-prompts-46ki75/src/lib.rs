@@ -1,19 +1,21 @@
 //! MCP server exposing the prompts published to GitHub Pages as MCP
-//! resources.
+//! prompts.
 //!
 //! The static distribution (built by `crates/builder`, deployed by
 //! `.github/workflows/deploy.yml`) serves two kinds of files:
 //!
-//! - `resources/list.json` — index of `{ name, title, path }` entries
-//! - `resources/<name>.md` — one markdown document per prompt
+//! - `prompts/list.json` — index of
+//!   `{ name, title, description?, arguments?, path }` entries, with
+//!   the metadata parsed from each prompt's Claude Skill–style
+//!   frontmatter at build time
+//! - `prompts/<name>.md` — one markdown document per prompt, with the
+//!   frontmatter stripped
 //!
 //! This server reads that hosting and re-exposes it over MCP:
-//! `resources/list` projects `list.json` onto `prompts://<name>`
-//! resources — enriching each with the `name` and `description` from
-//! the prompt's YAML frontmatter when present, falling back to the
-//! `list.json` title otherwise — and `resources/read` resolves a name
-//! through the index and returns the markdown body with the
-//! frontmatter block stripped (it is already surfaced on the listing).
+//! `prompts/list` projects `list.json` onto MCP prompts (name, title,
+//! description, arguments), and `prompts/get` resolves a name through
+//! the index and returns the markdown body with any provided argument
+//! values substituted (`$ARGUMENTS`, `$1`, `$2`, …).
 //!
 //! A single binary, `46ki75-prompts`, adapts the library to the two MCP
 //! transports an editor host cares about, selected by subcommand:
@@ -27,18 +29,16 @@
 //!
 //! Internally the crate follows the repository / use case layering
 //! documented in the org-wide Rust standards; the MCP adapter lives in
-//! [`resources`].
+//! [`prompts`].
 
 #![deny(missing_docs)]
 
 /// Crate-wide error type used during [`Server`] construction.
 pub mod error;
-/// Best-effort YAML frontmatter extraction from prompt markdown.
-pub mod frontmatter;
+/// MCP prompt handlers (`prompts/list`, `prompts/get`).
+pub mod prompts;
 /// HTTP repository over the static distribution.
 pub mod repository;
-/// MCP resource handlers (`resources/list`, `resources/read`).
-pub mod resources;
 /// [`ServerBuilder`] and the constants it defaults to.
 pub mod router;
 /// Name-resolution use case between handler and repository.
@@ -49,8 +49,8 @@ use std::sync::Arc;
 use rmcp::ErrorData as McpError;
 use rmcp::ServerHandler;
 use rmcp::model::{
-    Implementation, ListResourcesResult, PaginatedRequestParams, ReadResourceRequestParams,
-    ReadResourceResult, ServerCapabilities, ServerInfo,
+    GetPromptRequestParams, GetPromptResult, Implementation, ListPromptsResult,
+    PaginatedRequestParams, ServerCapabilities, ServerInfo,
 };
 use rmcp::service::{RequestContext, RoleServer};
 
@@ -58,7 +58,7 @@ pub use crate::error::Error;
 pub use crate::router::{DEFAULT_USER_AGENT, PROMPTS_BASE_URL, ServerBuilder};
 pub use crate::use_case::PromptsUseCase;
 
-/// MCP server handler exposing the prompt distribution as resources.
+/// MCP server handler exposing the prompt distribution as prompts.
 ///
 /// Cheap to clone — the use case is behind an `Arc` — which is what
 /// lets the streamable-HTTP transport hand out a fresh `Server` per
@@ -97,31 +97,32 @@ impl Server {
 impl ServerHandler for Server {
     fn get_info(&self) -> ServerInfo {
         let mut info = ServerInfo::default();
-        info.capabilities = ServerCapabilities::builder().enable_resources().build();
+        info.capabilities = ServerCapabilities::builder().enable_prompts().build();
         info.server_info = Implementation::new(env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
         info.instructions = Some(
-            "Prompt library served from static hosting. `resources/list` \
-             enumerates the published prompts as `prompts://<name>` \
-             resources; `resources/read` returns a prompt's markdown body."
+            "Prompt library served from static hosting. `prompts/list` \
+             enumerates the published prompts with their arguments; \
+             `prompts/get` returns a prompt's markdown body with any \
+             provided argument values substituted."
                 .to_string(),
         );
         info
     }
 
-    async fn list_resources(
+    async fn list_prompts(
         &self,
         _request: Option<PaginatedRequestParams>,
         _ctx: RequestContext<RoleServer>,
-    ) -> Result<ListResourcesResult, McpError> {
-        resources::list_resources(self).await
+    ) -> Result<ListPromptsResult, McpError> {
+        prompts::list_prompts(self).await
     }
 
-    async fn read_resource(
+    async fn get_prompt(
         &self,
-        request: ReadResourceRequestParams,
+        request: GetPromptRequestParams,
         _ctx: RequestContext<RoleServer>,
-    ) -> Result<ReadResourceResult, McpError> {
-        resources::read_resource(self, request).await
+    ) -> Result<GetPromptResult, McpError> {
+        prompts::get_prompt(self, request).await
     }
 }
 

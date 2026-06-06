@@ -1,5 +1,5 @@
 ---
-name: Information Retrieval Policy
+name: information-retrieval-policy
 description: >-
   A policy for how to source factual information: when to look it up,
   what tool to use, which sources to trust, and how to report the result.

@@ -19,12 +19,12 @@ fn main() -> ExitCode {
     match builder::build(&root, &out) {
         Ok(index) => {
             for entry in &index {
-                println!("{} -> resources/{}", entry.name, entry.path);
+                println!("{} -> prompts/{}", entry.name, entry.path);
             }
             println!(
                 "wrote {} prompt(s) + list.json to {}",
                 index.len(),
-                out.join("resources").display()
+                out.join("prompts").display()
             );
             ExitCode::SUCCESS
         }

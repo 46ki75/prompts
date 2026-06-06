@@ -1,8 +1,19 @@
 //! Builds the static distribution of prompts for GitHub Pages.
 //!
 //! Scans a repository root for top-level directories containing a
-//! `prompt.md`, copies each prompt to `<out>/resources/<name>.md`, and
-//! writes an index of all prompts to `<out>/resources/list.json`.
+//! `prompt.md` — markdown following the Claude Skill format, with an
+//! optional YAML frontmatter block (`name`, `description`,
+//! `argument-hint`). For each prompt the builder:
+//!
+//! - parses the frontmatter into index metadata,
+//! - writes the body (frontmatter stripped) to `<out>/prompts/<name>.md`,
+//! - and records an entry in `<out>/prompts/list.json`.
+//!
+//! `list.json` carries everything a server needs to advertise the
+//! prompts — consumers never have to parse frontmatter themselves.
+
+/// Claude Skill–style frontmatter parsing and stripping.
+pub mod frontmatter;
 
 use serde::Serialize;
 use std::fs;
@@ -11,11 +22,20 @@ use std::path::{Path, PathBuf};
 /// A single prompt entry as it appears in `list.json`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct PromptEntry {
-    /// Directory name of the prompt, e.g. `information-retrieval-policy`.
+    /// Prompt identifier: the frontmatter `name`, falling back to the
+    /// prompt's directory name.
     pub name: String,
-    /// Title taken from the prompt's first `#` heading; falls back to `name`.
+    /// Title taken from the body's first `#` heading; falls back to
+    /// `name`.
     pub title: String,
-    /// Path of the markdown file relative to `resources/`.
+    /// The frontmatter `description`, when present.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// Argument names parsed from the frontmatter `argument-hint`, in
+    /// positional order. Omitted when the prompt takes no arguments.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub arguments: Vec<String>,
+    /// Path of the markdown file relative to `prompts/`.
     pub path: String,
 }
 
@@ -54,7 +74,8 @@ pub fn extract_title(markdown: &str) -> Option<&str> {
 /// Scans `root` for top-level directories containing a `prompt.md`.
 ///
 /// Hidden directories (leading `.`) are skipped. Returns
-/// `(entry, content)` pairs sorted by name so output is deterministic.
+/// `(entry, body)` pairs — the body has its frontmatter stripped —
+/// sorted by name so output is deterministic.
 pub fn collect_prompts(root: &Path) -> Result<Vec<(PromptEntry, String)>, BuildError> {
     let mut prompts = Vec::new();
     for dir_entry in fs::read_dir(root).map_err(io_err(root))? {
@@ -62,10 +83,10 @@ pub fn collect_prompts(root: &Path) -> Result<Vec<(PromptEntry, String)>, BuildE
         if !dir_path.is_dir() {
             continue;
         }
-        let Some(name) = dir_path.file_name().and_then(|name| name.to_str()) else {
+        let Some(dir_name) = dir_path.file_name().and_then(|name| name.to_str()) else {
             continue;
         };
-        if name.starts_with('.') {
+        if dir_name.starts_with('.') {
             continue;
         }
         let prompt_path = dir_path.join("prompt.md");
@@ -73,14 +94,21 @@ pub fn collect_prompts(root: &Path) -> Result<Vec<(PromptEntry, String)>, BuildE
             continue;
         }
         let content = fs::read_to_string(&prompt_path).map_err(io_err(&prompt_path))?;
-        let title = extract_title(&content).unwrap_or(name).to_owned();
+        let metadata = frontmatter::parse(&content).unwrap_or_default();
+        let body = frontmatter::strip(&content).to_owned();
+
+        let arguments = metadata.argument_names();
+        let name = metadata.name.unwrap_or_else(|| dir_name.to_owned());
+        let title = extract_title(&body).unwrap_or(&name).to_owned();
         prompts.push((
             PromptEntry {
-                name: name.to_owned(),
-                title,
                 path: format!("{name}.md"),
+                title,
+                description: metadata.description,
+                arguments,
+                name,
             },
-            content,
+            body,
         ));
     }
     prompts.sort_by(|a, b| a.0.name.cmp(&b.0.name));
@@ -89,23 +117,23 @@ pub fn collect_prompts(root: &Path) -> Result<Vec<(PromptEntry, String)>, BuildE
 
 /// Builds the static distribution under `out` and returns the index entries.
 ///
-/// Produces `<out>/resources/<name>.md` per prompt and
-/// `<out>/resources/list.json` as the index.
+/// Produces `<out>/prompts/<name>.md` (frontmatter stripped) per prompt
+/// and `<out>/prompts/list.json` as the index.
 pub fn build(root: &Path, out: &Path) -> Result<Vec<PromptEntry>, BuildError> {
-    let resources = out.join("resources");
-    fs::create_dir_all(&resources).map_err(io_err(&resources))?;
+    let prompts_dir = out.join("prompts");
+    fs::create_dir_all(&prompts_dir).map_err(io_err(&prompts_dir))?;
 
     let prompts = collect_prompts(root)?;
     let mut index = Vec::with_capacity(prompts.len());
-    for (entry, content) in prompts {
-        let target = resources.join(&entry.path);
-        fs::write(&target, content).map_err(io_err(&target))?;
+    for (entry, body) in prompts {
+        let target = prompts_dir.join(&entry.path);
+        fs::write(&target, body).map_err(io_err(&target))?;
         index.push(entry);
     }
 
     let mut json = serde_json::to_string_pretty(&index)?;
     json.push('\n');
-    let list_path = resources.join("list.json");
+    let list_path = prompts_dir.join("list.json");
     fs::write(&list_path, json).map_err(io_err(&list_path))?;
     Ok(index)
 }

@@ -2,11 +2,12 @@
 //!
 //! Skipped by default via `#[ignore]`. Run with `just test-live`
 //! (or `cargo test -- --ignored`). Failures here may reflect upstream
-//! state (network, Pages outage, an empty deployment) rather than this
-//! diff, so per the org standards they do not gate PR merges.
+//! state (network, Pages outage, an empty or not-yet-migrated
+//! deployment) rather than this diff, so per the org standards they do
+//! not gate PR merges.
 
 use mcp_prompts_46ki75::Server;
-use rmcp::model::ReadResourceRequestParams;
+use rmcp::model::GetPromptRequestParams;
 use rmcp::{ClientHandler, ServiceExt};
 
 #[derive(Default, Clone)]
@@ -38,37 +39,32 @@ async fn spawn(
 
 #[tokio::test]
 #[ignore = "live: hits the real GitHub Pages distribution"]
-async fn live_list_and_read_first_published_prompt() -> anyhow::Result<()> {
+async fn live_list_and_get_first_published_prompt() -> anyhow::Result<()> {
     let server = Server::new()?;
     let (client, server_handle) = spawn(server).await;
 
-    let listed = client.list_resources(None).await?;
+    let listed = client.list_prompts(None).await?;
     assert!(
-        !listed.resources.is_empty(),
+        !listed.prompts.is_empty(),
         "published distribution should contain at least one prompt"
     );
 
-    // Read whichever prompt is listed first — the test must not pin a
-    // specific prompt name, only the list → read contract.
-    let first = &listed.resources[0].raw;
-    assert!(
-        first.uri.starts_with("prompts://"),
-        "unexpected URI shape: {}",
-        first.uri
-    );
+    // Get whichever prompt is listed first — the test must not pin a
+    // specific prompt name, only the list → get contract.
+    let first = &listed.prompts[0];
 
     let result = client
-        .read_resource(ReadResourceRequestParams::new(first.uri.clone()))
+        .get_prompt(GetPromptRequestParams::new(first.name.clone()))
         .await?;
 
     let text = result
-        .contents
+        .messages
         .iter()
-        .find_map(|c| match c {
-            rmcp::model::ResourceContents::TextResourceContents { text, .. } => Some(text.clone()),
+        .find_map(|message| match &message.content {
+            rmcp::model::PromptMessageContent::Text { text } => Some(text.clone()),
             _ => None,
         })
-        .expect("text contents");
+        .expect("text message");
     assert!(
         !text.trim().is_empty(),
         "prompt body should be non-empty markdown"

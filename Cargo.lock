@@ -208,6 +208,7 @@ name = "builder"
 version = "0.1.0"
 dependencies = [
  "serde",
+ "serde-saphyr",
  "serde_json",
  "tempfile",
  "thiserror",
@@ -997,7 +998,7 @@ checksum = "47e1ffaa40ddd1f3ed91f717a33c8c0ee23fff369e3aa8772b9605cc1d22f4c3"
 
 [[package]]
 name = "mcp-prompts-46ki75"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "axum",
@@ -1005,7 +1006,6 @@ dependencies = [
  "reqwest",
  "rmcp",
  "serde",
- "serde-saphyr",
  "serde_json",
  "thiserror",
  "tokio",

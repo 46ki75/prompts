@@ -1,10 +1,14 @@
 //! HTTP repository over the static distribution on GitHub Pages.
 //!
 //! The distribution contract (see the repository README) is two kinds
-//! of files under `<base>/resources/`:
+//! of files under `<base>/prompts/`:
 //!
-//! - `list.json` — JSON array of `{ name, title, path }` entries
-//! - `<path>` — one markdown file per prompt, referenced by `list.json`
+//! - `list.json` — JSON array of
+//!   `{ name, title, description?, arguments?, path }` entries; the
+//!   builder parses each prompt's frontmatter at build time, so the
+//!   index already carries everything `prompts/list` advertises
+//! - `<path>` — one markdown file per prompt (frontmatter stripped),
+//!   referenced by `list.json`
 
 use std::future::Future;
 use std::pin::Pin;
@@ -21,11 +25,18 @@ pub type BoxFuture<'a, T> = Pin<Box<dyn Future<Output = T> + Send + 'a>>;
 /// One entry of `list.json`, mirroring the builder's output shape.
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 pub struct PromptEntry {
-    /// Directory name of the prompt, e.g. `information-retrieval-policy`.
+    /// Prompt identifier, e.g. `information-retrieval-policy`.
     pub name: String,
     /// Human-readable title (the prompt's first `#` heading).
     pub title: String,
-    /// Path of the markdown file relative to `resources/`.
+    /// One-line summary from the prompt's frontmatter, when present.
+    #[serde(default)]
+    pub description: Option<String>,
+    /// Declared argument names in positional order, parsed from the
+    /// frontmatter `argument-hint` by the builder.
+    #[serde(default)]
+    pub arguments: Vec<String>,
+    /// Path of the markdown file relative to `prompts/`.
     pub path: String,
 }
 
@@ -89,10 +100,10 @@ pub type FetchPromptResult = Result<String, PromptsRepositoryError>;
 /// Held as `Arc<dyn PromptsRepository>` by the use case so a stub can
 /// be swapped in for unit tests without touching the real HTTP client.
 pub trait PromptsRepository: Send + Sync + 'static {
-    /// Fetch and parse `<base>/resources/list.json`.
+    /// Fetch and parse `<base>/prompts/list.json`.
     fn fetch_list(&self) -> BoxFuture<'_, FetchListResult>;
 
-    /// Fetch `<base>/resources/<path>` as UTF-8 markdown. `path` MUST
+    /// Fetch `<base>/prompts/<path>` as UTF-8 markdown. `path` MUST
     /// come from a [`PromptEntry`] returned by
     /// [`fetch_list`](Self::fetch_list) — the repository does not
     /// validate it beyond URL-joining.
@@ -126,9 +137,9 @@ impl PromptsRepositoryImpl {
         self
     }
 
-    fn resource_url(&self, file: &str) -> String {
+    fn file_url(&self, file: &str) -> String {
         let base = self.base_url.trim_end_matches('/');
-        format!("{base}/resources/{file}")
+        format!("{base}/prompts/{file}")
     }
 
     async fn fetch_bytes(&self, url: &str) -> Result<Vec<u8>, PromptsRepositoryError> {
@@ -162,7 +173,7 @@ impl PromptsRepositoryImpl {
 impl PromptsRepository for PromptsRepositoryImpl {
     fn fetch_list(&self) -> BoxFuture<'_, FetchListResult> {
         Box::pin(async move {
-            let url = self.resource_url("list.json");
+            let url = self.file_url("list.json");
             let body = self.fetch_bytes(&url).await?;
             serde_json::from_slice(&body)
                 .map_err(|source| PromptsRepositoryError::InvalidList { url, source })
@@ -171,7 +182,7 @@ impl PromptsRepository for PromptsRepositoryImpl {
 
     fn fetch_prompt(&self, path: String) -> BoxFuture<'_, FetchPromptResult> {
         Box::pin(async move {
-            let url = self.resource_url(&path);
+            let url = self.file_url(&path);
             let body = self.fetch_bytes(&url).await?;
             String::from_utf8(body).map_err(|_| PromptsRepositoryError::InvalidUtf8 { url })
         })
