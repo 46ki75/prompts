@@ -21,12 +21,10 @@ pub struct Frontmatter {
     pub description: Option<String>,
 }
 
-/// Parse the leading `---` YAML frontmatter block of `markdown`.
-///
-/// Returns [`None`] when the document does not start with `---`, the
-/// block is never closed by a `---` line, or the block is not valid
-/// YAML.
-pub fn parse(markdown: &str) -> Option<Frontmatter> {
+/// Split `markdown` into its frontmatter YAML and the rest of the
+/// document, or [`None`] when the document does not open with a
+/// well-delimited `---` block.
+fn split(markdown: &str) -> Option<(&str, &str)> {
     let body = markdown.strip_prefix("---")?;
     let body = body
         .strip_prefix("\r\n")
@@ -35,19 +33,36 @@ pub fn parse(markdown: &str) -> Option<Frontmatter> {
     // The YAML block runs up to the first line that is exactly `---`
     // (modulo trailing whitespace / CR).
     let mut yaml_len = 0;
-    let mut closed = false;
     for line in body.split_inclusive('\n') {
         if line.trim_end() == "---" {
-            closed = true;
-            break;
+            return Some((&body[..yaml_len], &body[yaml_len + line.len()..]));
         }
         yaml_len += line.len();
     }
-    if !closed {
-        return None;
-    }
+    None
+}
 
-    serde_saphyr::from_str(&body[..yaml_len]).ok()
+/// Parse the leading `---` YAML frontmatter block of `markdown`.
+///
+/// Returns [`None`] when the document does not start with `---`, the
+/// block is never closed by a `---` line, or the block is not valid
+/// YAML.
+pub fn parse(markdown: &str) -> Option<Frontmatter> {
+    let (yaml, _) = split(markdown)?;
+    serde_saphyr::from_str(yaml).ok()
+}
+
+/// Return `markdown` without its leading frontmatter block, also
+/// dropping the blank lines separating the block from the body.
+///
+/// Stripping is structural: a well-delimited block is removed even if
+/// its YAML would not [`parse`]. A document without a (well-formed)
+/// block is returned unchanged.
+pub fn strip(markdown: &str) -> &str {
+    match split(markdown) {
+        Some((_, rest)) => rest.trim_start_matches(['\r', '\n']),
+        None => markdown,
+    }
 }
 
 #[cfg(test)]
@@ -111,6 +126,35 @@ mod tests {
         // A thematic break or stray `---` glued to text must not be
         // mistaken for an opening delimiter.
         assert_eq!(parse("--- not frontmatter\n"), None);
+    }
+
+    #[test]
+    fn strip_removes_frontmatter_and_separating_blank_lines() {
+        let markdown = "---\nname: Alpha\n---\n\n# Alpha Title\n\nalpha body\n";
+        assert_eq!(strip(markdown), "# Alpha Title\n\nalpha body\n");
+    }
+
+    #[test]
+    fn strip_removes_structurally_valid_block_with_invalid_yaml() {
+        let markdown = "---\n: [unbalanced\n---\nbody\n";
+        assert_eq!(strip(markdown), "body\n");
+    }
+
+    #[test]
+    fn strip_leaves_document_without_frontmatter_unchanged() {
+        let markdown = "# Just a Heading\n\nbody\n";
+        assert_eq!(strip(markdown), markdown);
+    }
+
+    #[test]
+    fn strip_leaves_unterminated_block_unchanged() {
+        let markdown = "---\nname: Alpha\n\n# Heading\n";
+        assert_eq!(strip(markdown), markdown);
+    }
+
+    #[test]
+    fn strip_handles_closing_delimiter_at_end_of_input() {
+        assert_eq!(strip("---\nname: Alpha\n---"), "");
     }
 
     #[test]

@@ -15,7 +15,9 @@ use crate::repository::{PromptEntry, PromptsRepository, PromptsRepositoryError};
 pub struct PromptDocument {
     /// The `list.json` entry the prompt was resolved from.
     pub entry: PromptEntry,
-    /// The prompt markdown, verbatim.
+    /// The prompt markdown, with any leading frontmatter block
+    /// removed — the metadata is already surfaced on the resource
+    /// listing, so contents carry only the document body.
     pub content: String,
 }
 
@@ -95,7 +97,8 @@ impl PromptsUseCase {
             .collect())
     }
 
-    /// Resolve `name` through `list.json` and fetch the prompt body.
+    /// Resolve `name` through `list.json` and fetch the prompt body,
+    /// stripping any leading frontmatter block.
     ///
     /// A name absent from the index returns
     /// [`PromptsUseCaseError::NotFound`] without issuing a second
@@ -109,7 +112,10 @@ impl PromptsUseCase {
                 name: name.to_string(),
             })?;
         let content = self.repository.fetch_prompt(entry.path.clone()).await?;
-        Ok(PromptDocument { entry, content })
+        Ok(PromptDocument {
+            entry,
+            content: frontmatter::strip(&content).to_string(),
+        })
     }
 }
 
@@ -144,6 +150,24 @@ mod tests {
         assert_eq!(doc.content, "# Title of beta\n\nbody");
         // The fetched path MUST be the one `list.json` declared.
         assert_eq!(stub.seen_paths().await, vec!["beta.md".to_string()]);
+    }
+
+    #[tokio::test]
+    async fn read_prompt_strips_frontmatter_from_content() {
+        let stub = Arc::new(PromptsRepositoryStub::new());
+        stub.enqueue_list(Ok(vec![entry("alpha")])).await;
+        stub.enqueue_prompt(Ok(
+            "---\nname: Alpha Prompt\n---\n\n# Title of alpha\n\nbody\n".to_string(),
+        ))
+        .await;
+        let use_case = PromptsUseCase::new(stub);
+
+        let doc = use_case
+            .read_prompt("alpha")
+            .await
+            .expect("prompt should resolve");
+
+        assert_eq!(doc.content, "# Title of alpha\n\nbody\n");
     }
 
     #[tokio::test]

@@ -145,8 +145,9 @@ async fn read_resource_returns_prompt_markdown() -> anyhow::Result<()> {
     assert_eq!(uri, "prompts://alpha");
     // Must match what `resources/list` advertises.
     assert_eq!(mime_type, Some("text/markdown"));
-    // The body is returned verbatim — frontmatter included.
-    assert_eq!(text, ALPHA_MARKDOWN);
+    // The frontmatter is metadata for `resources/list` — contents
+    // carry only the document body.
+    assert_eq!(text, "# Alpha Title\n\nalpha body\n");
 
     client.cancel().await?;
     let _ = server_handle.await;

@@ -12,7 +12,8 @@
 //! resources — enriching each with the `name` and `description` from
 //! the prompt's YAML frontmatter when present, falling back to the
 //! `list.json` title otherwise — and `resources/read` resolves a name
-//! through the index and returns the markdown body.
+//! through the index and returns the markdown body with the
+//! frontmatter block stripped (it is already surfaced on the listing).
 //!
 //! A single binary, `46ki75-prompts`, adapts the library to the two MCP
 //! transports an editor host cares about, selected by subcommand:
