@@ -1,7 +1,7 @@
 //! Hermetic integration tests — drive the server through an in-process
 //! MCP client (`tokio::io::duplex`) against a wiremock static host.
 
-use prompts_46ki75::Server;
+use mcp_prompts_46ki75::Server;
 use rmcp::model::{RawResource, ReadResourceRequestParams, ResourceContents};
 use rmcp::{ClientHandler, ServiceExt};
 use serde_json::json;

@@ -9,7 +9,7 @@
 //! argv.
 
 use clap::{Args, Parser, Subcommand};
-use prompts_46ki75::{PROMPTS_BASE_URL, Server};
+use mcp_prompts_46ki75::{PROMPTS_BASE_URL, Server};
 use rmcp::transport::streamable_http_server::{
     StreamableHttpServerConfig, StreamableHttpService, session::local::LocalSessionManager,
 };
