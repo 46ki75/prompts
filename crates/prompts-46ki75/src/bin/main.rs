@@ -9,7 +9,7 @@
 //! argv.
 
 use clap::{Args, Parser, Subcommand};
-use mcp_prompts::{PROMPTS_BASE_URL, Server};
+use prompts_46ki75::{PROMPTS_BASE_URL, Server};
 use rmcp::transport::streamable_http_server::{
     StreamableHttpServerConfig, StreamableHttpService, session::local::LocalSessionManager,
 };
@@ -19,7 +19,7 @@ use tracing_subscriber::EnvFilter;
 const DEFAULT_BIND_ADDRESS: &str = "127.0.0.1:8000";
 
 #[derive(Debug, Parser)]
-#[command(name = "mcp-prompts", version, about, long_about = None)]
+#[command(name = "46ki75-prompts", version, about, long_about = None)]
 struct Cli {
     /// Base URL of the static prompt distribution. Useful for pointing
     /// at a local preview of `dist/` or a wiremock fixture.
@@ -93,7 +93,7 @@ fn init_http_tracing() {
 async fn run_stdio(base_url: &str) -> anyhow::Result<()> {
     init_stdio_tracing();
 
-    tracing::info!(%base_url, "starting mcp-prompts over stdio");
+    tracing::info!(%base_url, "starting 46ki75-prompts over stdio");
 
     let server = Server::builder().base_url(base_url.to_string()).build()?;
 
@@ -124,7 +124,7 @@ async fn run_http(base_url: &str, bind_address: &str) -> anyhow::Result<()> {
 
     let router = axum::Router::new().nest_service("/mcp", service);
     let listener = tokio::net::TcpListener::bind(bind_address).await?;
-    tracing::info!(%bind_address, %base_url, "mcp-prompts listening at /mcp");
+    tracing::info!(%bind_address, %base_url, "46ki75-prompts listening at /mcp");
 
     axum::serve(listener, router)
         .with_graceful_shutdown(async move {

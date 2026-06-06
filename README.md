@@ -23,15 +23,15 @@ Pushes to `main` deploy `dist/` to GitHub Pages via
 
 ## MCP server
 
-`crates/mcp-prompts` re-exposes the published distribution over the
+`crates/prompts-46ki75` re-exposes the published distribution over the
 Model Context Protocol: `resources/list` projects `list.json` onto
 `prompts://<name>` resources and `resources/read` returns a prompt's
 markdown. Reads resolve through `list.json`, so unlisted files are
 unreachable.
 
 ```bash
-cargo run --package mcp-prompts -- stdio          # what an MCP host launches
-cargo run --package mcp-prompts -- http           # streamable HTTP at /mcp
+cargo run --package prompts-46ki75 -- stdio       # what an MCP host launches
+cargo run --package prompts-46ki75 -- http        # streamable HTTP at /mcp
 ```
 
 `--base-url` (env `MCP_PROMPTS_BASE_URL`) points the server at another
@@ -43,7 +43,7 @@ Example MCP host configuration:
 {
   "mcpServers": {
     "prompts": {
-      "command": "mcp-prompts",
+      "command": "46ki75-prompts",
       "args": ["stdio"]
     }
   }

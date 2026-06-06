@@ -5,7 +5,7 @@
 //! state (network, Pages outage, an empty deployment) rather than this
 //! diff, so per the org standards they do not gate PR merges.
 
-use mcp_prompts::Server;
+use prompts_46ki75::Server;
 use rmcp::model::ReadResourceRequestParams;
 use rmcp::{ClientHandler, ServiceExt};
 

@@ -1,5 +1,5 @@
 [package]
-name = "mcp-prompts"
+name = "prompts-46ki75"
 version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
@@ -29,6 +29,8 @@ tracing-subscriber = { workspace = true }
 rmcp = { workspace = true, features = ["client"] }
 wiremock = { workspace = true }
 
+# Binary names (unlike package names) may start with a digit, so the
+# installed command can match the GitHub `46ki75/prompts` identity.
 [[bin]]
-name = "mcp-prompts"
+name = "46ki75-prompts"
 path = "src/bin/main.rs"

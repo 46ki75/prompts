@@ -12,11 +12,11 @@
 //! resources, and `resources/read` resolves a name through the index
 //! and returns the markdown body.
 //!
-//! A single binary, `mcp-prompts`, adapts the library to the two MCP
+//! A single binary, `46ki75-prompts`, adapts the library to the two MCP
 //! transports an editor host cares about, selected by subcommand:
 //!
-//! - `mcp-prompts stdio` — line-buffered JSON-RPC over stdin/stdout
-//! - `mcp-prompts http`  — streamable HTTP at `/mcp`
+//! - `46ki75-prompts stdio` — line-buffered JSON-RPC over stdin/stdout
+//! - `46ki75-prompts http`  — streamable HTTP at `/mcp`
 //!
 //! Both accept `--base-url` (env `MCP_PROMPTS_BASE_URL`) to override
 //! the upstream, useful for hermetic tests or previewing an

@@ -32,7 +32,7 @@ pub const DEFAULT_UPSTREAM_BODY_BYTES: usize = 8 * 1024 * 1024;
 /// Default `User-Agent` header sent by the built-in HTTP client,
 /// embedding the crate version and source URL.
 pub const DEFAULT_USER_AGENT: &str = concat!(
-    "mcp-prompts/",
+    "46ki75-prompts/",
     env!("CARGO_PKG_VERSION"),
     " (+https://github.com/46ki75/prompts)",
 );
