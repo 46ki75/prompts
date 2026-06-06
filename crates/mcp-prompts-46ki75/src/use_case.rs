@@ -7,6 +7,7 @@
 
 use std::sync::Arc;
 
+use crate::frontmatter::{self, Frontmatter};
 use crate::repository::{PromptEntry, PromptsRepository, PromptsRepositoryError};
 
 /// A prompt resolved to both its index entry and its markdown body.
@@ -16,6 +17,18 @@ pub struct PromptDocument {
     pub entry: PromptEntry,
     /// The prompt markdown, verbatim.
     pub content: String,
+}
+
+/// A `list.json` entry enriched with the prompt's frontmatter.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PromptSummary {
+    /// The `list.json` entry.
+    pub entry: PromptEntry,
+    /// Display title: the frontmatter `name` when present, otherwise
+    /// the `list.json` `title` (the prompt's first `#` heading).
+    pub title: String,
+    /// The frontmatter `description`, when present.
+    pub description: Option<String>,
 }
 
 /// Errors surfaced by [`PromptsUseCase`].
@@ -44,9 +57,42 @@ impl PromptsUseCase {
     }
 
     /// All published prompts, in the order `list.json` declares
-    /// (the builder sorts it by name).
-    pub async fn list_prompts(&self) -> Result<Vec<PromptEntry>, PromptsUseCaseError> {
-        Ok(self.repository.fetch_list().await?)
+    /// (the builder sorts it by name), enriched with frontmatter.
+    ///
+    /// Frontmatter lives in the prompt bodies, so each listed prompt
+    /// is fetched (concurrently) alongside the index. The enrichment
+    /// is best-effort: a body that fails to fetch or carries no
+    /// parseable frontmatter degrades to the `list.json` metadata
+    /// rather than failing the listing.
+    pub async fn list_prompts(&self) -> Result<Vec<PromptSummary>, PromptsUseCaseError> {
+        let entries = self.repository.fetch_list().await?;
+
+        let mut fetches = tokio::task::JoinSet::new();
+        for (index, entry) in entries.iter().enumerate() {
+            let repository = Arc::clone(&self.repository);
+            let path = entry.path.clone();
+            fetches.spawn(async move { (index, repository.fetch_prompt(path).await) });
+        }
+
+        let mut frontmatters: Vec<Option<Frontmatter>> = vec![None; entries.len()];
+        while let Some(joined) = fetches.join_next().await {
+            if let Ok((index, Ok(body))) = joined {
+                frontmatters[index] = frontmatter::parse(&body);
+            }
+        }
+
+        Ok(entries
+            .into_iter()
+            .zip(frontmatters)
+            .map(|(entry, frontmatter)| {
+                let frontmatter = frontmatter.unwrap_or_default();
+                PromptSummary {
+                    title: frontmatter.name.unwrap_or_else(|| entry.title.clone()),
+                    description: frontmatter.description,
+                    entry,
+                }
+            })
+            .collect())
     }
 
     /// Resolve `name` through `list.json` and fetch the prompt body.
@@ -117,6 +163,55 @@ mod tests {
         ));
         // No second upstream request may have been issued.
         assert!(stub.seen_paths().await.is_empty());
+    }
+
+    #[tokio::test]
+    async fn list_prompts_prefers_frontmatter_name_and_description() {
+        let stub = Arc::new(PromptsRepositoryStub::new());
+        stub.enqueue_list(Ok(vec![entry("alpha")])).await;
+        stub.enqueue_prompt(Ok(
+            "---\nname: Alpha Prompt\ndescription: Alpha summary.\n---\n\n# Title of alpha\n"
+                .to_string(),
+        ))
+        .await;
+        let use_case = PromptsUseCase::new(stub);
+
+        let summaries = use_case.list_prompts().await.expect("list should resolve");
+
+        assert_eq!(summaries.len(), 1);
+        assert_eq!(summaries[0].title, "Alpha Prompt");
+        assert_eq!(summaries[0].description.as_deref(), Some("Alpha summary."));
+        assert_eq!(summaries[0].entry, entry("alpha"));
+    }
+
+    #[tokio::test]
+    async fn list_prompts_falls_back_to_entry_title_without_frontmatter() {
+        let stub = Arc::new(PromptsRepositoryStub::new());
+        stub.enqueue_list(Ok(vec![entry("alpha")])).await;
+        stub.enqueue_prompt(Ok("# Title of alpha\n\nno frontmatter\n".to_string()))
+            .await;
+        let use_case = PromptsUseCase::new(stub);
+
+        let summaries = use_case.list_prompts().await.expect("list should resolve");
+
+        assert_eq!(summaries[0].title, "Title of alpha");
+        assert_eq!(summaries[0].description, None);
+    }
+
+    #[tokio::test]
+    async fn list_prompts_tolerates_body_fetch_failures() {
+        let stub = Arc::new(PromptsRepositoryStub::new());
+        stub.enqueue_list(Ok(vec![entry("alpha")])).await;
+        // No prompt enqueued — the stub's fetch_prompt errors.
+        let use_case = PromptsUseCase::new(stub);
+
+        let summaries = use_case
+            .list_prompts()
+            .await
+            .expect("a failed body fetch must not fail the listing");
+
+        assert_eq!(summaries[0].title, "Title of alpha");
+        assert_eq!(summaries[0].description, None);
     }
 
     #[tokio::test]

@@ -9,8 +9,10 @@
 //!
 //! This server reads that hosting and re-exposes it over MCP:
 //! `resources/list` projects `list.json` onto `prompts://<name>`
-//! resources, and `resources/read` resolves a name through the index
-//! and returns the markdown body.
+//! resources — enriching each with the `name` and `description` from
+//! the prompt's YAML frontmatter when present, falling back to the
+//! `list.json` title otherwise — and `resources/read` resolves a name
+//! through the index and returns the markdown body.
 //!
 //! A single binary, `46ki75-prompts`, adapts the library to the two MCP
 //! transports an editor host cares about, selected by subcommand:
@@ -30,6 +32,8 @@
 
 /// Crate-wide error type used during [`Server`] construction.
 pub mod error;
+/// Best-effort YAML frontmatter extraction from prompt markdown.
+pub mod frontmatter;
 /// HTTP repository over the static distribution.
 pub mod repository;
 /// MCP resource handlers (`resources/list`, `resources/read`).

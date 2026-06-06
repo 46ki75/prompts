@@ -28,19 +28,22 @@ pub fn prompt_uri(name: &str) -> String {
 }
 
 /// Handle `resources/list` by projecting `list.json` entries onto
-/// MCP [`Resource`]s.
+/// MCP [`Resource`]s. Title and description come from each prompt's
+/// frontmatter when present, with the `list.json` title as fallback —
+/// see [`PromptsUseCase::list_prompts`](crate::PromptsUseCase::list_prompts).
 pub async fn list_resources(server: &Server) -> Result<ListResourcesResult, McpError> {
-    let entries = server
+    let summaries = server
         .prompts_use_case()
         .list_prompts()
         .await
         .map_err(to_mcp_error)?;
 
-    let resources = entries
+    let resources = summaries
         .into_iter()
-        .map(|entry| {
-            let mut raw = RawResource::new(prompt_uri(&entry.name), entry.name);
-            raw.title = Some(entry.title);
+        .map(|summary| {
+            let mut raw = RawResource::new(prompt_uri(&summary.entry.name), summary.entry.name);
+            raw.title = Some(summary.title);
+            raw.description = summary.description;
             raw.mime_type = Some(PROMPT_MIME_TYPE.to_string());
             raw.no_annotation()
         })

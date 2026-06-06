@@ -35,7 +35,14 @@ async fn spawn(
     (client, server_handle)
 }
 
+/// Markdown body of the `alpha` fixture prompt — carries frontmatter.
+const ALPHA_MARKDOWN: &str = "---\nname: Alpha Frontmatter Name\ndescription: Alpha frontmatter description.\n---\n\n# Alpha Title\n\nalpha body\n";
+
 /// Mount the standard two-prompt fixture on `mock`.
+///
+/// `alpha.md` is served with YAML frontmatter; `beta.md` is listed but
+/// deliberately not mounted (its fetch 404s), exercising the fallback
+/// to `list.json` metadata.
 async fn mount_fixture(mock: &MockServer) {
     Mock::given(method("GET"))
         .and(path("/resources/list.json"))
@@ -47,7 +54,7 @@ async fn mount_fixture(mock: &MockServer) {
         .await;
     Mock::given(method("GET"))
         .and(path("/resources/alpha.md"))
-        .respond_with(ResponseTemplate::new(200).set_body_string("# Alpha Title\n\nalpha body\n"))
+        .respond_with(ResponseTemplate::new(200).set_body_string(ALPHA_MARKDOWN))
         .mount(mock)
         .await;
 }
@@ -98,16 +105,24 @@ async fn list_resources_projects_list_json_entries() -> anyhow::Result<()> {
     let raws: Vec<&RawResource> = listed.resources.iter().map(|r| &r.raw).collect();
     assert_eq!(raws.len(), 2, "expected both fixture prompts: {raws:?}");
 
+    // Frontmatter wins for title/description when present...
     let alpha = raws
         .iter()
         .find(|r| r.name == "alpha")
         .expect("alpha entry");
     assert_eq!(alpha.uri, "prompts://alpha");
-    assert_eq!(alpha.title.as_deref(), Some("Alpha Title"));
+    assert_eq!(alpha.title.as_deref(), Some("Alpha Frontmatter Name"));
+    assert_eq!(
+        alpha.description.as_deref(),
+        Some("Alpha frontmatter description.")
+    );
     assert_eq!(alpha.mime_type.as_deref(), Some("text/markdown"));
 
+    // ...and an unreadable body falls back to the `list.json` title.
     let beta = raws.iter().find(|r| r.name == "beta").expect("beta entry");
     assert_eq!(beta.uri, "prompts://beta");
+    assert_eq!(beta.title.as_deref(), Some("Beta Title"));
+    assert_eq!(beta.description, None);
 
     client.cancel().await?;
     let _ = server_handle.await;
@@ -130,7 +145,8 @@ async fn read_resource_returns_prompt_markdown() -> anyhow::Result<()> {
     assert_eq!(uri, "prompts://alpha");
     // Must match what `resources/list` advertises.
     assert_eq!(mime_type, Some("text/markdown"));
-    assert_eq!(text, "# Alpha Title\n\nalpha body\n");
+    // The body is returned verbatim — frontmatter included.
+    assert_eq!(text, ALPHA_MARKDOWN);
 
     client.cancel().await?;
     let _ = server_handle.await;
