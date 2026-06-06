@@ -1,0 +1,22 @@
+Note on sourcing: This is a fluid topic (an evolving AWS service), and the authoritative way to answer it is the AWS documentation — ideally via the AWS Knowledge MCP server. No retrieval tools are available in this run, so the following is based on my training data (cutoff January 2026) and is NOT freshly verified. Confirm against the primary source before relying on specifics: https://docs.aws.amazon.com/bedrock-agentcore/ and the AWS Bedrock AgentCore product page.
+
+Best-effort answer (unverified):
+
+Amazon Bedrock AgentCore is a set of AWS services for building, deploying, and operating AI agents in production. It was announced at AWS Summit New York in July 2025 (in preview) and is aimed at running agents at enterprise scale, independent of which model or agent framework you use (e.g., Strands Agents, LangGraph, CrewAI, and others) — not limited to models hosted in Amazon Bedrock.
+
+What it's for: it provides the surrounding infrastructure and operational "plumbing" that agents need beyond the LLM call itself, so teams don't have to build that scaffolding themselves. The capabilities I recall being grouped under it include:
+
+- AgentCore Runtime — a serverless, isolated runtime for deploying and scaling agents, with support for long-running sessions.
+- AgentCore Memory — managed short-term and long-term memory for agents across sessions.
+- AgentCore Identity — identity and access management for agents, including secure access to AWS resources and third-party services/tools.
+- AgentCore Gateway — turns existing APIs and services (and Lambda functions) into agent-usable tools, with MCP support.
+- AgentCore Browser — a managed, sandboxed headless browser tool so agents can interact with websites.
+- AgentCore Code Interpreter — a sandboxed environment for agents to execute code.
+- AgentCore Observability — tracing, monitoring, and debugging of agent behavior.
+
+Which claims to distrust most (most likely to be stale):
+- General-availability vs. preview status, pricing, and regional availability — these change quickly; the July 2025 preview may since have gone GA, and I cannot confirm its current state as of today (2026-06-06).
+- The exact set and names of the component services, and which frameworks/integrations are officially supported — the lineup may have been added to or renamed.
+- Any specific limits (session length, supported runtimes, etc.).
+
+To verify: AWS Bedrock AgentCore documentation (https://docs.aws.amazon.com/bedrock-agentcore/), the AWS product/pricing pages, and the AWS News Blog announcement posts. The AWS Knowledge MCP server would be the preferred tool to confirm these details.

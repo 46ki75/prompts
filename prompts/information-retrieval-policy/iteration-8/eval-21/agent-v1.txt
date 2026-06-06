@@ -1,0 +1,60 @@
+Tailwind's theme-configuration mechanism changed significantly between v3 and v4, and "the standard setup" depends entirely on which version you're on. I can't freshly verify the current syntax in this environment (no documentation/web access), so the setup below is from training data through early 2026 and is not freshly verified. Confirm against the official docs before relying on it: https://tailwindcss.com/docs/theme (and the v4 upgrade guide at https://tailwindcss.com/docs/upgrade-guide).
+
+The single most likely thing to be stale here is the v3-vs-v4 split — if you've installed Tailwind recently you almost certainly have v4, where theme config lives in CSS, not in a JS config file. Treat the v3 instructions below as legacy.
+
+---
+
+Tailwind v4 (the current default for new installs) — configure the theme in CSS
+
+In your main CSS file:
+
+    @import "tailwindcss";
+
+    @theme {
+      --color-brand: #2563eb;
+      --color-brand-dark: #1e40af;
+      --font-display: "Inter", sans-serif;
+      --spacing-18: 4.5rem;
+      --breakpoint-3xl: 120rem;
+    }
+
+Each `--<namespace>-<name>` variable both defines a design token and generates the corresponding utilities. For example, `--color-brand` produces `bg-brand`, `text-brand`, `border-brand`, etc. The namespaces (`--color-*`, `--font-*`, `--spacing-*`, `--breakpoint-*`, `--radius-*`, and so on) map to specific utility families.
+
+Key v4 notes (verify these specifically, as they're version-sensitive):
+- v4 has no `tailwind.config.js` by default; CSS-first config via `@theme` is the standard.
+- To extend rather than replace the defaults, just add new variables. To override a default, redefine its variable. To clear a whole namespace, use e.g. `--color-*: initial;`.
+- A JS config file is still loadable for compatibility via `@config "./tailwind.config.js";`, but it's the legacy path.
+
+---
+
+Tailwind v3 (legacy) — configure the theme in tailwind.config.js
+
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+      content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#2563eb",
+              dark: "#1e40af",
+            },
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          spacing: {
+            18: "4.5rem",
+          },
+        },
+      },
+      plugins: [],
+    };
+
+Use `theme.extend` to add to Tailwind's defaults; put values directly under `theme` (not `extend`) only when you intend to replace a default scale entirely.
+
+---
+
+How to tell which you have: run `npx tailwindcss --version`, or check your package.json. If it's 4.x, use the CSS `@theme` approach; if 3.x, use the JS config.
+
+Because the v3/v4 boundary is the load-bearing detail and I couldn't verify it live, please confirm the exact directive names and namespace list against https://tailwindcss.com/docs/theme before committing to the config.

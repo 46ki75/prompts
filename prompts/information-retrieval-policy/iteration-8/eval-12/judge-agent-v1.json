@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The output is exactly \"12\", directly answering the question with the correct value. It does not demand any external verification for this math fact, satisfying all must_do items and violating no must_not_do items."}

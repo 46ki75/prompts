@@ -1,0 +1,33 @@
+Mark-and-sweep is a tracing garbage collection algorithm that reclaims memory occupied by objects that are no longer reachable by the program. It runs in two phases.
+
+## The reachability model
+
+The collector starts from a set of "roots" — references the program can access directly without going through other objects. Roots typically include:
+
+- Local variables and parameters on the call stack
+- CPU registers
+- Global/static variables
+
+An object is considered "live" (still in use) if it is reachable by following a chain of references starting from any root. Anything not reachable is garbage and can be reclaimed.
+
+## Phase 1: Mark
+
+Starting from the roots, the collector traverses the object reference graph (via depth-first or breadth-first search) and sets a "mark" bit on every object it reaches. By the end of this phase, every reachable (live) object is marked, and every unreachable object remains unmarked.
+
+A naive recursive traversal can overflow the stack on deep object graphs, so production collectors often use an explicit worklist, pointer reversal (the Deutsch-Schorr-Waite algorithm), or other bounded-memory techniques.
+
+## Phase 2: Sweep
+
+The collector linearly scans the entire heap. For each object:
+
+- If it is marked, the mark bit is cleared (reset for the next collection cycle) and the object is kept.
+- If it is unmarked, the object is unreachable, so its memory is reclaimed and returned to the free list for future allocation.
+
+## Key characteristics
+
+- **Handles cycles correctly.** Unlike reference counting, mark-and-sweep reclaims groups of objects that reference each other but are unreachable from the roots, because reachability — not reference count — determines liveness.
+- **Stop-the-world (in the basic form).** The simplest version pauses program execution during collection so the object graph does not change mid-traversal. This can cause noticeable latency pauses.
+- **Non-moving / fragmentation.** Basic mark-and-sweep does not relocate surviving objects, so the heap can become fragmented over time. A common variant, mark-compact, adds a third phase that slides live objects together to eliminate fragmentation. Generational and incremental/concurrent collectors are other refinements that reduce pause times.
+- **Cost.** The mark phase is proportional to the amount of live data; the sweep phase is proportional to the total heap size.
+
+This is a foundational, long-stable algorithm (first described by John McCarthy for Lisp in 1960), so the description above reflects established computer science rather than any time-sensitive source.

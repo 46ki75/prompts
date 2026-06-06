@@ -1,0 +1,14 @@
+A verified answer to this would normally come from the AWS Knowledge MCP server or the official VPC documentation, neither of which is available in this run. The following is based on my training data (through early 2026) and is not freshly verified — confirm against the primary source before relying on it.
+
+Short answer: a NAT Gateway is a zonal resource, and for a production setup you generally want one per Availability Zone.
+
+Key points (unverified — confirm in the AWS VPC NAT Gateway docs):
+
+- A NAT Gateway lives in a single subnet, which means it exists in exactly one AZ. It is redundant within that AZ (AWS manages the underlying availability), but it does not span AZs.
+- If you deploy a single NAT Gateway and route all private subnets' traffic through it, then losing that AZ takes out outbound internet access for every private subnet — and you also pay cross-AZ data transfer charges for traffic from instances in other AZs.
+- The recommended highly-available pattern: deploy one NAT Gateway in each AZ you use, and configure each AZ's private subnet route table to send 0.0.0.0/0 to the NAT Gateway in its own AZ. This keeps traffic in-AZ (cheaper) and removes the cross-AZ single point of failure.
+- Trade-off: each NAT Gateway has an hourly charge plus per-GB data processing, so one-per-AZ multiplies the hourly cost. For dev/test or cost-sensitive non-critical workloads, a single NAT Gateway is a common and acceptable compromise.
+
+So: you do not strictly *need* one per AZ to function, but one per AZ is the AWS-recommended design for high availability and to avoid cross-AZ transfer costs.
+
+Most likely to be stale / worth double-checking: exact pricing structure, any newer NAT options or defaults, and whether AWS has changed its current architectural guidance. Verify at the AWS primary source: "NAT gateways" in the Amazon VPC User Guide (docs.aws.amazon.com/vpc), and the VPC pricing page for current rates.

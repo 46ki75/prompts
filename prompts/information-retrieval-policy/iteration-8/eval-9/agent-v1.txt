@@ -1,0 +1,65 @@
+A recursive CTE in PostgreSQL is written with WITH RECURSIVE. It has two parts combined by UNION (or UNION ALL):
+
+1. The anchor (base) term — the initial query that seeds the result.
+2. The recursive term — a query that references the CTE name itself, repeatedly applied until it produces no new rows.
+
+Basic shape:
+
+    WITH RECURSIVE cte_name (col1, col2, ...) AS (
+        -- anchor term
+        SELECT ...
+        UNION ALL          -- or UNION to deduplicate rows
+        -- recursive term
+        SELECT ...
+        FROM cte_name
+        JOIN ...           -- typically joins back to a real table
+        WHERE ...          -- a termination condition
+    )
+    SELECT * FROM cte_name;
+
+Example — generate numbers 1 through 10:
+
+    WITH RECURSIVE counter (n) AS (
+        SELECT 1
+        UNION ALL
+        SELECT n + 1 FROM counter WHERE n < 10
+    )
+    SELECT n FROM counter;
+
+Example — walk a hierarchy (employees reporting to a manager):
+
+    WITH RECURSIVE subordinates AS (
+        -- anchor: the top manager
+        SELECT employee_id, manager_id, name, 1 AS depth
+        FROM employees
+        WHERE employee_id = 1
+
+        UNION ALL
+
+        -- recursive: everyone reporting (directly) to someone already in the set
+        SELECT e.employee_id, e.manager_id, e.name, s.depth + 1
+        FROM employees e
+        JOIN subordinates s ON e.manager_id = s.employee_id
+    )
+    SELECT employee_id, name, depth
+    FROM subordinates
+    ORDER BY depth, employee_id;
+
+Key points:
+
+- WITH RECURSIVE applies to the whole WITH clause; even if only one of several CTEs is recursive, you write the keyword once at the start.
+- UNION ALL keeps all rows; UNION eliminates duplicate rows on each step, which can also help terminate cycles in graph data.
+- Always ensure a termination condition. Without one (e.g., a cyclic graph with UNION ALL), the query loops indefinitely.
+- For cyclic data, PostgreSQL supports a CYCLE clause (PostgreSQL 14+) to detect and stop cycles, and a SEARCH clause to control depth-/breadth-first ordering. For example:
+
+    WITH RECURSIVE g AS (
+        SELECT id, link FROM graph WHERE id = 1
+        UNION ALL
+        SELECT graph.id, graph.link
+        FROM graph JOIN g ON graph.id = g.link
+    ) CYCLE id SET is_cycle USING path
+    SELECT * FROM g;
+
+- The recursive term may reference the CTE only once, and recursive self-reference is not allowed inside a subquery, outer join, or aggregate within the recursive term.
+
+These are stable, standard SQL features (recursive CTEs entered the SQL standard and have been in PostgreSQL since version 8.4). The CYCLE/SEARCH clauses are the newer additions (PostgreSQL 14). To confirm exact syntax and any version-specific behavior, see the PostgreSQL documentation: "Queries / WITH Queries (Common Table Expressions)" at https://www.postgresql.org/docs/current/queries-with.html

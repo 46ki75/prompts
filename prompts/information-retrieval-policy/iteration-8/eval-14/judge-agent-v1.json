@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The candidate answered the release date directly as a historical fact: 'Python 3.10.0 was released on October 4, 2021.' This satisfies the must_do (October 2021 release date from knowledge) and violates no must_not_do items: it did not refuse pending verification, nor did it confuse the historical release with the current version."}

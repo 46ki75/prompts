@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The output answers directly with \"Paris.\" and does not call for web search or external verification, satisfying both must_do items. It does not refuse, demand a tool call, or add unnecessary citations or 'as of' dates, violating none of the must_not_do items."}

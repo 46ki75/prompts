@@ -1,0 +1,26 @@
+Array.prototype.flat
+
+`flat()` creates a new array with all sub-array elements recursively concatenated into it up to a specified depth. It does not mutate the original array.
+
+- Signature: `arr.flat(depth)`
+- `depth` (optional) defaults to `1`. Pass `Infinity` to flatten all nested levels.
+- Empty slots in sparse arrays are removed.
+
+Examples:
+- `[1, [2, 3]].flat()` -> `[1, 2, 3]`
+- `[1, [2, [3, [4]]]].flat(2)` -> `[1, 2, 3, [4]]`
+- `[1, [2, [3, [4]]]].flat(Infinity)` -> `[1, 2, 3, 4]`
+
+It was standardized in ES2019. (Stable language-spec behavior.)
+
+---
+
+Latest Node.js LTS version
+
+I can't verify this in the current environment — no web search, documentation fetcher, or other retrieval tool is available, so I can't confirm the current LTS line.
+
+Based on training data (cutoff January 2026), not freshly verified: Node.js 22.x ("Jod") was the Active LTS line, with 20.x ("Iron") in Maintenance LTS. Node.js 24.x was on track to enter LTS around late October 2025, which would make 24.x ("Krypton") the latest LTS line as of mid-2026.
+
+The claim most likely to be stale is which line is "latest LTS": if 24.x has promoted to Active LTS on schedule, that is now the latest, and the specific patch versions of any line will certainly have moved.
+
+To confirm the exact current LTS version and patch level, check the primary source: https://nodejs.org/en/about/previous-releases (the official release schedule), or run `nvm ls-remote --lts`.

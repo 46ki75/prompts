@@ -1,0 +1,8 @@
+I can't verify this right now — checking the latest Next.js version requires retrieval (npm registry, the Next.js releases page, or GitHub releases), and no such tools are available in this environment.
+
+Based on training data (cutoff January 2026), not freshly verified: the latest stable major was Next.js 15.x. Treat the exact minor/patch number as the most likely stale part of this answer — minors and patches ship frequently, so even if 15 is still current, the precise version (e.g., 15.x.y) is probably out of date, and a newer major (16+) may have been released since the cutoff.
+
+To confirm, check one of these primary sources:
+- npm: `npm view next version`
+- https://github.com/vercel/next.js/releases
+- https://nextjs.org/blog

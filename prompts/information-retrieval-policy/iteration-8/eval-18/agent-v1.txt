@@ -1,0 +1,61 @@
+Handling a CORS preflight request correctly (per the WHATWG Fetch Standard, which defines CORS):
+
+## When a preflight happens
+
+The browser sends a preflight automatically before the "actual" request when the request is *not* a "simple"/CORS-safelisted request — i.e. when any of these hold:
+
+- The method is not GET, HEAD, or POST.
+- There are author-set headers outside the safelist (Accept, Accept-Language, Content-Language, and Content-Type with limited values).
+- Content-Type is something other than application/x-www-form-urlencoded, multipart/form-data, or text/plain.
+- The request has certain other characteristics (e.g. ReadableStream body, some event listeners on the upload object).
+
+The preflight is an `OPTIONS` request carrying:
+
+- `Origin: <requesting origin>`
+- `Access-Control-Request-Method: <the method the real request will use>`
+- `Access-Control-Request-Headers: <comma-separated lowercased header names the real request will send>` (only present when there are non-safelisted headers)
+
+## What the server must respond with
+
+Respond to the OPTIONS request with a 2xx status (200 or 204 are both fine — the spec only requires an "ok status", 200–299) and the appropriate `Access-Control-*` headers. No response body is needed.
+
+Required/relevant response headers:
+
+- `Access-Control-Allow-Origin` — must echo the request's `Origin` value, or be `*`. Note: `*` is **not** allowed together with credentialed requests; if credentials are involved you must echo the specific origin.
+- `Access-Control-Allow-Methods` — the method(s) you permit. Must include the method named in `Access-Control-Request-Method`. (`*` is allowed for non-credentialed requests.)
+- `Access-Control-Allow-Headers` — must include every header named in `Access-Control-Request-Headers`. (`*` is allowed for non-credentialed requests; safelisted headers are always implicitly allowed.)
+- `Access-Control-Allow-Credentials: true` — required only if the actual request will be made with credentials (cookies, TLS client certs, HTTP auth). When this is set, you cannot use `*` for Allow-Origin, Allow-Methods, or Allow-Headers — you must name them explicitly.
+- `Access-Control-Max-Age: <seconds>` — optional; tells the browser how long it may cache this preflight result so it can skip future preflights for the same request shape. Browsers cap this (e.g. Chromium caps at 7200s / 2h, Firefox at 86400s / 24h).
+- `Vary: Origin` — recommended whenever you echo the Origin (or vary behavior by it) so caches don't serve the wrong response.
+
+If you expose non-safelisted *response* headers to the client, use `Access-Control-Expose-Headers` — but that applies to the *actual* response, not the preflight.
+
+## The browser-side check
+
+After the preflight response, the browser validates it. If `Allow-Origin` doesn't match, the requested method isn't in `Allow-Methods`, a requested header isn't in `Allow-Headers`, or credentials are required but `Allow-Credentials: true` is absent, the check fails and the actual request is never sent — the fetch rejects with a network/CORS error.
+
+## Minimal correct example (non-credentialed)
+
+```
+OPTIONS /resource HTTP/1.1
+Origin: https://app.example
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: content-type, x-custom
+
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: https://app.example
+Access-Control-Allow-Methods: PUT
+Access-Control-Allow-Headers: content-type, x-custom
+Access-Control-Max-Age: 86400
+Vary: Origin
+```
+
+## Common pitfalls
+
+- Returning `Access-Control-Allow-Origin: *` while also trying to send credentials — rejected by the browser.
+- Forgetting to include `OPTIONS` in your server routing/auth, so the preflight gets a 401/redirect/404 instead of a 2xx — the actual request then never fires.
+- Requiring authentication on the OPTIONS request: preflights carry no credentials, so they must be allowed through unauthenticated.
+- Omitting a header from `Access-Control-Allow-Headers` that the client sends (case-insensitive, but list them).
+- Redirects on a preflight are not followed and cause failure.
+
+Source: WHATWG Fetch Standard, "CORS protocol" and "CORS-preflight request" sections (fetch.spec.whatwg.org). This is a stable spec; the mechanics above have not materially changed in years. The only browser-specific (non-spec) detail is the `Access-Control-Max-Age` cap, which is implementation-defined and worth verifying against current browser docs if it matters to you.

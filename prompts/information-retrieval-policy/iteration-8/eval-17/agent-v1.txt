@@ -1,0 +1,14 @@
+Short answer: Yes — CPython still has a GIL by default, but as of recent versions it is now optionally removable.
+
+Based on training data (through my Jan 2026 cutoff), not freshly verified in this session:
+
+- The reference implementation, CPython, has historically used a Global Interpreter Lock that allows only one thread to execute Python bytecode at a time. That default behavior is still in place.
+- PEP 703 introduced an officially supported "free-threaded" build of CPython that can run without the GIL. This landed experimentally in CPython 3.13 (a separate build, often labeled `python3.13t`), with the GIL still enabled in the standard build. The plan has been to mature free-threading over subsequent releases (3.14 and beyond), gradually moving it from experimental toward a supported, and eventually possibly default, configuration.
+- Other implementations have long differed: Jython and IronPython have no GIL; PyPy has a GIL in its default build.
+
+Which parts to distrust most (this area is actively changing release-to-release): the exact status of free-threading in 3.13 vs. 3.14+ — specifically whether it is still "experimental," whether the no-GIL build remains separate or has become a build-time/runtime toggle in the standard distribution, and any timeline for it becoming the default. Treat those specifics as the stale-prone claims.
+
+To confirm the current state, consult the primary sources:
+- PEP 703 ("Making the Global Interpreter Lock Optional in CPython")
+- The official Python documentation / "What's New" pages for the version you are targeting (docs.python.org)
+- PEP 779 and related steering-council updates on free-threading status, if checking the latest phase

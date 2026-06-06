@@ -1,0 +1,7 @@
+I can't give you the current price of Bitcoin. It's live market data that changes by the second, and I have no retrieval tools available in this environment to look it up, so any number I offered would be a guess rather than a verified fact.
+
+To get an accurate, up-to-the-minute price, check a primary source such as:
+- A major exchange: Coinbase (coinbase.com), Kraken, or Binance
+- A market-data aggregator: CoinGecko (coingecko.com) or CoinMarketCap (coinmarketcap.com)
+
+These will show the real-time BTC/USD price.

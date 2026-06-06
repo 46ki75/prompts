@@ -1,0 +1,26 @@
+RFC 7231 (Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content), Section 4.3.4, defines the PUT method as follows:
+
+Core semantics:
+- PUT requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload. In other words, the client supplies a representation, and the origin server makes the target resource's state equal to that representation.
+
+Key properties RFC 7231 specifies:
+
+1. Create or replace. A successful PUT either creates a new resource (if the target did not exist) or replaces the existing target resource's representation with the enclosed one.
+
+2. Idempotent. PUT is idempotent — repeating the same PUT has the same effect as issuing it once. (It is not "safe," because it modifies state.)
+
+3. Response status codes. The origin server should respond with:
+   - 201 (Created) if a new resource was created by the request, and
+   - 200 (OK) or 204 (No Content) if an existing resource was successfully modified.
+
+4. Difference from POST. The fundamental difference is the intent expressed by the target URI: with PUT, the enclosed representation is the state the client wants the target resource (identified by the request URI) to have; with POST, the target resource is expected to process the enclosed representation according to its own semantics. PUT's URI identifies the resource to be replaced/created; POST's does not necessarily.
+
+5. Handling of unrecognized header fields and Content-Range. A PUT request applied to the target resource can have side effects on other resources. A server that receives a PUT with a Content-Range header field (RFC 7233) MUST respond with 400 (Bad Request), because partial PUT is not defined.
+
+6. Representation metadata. The origin server SHOULD ignore or reject any received header field metadata it does not understand or cannot store, and should not silently store a representation whose metadata it cannot honor. If the server applies any transformation to the representation, it SHOULD provide a 200/204 response with appropriate validators and an indication via, e.g., a Content-Location or different validators that the stored state differs from what was sent.
+
+7. Validators and conditional requests. PUT is commonly combined with conditional request header fields (e.g., If-Match, If-Unmodified-Since) to prevent the "lost update" problem when multiple clients act on the same resource.
+
+Note on currency: RFC 7231 is itself a fixed, published standard (dated June 2014). However, it has since been obsoleted by RFC 9110 (HTTP Semantics, June 2022), which now carries the authoritative, current definition of PUT (Section 9.3.4). The substance of PUT's semantics is essentially unchanged between the two; if you need the current normative reference rather than the historical one, cite RFC 9110.
+
+Source: RFC 7231, Section 4.3.4 (PUT), IETF.

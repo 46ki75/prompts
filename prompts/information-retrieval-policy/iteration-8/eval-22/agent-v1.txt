@@ -1,0 +1,12 @@
+Yes — Toasty is an ORM (object-relational mapper) for Rust, started by Carl Lerche (the author of Tokio, Bytes, Mio, and other core Rust async libraries). It was announced/open-sourced relatively recently and is designed to work with both SQL databases and NoSQL stores like DynamoDB, with an async-first API.
+
+A few caveats on this answer:
+
+- This comes from my training data (cutoff January 2026), not from a freshly verified source, since I have no retrieval tools available in this run.
+- Toasty was explicitly described by its author as being in early/pre-production development. For a fast-moving young project, the details most likely to be stale are: its current status (whether it's still "experimental" or has hit a stable/usable release), the exact set of supported backends, and its API shape. Treat those as the points to double-check.
+
+To confirm the current state, consult the primary sources:
+- The GitHub repository (github.com/tokio-rs/toasty) and its README/release notes.
+- Carl Lerche's original announcement blog post.
+
+So your colleague is right that it's a new ORM — specifically a Rust one from the Tokio ecosystem — but verify its maturity and feature set against the repo before relying on it.
