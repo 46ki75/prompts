@@ -29,8 +29,6 @@ tracing-subscriber = { workspace = true }
 rmcp = { workspace = true, features = ["client"] }
 wiremock = { workspace = true }
 
-# Binary names (unlike package names) may start with a digit, so the
-# installed command can match the GitHub `46ki75/prompts` identity.
 [[bin]]
-name = "46ki75-prompts"
+name = "mcp-prompts-46ki75"
 path = "src/bin/main.rs"
