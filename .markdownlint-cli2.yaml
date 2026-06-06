@@ -15,3 +15,4 @@ ignores:
   - "./.agents/**"
   # Agent-generated eval artifacts — not hand-maintained.
   - "./**/iteration-*/**"
+  - "./**/LICENSE"
