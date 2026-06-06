@@ -5,7 +5,7 @@ members = ["crates/*"]
 [workspace.package]
 edition = "2024"
 rust-version = "1.90"
-authors = ["Ikuma Yamashita <46ki75@gmail.com>"]
+authors = ["Ikuma Yamashita"]
 repository = "https://github.com/46ki75/prompts"
 
 [workspace.dependencies]
