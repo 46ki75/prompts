@@ -1,0 +1,35 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+One agreement error and one light-verb phrasing that a native would simplify. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- When the server boot up
++ When the server boots up
+```
+
+Subject-verb agreement; `server` is singular.
+
+## Observations
+
+### 1. 💡 Medium — light-verb
+
+```diff
+- does the registration of itself to the discovery service
++ registers itself with the discovery service
+```
+
+Direct verb `registers` is more concise and idiomatic than the light-verb construction `does the registration`. Also, `with` is the standard preposition for this action.
+
+## Revised Sentence
+
+When the server boots up, it registers itself with the discovery service.
+
+## Register
+
+Neutral / Technical

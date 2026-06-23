@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically sound; a minor technical-idiom upgrade would align with standard phrasing. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 Medium — technical-idiom
+
+```diff
+- compares references rather than values
++ compares by reference rather than by value
+```
+
+Standard technical phrasing uses "by reference / by value" when describing comparison semantics or data handling.
+
+## Revised Sentence
+
+This function compares by reference rather than by value.
+
+## Register
+
+Neutral (technical documentation)

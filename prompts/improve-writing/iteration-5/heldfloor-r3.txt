@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Two tense slips aside, the underlying phrasing is native with one collocation choice that could be more idiomatic. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- the pipeline run twice
++ the pipeline ran twice
+```
+
+Past tense; `yesterday` sets a past context, so `run` should be `ran`.
+
+### 2. ⚠️ Error
+
+```diff
+- and produce no error
++ and produced no error
+```
+
+Tense agreement; the action is in the past, so `produce` should be `produced`.
+
+## Observations
+
+### 1. 💡 Medium — collocation
+
+```diff
+- produced no error
++ produced no errors
+```
+
+When reporting outcomes, natives use the plural `no errors` to mean "zero errors of any kind"; the singular `no error` reads slightly off here.
+
+## Revised Sentence
+
+Yesterday the pipeline ran twice and produced no errors.
+
+## Register
+
+Neutral (technical)

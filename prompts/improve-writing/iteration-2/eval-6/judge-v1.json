@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 and 2 are satisfied: the candidate flags 'should to make' -> 'should make' (modal valency) and 'query who is' -> 'query that is' (relative pronoun) both as Errors. must_do 3 is satisfied because 'make optimization' -> 'optimize' is correctly placed under Observations (Medium), not Errors, so must_not_do 2 is not violated. must_do 4 is satisfied: a single Medium observation maps to 4 per the table, and the candidate assigned 4/5, never 5 (must_not_do 3 not violated); the 'should to' error was not missed (must_not_do 1 not violated)."
+}

@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Several agreement and double-negative slips, but the underlying phrasing is native technical English; errors do not affect the score and 0 Medium/High Observations remain. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- a user click the button
++ a user clicks the button
+```
+
+Subject-verb agreement; singular `a user` takes `clicks`.
+
+### 2. ⚠️ Error
+
+```diff
+- the request are send
++ the request is sent
+```
+
+Singular `the request` takes `is`, and the passive requires the past participle `sent`.
+
+### 3. ⚠️ Error
+
+```diff
+- without no delay
++ without delay
+```
+
+Double negative; `without` already carries the negation.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+When a user clicks the button, the request is sent to the server without delay.
+
+## Register
+
+Neutral (technical)

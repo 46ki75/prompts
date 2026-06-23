@@ -1,0 +1,66 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatical throughout, but heavy reliance on light-verb nominalizations (`making the improvement of`, `do the notification of`) reads as systematically non-native. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- we are making the improvement of the performance
++ we are improving performance
+```
+
+The nominalized `making the improvement of` is a classic non-native pattern; natives use the direct verb `improving`.
+
+### 2. 💡 High — light-verb
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ looking at reducing operational costs
+```
+
+Stacked nominalizations (`giving consideration to`, `the reduction of`) sound markedly non-native; the verb forms are far more idiomatic.
+
+### 3. 💡 High — light-verb
+
+```diff
+- we do the notification of all the stakeholders in a manual way
++ we notify all stakeholders manually
+```
+
+`do the notification of … in a manual way` should collapse to the verb `notify` plus the adverb `manually`.
+
+### 4. 💡 Medium — light-verb
+
+```diff
+- This approach gives us the possibility to achieve the modernization of the platform
++ This approach lets us modernize the platform
+```
+
+`gives us the possibility to achieve the modernization of` is a chain of nominalizations; `lets us modernize` is the natural phrasing.
+
+### 5. 💡 Medium — concision
+
+```diff
+- At the present moment, we are
++ Right now, we are
+```
+
+`At the present moment` is wordy; natives prefer `Right now` or simply drop it.
+
+(1 additional lower-impact observation omitted.)
+
+## Revised Sentence
+
+Our team is migrating our legacy services to the cloud. Right now, we are improving performance and looking at reducing operational costs. Once a deployment finishes, we notify all stakeholders manually. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral / Formal (technical)

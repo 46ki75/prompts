@@ -1,0 +1,66 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Systemic light-verb nominalizations (`making the improvement of`, `giving the consideration to`, `do the notification`, `do the reduction`) make the text read distinctly non-native; with multiple surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- we are making the improvement of the performance
++ we are improving performance
+```
+
+Natives use the direct verb `improve` rather than the `make the improvement of` light-verb construction.
+
+### 2. 💡 High — light-verb
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ considering how to reduce operational cost
+```
+
+`considering` (with the direct verb `reduce`) is the idiomatic form; the stacked nominalizations `giving the consideration to` and `the reduction of` read heavy and non-native.
+
+### 3. 💡 High — light-verb
+
+```diff
+- we do the notification of all the stakeholders in a manual way
++ we notify all stakeholders manually
+```
+
+The direct verb `notify` plus the adverb `manually` is standard; `do the notification of ... in a manual way` is a non-native circumlocution.
+
+### 4. 💡 High — light-verb
+
+```diff
+- This approach gives us the possibility to achieve the modernization of the platform
++ This approach lets us modernize the platform
+```
+
+`lets us modernize` uses the direct verb; `gives us the possibility to achieve the modernization of` is a chain of nominalizations that reads non-native.
+
+### 5. 💡 Medium — collocation
+
+```diff
+- At the present moment, we are
++ Currently, we are
+```
+
+`Currently` (or `Right now`) is the standard technical collocation; `At the present moment` is wordy and uncommon.
+
+(1 additional lower-impact observation omitted.)
+
+## Revised Sentence
+
+Our team is migrating our legacy services to the cloud. Currently, we are improving performance and considering how to reduce operational cost. After each deployment finishes, we notify all stakeholders manually. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral (technical)

@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+The meaning is clear, but the predicate noun should be the adjective form, which is the standard way to state this property. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- This API is idempotency.
++ This API is idempotent.
+```
+
+A predicate after `is` describing a property of the subject takes the adjective `idempotent`, not the noun `idempotency`.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral (technical)

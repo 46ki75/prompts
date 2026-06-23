@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 is satisfied: the candidate flags 'is idempotency' -> 'is idempotent' under Errors with a diff and correctly explains it as a wrong part of speech (noun used where an adjective is required). must_do 2 is satisfied: the output resolves the intended meaning to 'idempotent', consistent with the Japanese 冪等, and the revision preserves this. Neither must_not_do is violated: the technical meaning is unchanged and the Japanese sentence is neither assessed nor rewritten."
+}

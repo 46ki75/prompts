@@ -1,0 +1,62 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable, but a verb-form error plus non-native collocations make it read non-native. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- we should to make
++ we should make
+```
+
+After a modal verb (`should`), use the bare infinitive, not `to`.
+
+### 2. ⚠️ Error
+
+```diff
+- the query who is slow
++ the query that is slow
+```
+
+`who` refers to people; an inanimate noun like `query` takes `that` (or `which`).
+
+## Observations
+
+### 1. 💡 High — collocation
+
+```diff
+- make optimization for the query
++ optimize the query
+```
+
+Natives use the verb `optimize` directly rather than the light-verb construction `make optimization for`.
+
+### 2. 💡 Medium — concision
+
+```diff
+- the query that is slow
++ the slow query
+```
+
+For an inanimate noun, natives usually fold the description into an attributive adjective.
+
+### 3. 💡 Low — preposition
+
+```diff
+- About the performance, I think
++ Regarding performance, I think
+```
+
+`Regarding performance` is a more standard opener in technical discussion.
+
+## Revised Sentence
+
+Regarding performance, I think we should optimize the slow query.
+
+## Register
+
+Casual / Neutral

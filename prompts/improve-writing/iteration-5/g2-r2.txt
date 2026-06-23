@@ -1,0 +1,66 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Systemic light-verb nominalizations (`doing the migration of`, `making the improvement of`, `giving the consideration to the reduction of`, `do the notification of ... in a manual way`) make it read distinctly non-native; with multiple surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- doing the migration of the legacy services
++ migrating the legacy services
+```
+
+Natives use the direct verb `migrate` rather than the `do the migration of` light-verb construction.
+
+### 2. 💡 High — light-verb
+
+```diff
+- making the improvement of the performance
++ improving performance
+```
+
+`improving performance` is the standard verbal form; the nominalized `making the improvement of` reads heavy and non-native.
+
+### 3. 💡 High — light-verb
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ considering how to reduce operational cost
+```
+
+The chained nominalizations `giving the consideration to` and `the reduction of` are a non-native circumlocution; natives use the direct verbs `consider` and `reduce`.
+
+### 4. 💡 High — light-verb
+
+```diff
+- we do the notification of all the stakeholders in a manual way
++ we manually notify all stakeholders
+```
+
+Natives use the direct verb `notify` with the adverb `manually` rather than `do the notification of ... in a manual way`.
+
+### 5. 💡 Medium — light-verb
+
+```diff
+- achieve the modernization of the platform step by step
++ modernize the platform incrementally
+```
+
+`modernize the platform` is the idiomatic verbal form; `achieve the modernization of` is a heavy nominalization.
+
+(1 additional lower-impact observation omitted.)
+
+## Revised Sentence
+
+Our team is migrating the legacy services to the cloud. We are currently improving performance and considering how to reduce operational cost. After each deployment finishes, we manually notify all stakeholders. This approach lets us modernize the platform incrementally.
+
+## Register
+
+Neutral / Formal (business-technical)

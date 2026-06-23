@@ -1,0 +1,1 @@
+{"verdict": "correct", "reasoning": "The candidate assigned a score of 5/5, satisfying the must_do requirement of 4 or 5. Neither 'immutable' nor 'idempotent' was flagged in the Observations section — in fact the candidate explicitly praised their natural use. No revisions were suggested, so no must_not_do criterion of replacing domain terms with generic English was violated."}

@@ -1,0 +1,62 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Multiple agreement and phrasing issues that a native speaker would catch immediately. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- click the button
++ clicks the button
+```
+
+Subject-verb agreement; `user` is singular.
+
+### 2. ⚠️ Error
+
+```diff
+- the request are send
++ the request is sent
+```
+
+Subject-verb agreement (`request` is singular) and passive voice tense.
+
+### 3. ⚠️ Error
+
+```diff
+- without no delay
++ without delay
+```
+
+Double negative; use one negation only.
+
+## Observations
+
+### 1. 💡 Medium — collocation
+
+```diff
+- When a user click
++ When a user clicks
+```
+
+Standard temporal collocation in technical writing.
+
+### 2. 💡 Medium — technical-idiom
+
+```diff
+- the request are send
++ the request is sent
+```
+
+"Sent to the server" is the standard technical phrasing.
+
+## Revised Sentence
+
+When a user clicks the button, the request is sent to the server immediately.
+
+## Register
+
+Neutral / Formal (technical)

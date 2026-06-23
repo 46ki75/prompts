@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 is satisfied: the candidate assigned a Naturalness Score of 5/5. must_do 2 is satisfied: neither 'immutable' nor 'idempotent' is flagged, with 'No errors found.' and 'No observations.' Neither must_not_do is violated: no observation flags the domain terms, and the candidate states 'No revisions needed,' so it does not suggest replacing them with generic English."
+}

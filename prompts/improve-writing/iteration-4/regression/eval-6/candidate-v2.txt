@@ -1,0 +1,53 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable, but the modal phrasing and the relative clause read non-native in this technical register. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- we should to make
++ we should make
+```
+
+`should` takes a bare infinitive; the `to` is ungrammatical.
+
+## Observations
+
+### 1. 💡 High — collocation
+
+```diff
+- make optimization for the query
++ optimize the query
+```
+
+Natives use the verb `optimize` directly rather than the light-verb pattern `make optimization for`.
+
+### 2. 💡 Medium — word-order / register
+
+```diff
+- the query who is slow
++ the slow query
+```
+
+For an inanimate noun, natives use a prenominal adjective (`the slow query`) and avoid `who` for non-persons.
+
+### 3. 💡 Low — concision
+
+```diff
+- About the performance, I think
++ I think
+```
+
+`About the performance` is redundant once the sentence names the query; natives would usually drop it.
+
+## Revised Sentence
+
+I think we should optimize the slow query.
+
+## Register
+
+Casual / Neutral (spoken, conversational tone)

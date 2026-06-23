@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "All must_do are satisfied: the missing article is flagged as an Error ('adding cache layer' -> 'adding a cache layer'), the Naturalness Score is 5/5, and the Register detects a casual/questioning tone ('Casual / Neutral (questioning tone)'). No must_not_do is violated: 'Maybe,' is never flagged, 'a lot' is preserved verbatim in the Revised Sentence and not rewritten to 'significantly'/'substantially', and the score is not below 5 (Observations report none)."
+}

@@ -1,0 +1,64 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+The sentence relies heavily on a non-native "do + noun" pattern throughout, creating a stilted, procedural tone that obscures the action. Multiple High-impact observations survive. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- we do the checking of the configuration
++ we check the configuration
+```
+
+Native English avoids "do + noun" constructions in favor of the direct verb. "Check" is simpler and clearer.
+
+### 2. 💡 High — light-verb
+
+```diff
+- we do the restart of the services
++ we restart the services
+```
+
+"Restart the services" is the standard phrasing; "do the restart of" is non-native padding.
+
+### 3. 💡 High — preposition / collocation
+
+```diff
+- for the achievement of a clean state
++ to achieve a clean state
+```
+
+Native phrasing uses the infinitive `to achieve` rather than the prepositional "for the achievement of" construction.
+
+### 4. 💡 High — light-verb
+
+```diff
+- we also do the notification of the team
++ we also notify the team
+```
+
+Direct verb `notify` is standard; "do the notification of" is non-native bureaucratic padding.
+
+### 5. 💡 Medium — concision
+
+```diff
+- about the completion of the process
++ that the process is complete
+```
+
+"Notify the team that X" is more direct than "notify about the completion of the process."
+
+## Revised Sentence
+
+During deployment, we check the configuration, restart the services to achieve a clean state, and notify the team that the process is complete.
+
+## Register
+
+Neutral / Formal (technical procedure)

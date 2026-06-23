@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean, but the stacked redundancy reads slightly non-native. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 Medium — concision
+
+```diff
+- The actual real reason
++ The real reason
+```
+
+`actual` and `real` are near-synonyms here; natives use one, not both.
+
+### 2. 💡 Low — collocation
+
+```diff
+- the real reason of the failure
++ the real reason for the failure
+```
+
+`reason for X` is the standard collocation; `reason of` sounds non-native.
+
+### 3. 💡 Low — concision
+
+```diff
+- the disk was totally full
++ the disk was full
+```
+
+`full` is absolute, so `totally` adds little; natives often drop it.
+
+## Revised Sentence
+
+The real reason for the failure is that the disk was full.
+
+## Register
+
+Neutral

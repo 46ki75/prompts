@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "All must_do criteria are satisfied: the output assigns Naturalness Score 5/5 (must_do 1), reports no observations stating 'No observations. The phrasing is already native-like.' (must_do 2), and sets the Revised Sentence to 'No revisions needed.' (must_do 3). Neither must_not_do is violated: no taste-level or hedged observation is invented (the Observations section is empty), and the score is not below 5."
+}

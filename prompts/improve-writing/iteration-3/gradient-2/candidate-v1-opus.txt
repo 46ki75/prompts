@@ -1,0 +1,66 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatical and understandable, but a chain of "the [noun] of the [noun]" nominalizations reads non-native where natives would use direct verbs. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — concision
+
+```diff
+- we are making the improvement of the performance
++ we are improving performance
+```
+
+Natives prefer the direct verb over the nominalization "making the improvement of."
+
+### 2. 💡 High — concision
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ looking at reducing operational cost
+```
+
+"Giving the consideration to the reduction of" stacks nominalizations; natives use direct verbs.
+
+### 3. 💡 High — collocation
+
+```diff
+- we do the notification of all the stakeholders in a manual way
++ we notify all the stakeholders manually
+```
+
+"Do the notification of ... in a manual way" is non-native; the verb "notify" plus the adverb "manually" is standard.
+
+### 4. 💡 Medium — concision
+
+```diff
+- our team is doing the migration of the legacy services
++ our team is migrating the legacy services
+```
+
+The light-verb construction "doing the migration of" is wordier than the direct verb "migrating."
+
+### 5. 💡 Medium — concision
+
+```diff
+- gives us the possibility to achieve the modernization of the platform
++ lets us modernize the platform
+```
+
+"Gives us the possibility to achieve the modernization of" is a stacked nominalization; natives use the direct verb.
+
+(1 additional lower-impact observation omitted.)
+
+## Revised Sentence
+
+Basically, our team is migrating the legacy services to the cloud. Right now, we are improving performance and looking at reducing operational cost. After the deployment is finished, we notify all the stakeholders manually. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral

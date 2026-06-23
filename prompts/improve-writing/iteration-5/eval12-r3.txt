@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+One part-of-speech slip (noun for adjective), but the underlying phrasing is native and 0 Medium/High Observations remain; errors do not affect the score. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- This API is idempotency.
++ This API is idempotent.
+```
+
+A predicate adjective is required after `is`; `idempotency` is the noun form, `idempotent` the adjective.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral (technical)

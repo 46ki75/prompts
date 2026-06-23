@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "All must_do criteria are satisfied: the output assigns Naturalness Score 5/5 (must_do 1), detects a Casual register ('Casual / Neutral', must_do 2), and reports no observations stating the phrasing is already native-like (must_do 3). No must_not_do is violated: it does not flag 'So', 'basically', 'just', or 'nothing fancy' (must_not_do 1), it makes no revisions and does not push toward a more formal register (must_not_do 2), and the score is not below 5 (must_not_do 3)."
+}

@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "All must_do criteria are satisfied: the output assigns 5/5 Native-like (must_do 1), reports 'No errors found.' (must_do 2), reports no observations stating the phrasing is already native-like (must_do 3), sets Revised Sentence to 'No revisions needed.' (must_do 4), and emits the five sections in the required order (must_do 5). No must_not_do is violated: no Observation is invented, the score is not below 5, and the response is not wrapped in a code fence."
+}

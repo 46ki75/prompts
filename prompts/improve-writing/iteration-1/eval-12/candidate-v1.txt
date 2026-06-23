@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+One word-class slip aside, the structure is standard idiomatic technical phrasing. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- is idempotency
++ is idempotent
+```
+
+A predicate adjective is required after `is`; `idempotency` is the noun, `idempotent` the adjective.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral

@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable, but the double negative and verb-agreement/article slips push it below native-like phrasing. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- a user click the button
++ a user clicks the button
+```
+
+Subject-verb agreement; singular `a user` takes `clicks`.
+
+### 2. ⚠️ Error
+
+```diff
+- the request are send
++ the request is sent
+```
+
+`request` is singular (`is`), and the passive needs the past participle `sent`, not `send`.
+
+## Observations
+
+### 1. 💡 High — idiom
+
+```diff
+- without no delay
++ without delay
+```
+
+`without no` is a double negative; the standard idiom is `without delay`.
+
+## Revised Sentence
+
+When a user clicks the button, the request is sent to the server without delay.
+
+## Register
+
+Neutral (technical)

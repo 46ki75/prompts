@@ -1,0 +1,37 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+A few tense and number slips, but the underlying phrasing is ordinary native technical English; errors do not affect the score and 0 Medium/High Observations remain. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- the pipeline run twice
++ the pipeline ran twice
+```
+
+Past tense; `Yesterday` requires the past form `ran`.
+
+### 2. ⚠️ Error
+
+```diff
+- and produce no error
++ and produced no errors
+```
+
+Past tense `produced` to match `Yesterday`, and plural `errors` reads naturally here.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+Yesterday the pipeline ran twice and produced no errors.
+
+## Register
+
+Neutral (technical)

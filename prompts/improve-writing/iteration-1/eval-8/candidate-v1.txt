@@ -1,0 +1,21 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Clean, idiomatic technical sentence using domain terms (`immutable`, `idempotent`) naturally with standard collocations. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable, but uses a non-native subordinate-clause construction and a light-verb phrasing where natives would use a plain verb. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- When the server boot up
++ When the server boots up
+```
+
+Subject-verb agreement; `the server` is singular, so the verb takes `-s`.
+
+## Observations
+
+### 1. 💡 Medium — light-verb
+
+```diff
+- it does the registration of itself
++ it registers itself
+```
+
+Natives prefer the plain verb `register` over the light-verb construction `do the registration of`.
+
+### 2. 💡 Medium — collocation
+
+```diff
+- boots up
++ boots
+```
+
+In technical writing, `boots` (or `starts up`) is the standard collocation; `boots up` is slightly redundant but common in casual speech.
+
+## Revised Sentence
+
+When the server boots, it registers itself with the discovery service.
+
+## Register
+
+Neutral (technical)

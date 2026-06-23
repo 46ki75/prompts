@@ -1,0 +1,4 @@
+{
+  "verdict": "incorrect",
+  "reasoning": "must_do 1 fails: the candidate never surfaces the 'reason of' -> 'reason for' issue as an Observation (or anywhere). must_do 2 fails: the Revised Sentence 'The actual reason the disk was full.' is a fragment lacking a main verb and drops 'the failure', so it neither preserves the original meaning nor is grammatical. must_not_do 2 is also violated: 'totally' is removed with a register rationale ('casual intensifier often dropped in neutral technical explanations'), which is explicitly disallowed."
+}

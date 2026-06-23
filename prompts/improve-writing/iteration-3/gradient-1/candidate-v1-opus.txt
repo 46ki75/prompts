@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatically clean, but several heavy nominalizations and an unusual prepositional phrase make it read non-natively. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — collocation
+
+```diff
+- by the usage of the old framework
++ using the old framework
+```
+
+`using X` is the natural way to express the means; `by the usage of` is an unidiomatic nominalization.
+
+### 2. 💡 Medium — concision
+
+```diff
+- We did the implementation of the feature
++ We implemented the feature
+```
+
+Natives prefer the verb to the "did the implementation of" light-verb-plus-nominalization construction.
+
+### 3. 💡 Medium — concision
+
+```diff
+- the testing of the system
++ tested the system
+```
+
+Likewise, the verb `tested` is more natural than the nominalized `the testing of`.
+
+## Revised Sentence
+
+We implemented the feature and tested the system using the old framework.
+
+## Register
+
+Neutral

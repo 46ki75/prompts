@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatically clean meaning is reachable, but multiple agreement slips and a double negative make it read as non-native. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- When a user click the button
++ When a user clicks the button
+```
+
+Subject-verb agreement; `a user` is third-person singular.
+
+### 2. ⚠️ Error
+
+```diff
+- the request are send
++ the request is sent
+```
+
+`the request` is singular (agreement), and the passive needs the past participle `sent`, not `send`.
+
+### 3. ⚠️ Error
+
+```diff
+- without no delay
++ without delay
+```
+
+Double negative; `without` already carries the negation.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+When a user clicks the button, the request is sent to the server without delay.
+
+## Register
+
+Neutral (technical)

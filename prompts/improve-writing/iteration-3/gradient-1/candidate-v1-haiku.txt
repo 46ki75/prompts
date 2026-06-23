@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Three instances of noun-heavy, non-idiomatic phrasing. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — gerund-vs-noun
+
+```diff
+- did the implementation
++ implemented
+```
+
+Natives prefer the direct verb form in technical contexts rather than nominalization.
+
+### 2. 💡 High — gerund-vs-noun
+
+```diff
+- the testing of the system
++ tested the system
+```
+
+Same pattern: `tested` is more idiomatic than `the testing of`.
+
+### 3. 💡 High — collocation
+
+```diff
+- by the usage of the old framework
++ using the old framework
+```
+
+`by the usage of` is non-native phrasing; `using` is the standard collocation.
+
+## Revised Sentence
+
+We implemented the system and tested it using the old framework.
+
+## Register
+
+Neutral / Formal (technical)
