@@ -16,3 +16,4 @@ ignores:
   # Agent-generated eval artifacts — not hand-maintained.
   - "./**/iteration-*/**"
   - "./**/LICENSE"
+  - "prompts/improve-writing/prompt.md"
