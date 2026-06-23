@@ -1,0 +1,37 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Redundant modifier and casual intensifier weaken clarity in neutral explanation. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 Medium — concision
+
+```diff
+- The actual real reason
++ The actual reason
+```
+
+"Actual" and "real" are redundant; native speakers choose one.
+
+### 2. 💡 Low — concision
+
+```diff
+- was totally full
++ was full
+```
+
+"Totally" is a casual intensifier often dropped in neutral technical explanations.
+
+## Revised Sentence
+
+The actual reason the disk was full.
+
+## Register
+
+Casual / Neutral

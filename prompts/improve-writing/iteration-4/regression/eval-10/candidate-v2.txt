@@ -1,0 +1,37 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatically clean, but a redundant doubling and a non-standard intensifier collocation make it read slightly non-native. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 Medium — concision
+
+```diff
+- The actual real reason
++ The real reason
+```
+
+`actual` and `real` are near-synonyms here; natives use one, not both.
+
+### 2. 💡 Medium — collocation
+
+```diff
+- the disk was totally full
++ the disk was completely full
+```
+
+`full` is an absolute, so `completely full` is the standard collocation; `totally` reads more casual and less idiomatic with it.
+
+## Revised Sentence
+
+The real reason for the failure is that the disk was completely full.
+
+## Register
+
+Neutral

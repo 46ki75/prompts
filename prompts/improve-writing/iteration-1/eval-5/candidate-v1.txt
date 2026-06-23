@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatically there is an agreement slip, and the light-verb construction reads non-native in a technical sentence. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- When the server boot up
++ When the server boots up
+```
+
+Subject-verb agreement; `the server` is singular and takes `boots`.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- it does the registration of itself
++ it registers itself
+```
+
+Natives use the verb `register` directly rather than the light-verb construction `do the registration of`.
+
+### 2. 💡 Medium — collocation
+
+```diff
+- it registers itself to the discovery service
++ it registers itself with the discovery service
+```
+
+`register with` is the standard collocation for joining or enrolling in a service.
+
+## Revised Sentence
+
+When the server boots up, it registers itself with the discovery service.
+
+## Register
+
+Neutral (technical)

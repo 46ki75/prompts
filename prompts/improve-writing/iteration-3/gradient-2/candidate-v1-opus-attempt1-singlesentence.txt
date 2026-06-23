@@ -1,0 +1,64 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Grammatically correct but pervasively nominalized; native technical writers would use direct verbs instead of "do the X of Y" constructions. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- we do the checking of the configuration
++ we check the configuration
+```
+
+The "do the checking of" construction is non-native; natives use the direct verb "check".
+
+### 2. 💡 High — light-verb
+
+```diff
+- we do the restart of the services
++ we restart the services
+```
+
+Same pattern: "do the restart of" should collapse to the verb "restart".
+
+### 3. 💡 High — light-verb
+
+```diff
+- we also do the notification of the team
++ we also notify the team
+```
+
+"do the notification of" reads as non-native; the verb "notify" is standard.
+
+### 4. 💡 Medium — concision
+
+```diff
+- for the achievement of a clean state
++ to reach a clean state
+```
+
+Natives prefer an infinitive of purpose over the nominalized "for the achievement of".
+
+### 5. 💡 Medium — collocation
+
+```diff
+- about the completion of the process
++ that the process is complete
+```
+
+A finite clause reads more naturally than the nominalized "about the completion of".
+
+## Revised Sentence
+
+At deployment time, we check the configuration, then restart the services to reach a clean state, and we also notify the team that the process is complete.
+
+## Register
+
+Neutral

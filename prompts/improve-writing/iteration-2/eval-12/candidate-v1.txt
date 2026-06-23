@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Correct technical term and form. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- is idempotency
++ is idempotent
+```
+
+Wrong part of speech; "is" requires an adjective here. `idempotency` is a noun (the property), not the state description.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral / Formal (technical)

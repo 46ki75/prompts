@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 is satisfied: the 'that is' -> 'that are' subject-verb agreement fix appears under Errors with the correct rationale (roles is plural). must_do 2 is satisfied: the 'finish a job' -> 'complete the task' phrasing change is placed under Observations as a collocation suggestion, not an Error. must_do 3 is satisfied: the Japanese is used only for intent and never assessed. No must_not_do is violated — the agreement fix is not in Observations, no collocation/idiom appears in Errors, the single Error's - and + lines differ, and the Japanese sentence is neither assessed nor rewritten."
+}

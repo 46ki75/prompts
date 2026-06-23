@@ -1,0 +1,21 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Standard idiomatic technical setup instructions using direct imperatives. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical instructions)

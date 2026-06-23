@@ -1,0 +1,21 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Clean, idiomatic technical phrasing with correct domain terms and a natural cause-effect structure. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

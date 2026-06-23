@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Subject-verb agreement error plus non-native collocations in an instructional context. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- that is required
++ that are required
+```
+
+Subject-verb agreement; `roles` is plural.
+
+## Observations
+
+### 1. 💡 Medium — concision
+
+```diff
+- that are required to finish a job
++ required to finish a job
+```
+
+Participial form `roles required` is tighter and standard in technical/procedural writing.
+
+### 2. 💡 Medium — collocation
+
+```diff
+- to finish a job
++ to complete the task
+```
+
+`complete the task` is the standard technical collocation in instructional contexts.
+
+## Revised Sentence
+
+Assign only the roles required to complete the task.
+
+## Register
+
+Neutral / Formal (instructional)

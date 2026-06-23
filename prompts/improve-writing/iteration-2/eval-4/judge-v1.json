@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 is satisfied: the only revision changes 'compares references rather than values' to 'compares by reference rather than by value', which the criteria explicitly note is a phrasing-preserving rewrite that does not change meaning. must_do 2 is satisfied since the output assigns a 4/5 score. No must_not_do is violated: there is no 'deep'/'shallow' or reference-vs-deep-value distinction, the meaning is preserved, and no precision or jargon beyond the original concept is introduced."
+}

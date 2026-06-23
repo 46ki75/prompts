@@ -1,0 +1,21 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Standard imperative list items in a setup guide; phrasing is idiomatic and concise. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical documentation, imperative list)

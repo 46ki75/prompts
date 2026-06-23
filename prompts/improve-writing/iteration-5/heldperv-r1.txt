@@ -1,0 +1,64 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Systemic light-verb nominalizations (`make the configuration of`, `do the installation of`, `do the verification of`, `give the notification`) make it read distinctly non-native; with four surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- make the configuration of the servers
++ configure the servers
+```
+
+Natives use the direct verb `configure` rather than the `make the configuration of` light-verb construction.
+
+### 2. 💡 High — light-verb
+
+```diff
+- the installation of the packages
++ install the packages
+```
+
+`install the packages` is the standard verbal form; the nominalized `the installation of` reads heavy and non-native.
+
+### 3. 💡 High — light-verb
+
+```diff
+- do the verification of the connections
++ verify the connections
+```
+
+Natives use the direct verb `verify`; `do the verification of` is a non-native circumlocution.
+
+### 4. 💡 High — light-verb
+
+```diff
+- give the notification to the operators
++ notify the operators
+```
+
+`notify the operators` is the idiomatic verbal form; `give the notification to` reads as a non-native paraphrase.
+
+### 5. 💡 Medium — collocation
+
+```diff
+- In the beginning, we
++ First, we
+```
+
+`First,` is the standard sequencing marker in technical writing; `In the beginning,` reads as narrative rather than procedural.
+
+## Revised Sentence
+
+First, we configure the servers and install the packages. After that, we verify the connections and notify the operators that the system is ready.
+
+## Register
+
+Neutral (technical)

@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean; one phrasing choice could match the standard technical collocation more closely. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 Medium — collocation / technical-idiom
+
+```diff
+- compares references rather than values
++ compares by reference rather than by value
+```
+
+Natives describing comparison semantics typically use the `by reference` / `by value` collocation, which names the comparison strategy rather than the operands.
+
+## Revised Sentence
+
+This function compares by reference rather than by value.
+
+## Register
+
+Neutral (technical)

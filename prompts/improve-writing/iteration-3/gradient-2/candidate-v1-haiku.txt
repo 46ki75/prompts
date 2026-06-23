@@ -1,0 +1,71 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Multiple non-native light-verb constructions and verbose phrasing create systemic distance from idiomatic technical English. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- we do the notification of all the stakeholders
++ we notify all the stakeholders
+```
+
+Wrong light-verb valency; `do the notification` is unidiomatic. Direct `notify` is standard.
+
+## Observations
+
+### 1. 💡 High — collocation
+
+```diff
+- At the present moment, we are making
++ Currently, we are
+```
+
+`At the present moment` is verbose and overly formal. `Currently` is the standard technical opening.
+
+### 2. 💡 High — light-verb / concision
+
+```diff
+- making the improvement of the performance
++ improving performance
+```
+
+`make the improvement of` is a weak light-verb construction; the derived verb `improve` is standard and concise.
+
+### 3. 💡 High — light-verb / concision
+
+```diff
+- giving the consideration to the reduction of operational cost
++ considering cost reduction
+```
+
+Nominalized chain (`give consideration to the reduction`) is verbose and non-native. `consider` + gerund is the standard pattern.
+
+### 4. 💡 Medium — gerund-vs-noun
+
+```diff
+- our team is doing the migration
++ our team is migrating
+```
+
+Derived verb `migrate` is more direct than the light-verb `do the migration`.
+
+### 5. 💡 Medium — light-verb / collocation
+
+```diff
+- This approach gives us the possibility to achieve
++ This approach lets us achieve
+```
+
+`gives us the possibility to` is wordy; `lets us` or `allows us to` is the native collocation.
+
+## Revised Sentence
+
+Basically, our team is migrating the legacy services to the cloud. Currently, we are improving performance and considering cost reduction. After deployment, we notify all stakeholders manually. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral / Formal (technical, procedural)

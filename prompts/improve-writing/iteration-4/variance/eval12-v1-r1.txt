@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+The meaning is recoverable, but `is idempotency` uses a noun where a predicate adjective is required, which reads clearly non-native. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- This API is idempotency.
++ This API is idempotent.
+```
+
+A predicate after `is` describing a property of the API needs the adjective `idempotent`, not the noun `idempotency`.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral (technical)

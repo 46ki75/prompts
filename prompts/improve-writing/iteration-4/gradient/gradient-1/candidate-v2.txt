@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Grammatical, but stacked light-verb nominalizations ("did the implementation of", "did the testing of", "by the usage of") read distinctly non-native. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- did the implementation of the feature
++ implemented the feature
+```
+
+Natives use the direct verb instead of `do the implementation of`, which is a non-native light-verb construction.
+
+### 2. 💡 High — light-verb
+
+```diff
+- the testing of the system
++ tested the system
+```
+
+`test the system` is the standard verbal form; the nominalized `the testing of` sounds heavy and non-native.
+
+### 3. 💡 High — light-verb / concision
+
+```diff
+- by the usage of the old framework
++ using the old framework
+```
+
+`using` is the idiomatic way to express the means; `by the usage of` is a non-native circumlocution.
+
+## Revised Sentence
+
+We implemented the feature and tested the system using the old framework.
+
+## Register
+
+Neutral

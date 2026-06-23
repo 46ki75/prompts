@@ -1,0 +1,53 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable but uses a casual collocation in a technical context. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- the roles that is required
++ the roles that are required
+```
+
+Subject-verb agreement; `roles` is plural.
+
+## Observations
+
+### 1. 💡 High — collocation
+
+```diff
+- to finish a job
++ to perform a task
+```
+
+`perform a task` is the standard technical collocation; `finish a job` reads colloquially.
+
+### 2. 💡 Medium — concision
+
+```diff
+- assign only the roles that are required
++ assign only the roles required
+```
+
+Participial `roles required` is tighter and standard in access-control docs.
+
+### 3. 💡 Low — register
+
+```diff
+- You must assign
++ Assign
+```
+
+Technical docs often use direct imperatives.
+
+## Revised Sentence
+
+Assign only the roles required to perform a task.
+
+## Register
+
+Neutral / Formal (technical)

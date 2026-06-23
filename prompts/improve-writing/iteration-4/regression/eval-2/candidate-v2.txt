@@ -1,0 +1,28 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Casual technical question with one minor article slip. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- adding cache layer
++ adding a cache layer
+```
+
+Missing article before a singular countable noun.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+Maybe, adding a cache layer can reduce the latency a lot?
+
+## Register
+
+Casual / Neutral (questioning tone)

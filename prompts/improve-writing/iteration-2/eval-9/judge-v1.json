@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "All must_do criteria are satisfied: the output assigns Naturalness Score 5/5 (must_do 1), states 'No errors found.' (must_do 2), and reports 'No observations.' (must_do 3). No must_not_do is violated: neither the heading nor the imperative list items are flagged as errors or observations (must_not_do 1), and no articles or full sentences are demanded, with 'No revisions needed.' confirming this (must_not_do 2)."
+}

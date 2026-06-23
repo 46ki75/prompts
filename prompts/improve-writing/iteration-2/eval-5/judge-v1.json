@@ -1,0 +1,4 @@
+{
+  "verdict": "correct",
+  "reasoning": "must_do 1 is satisfied: 'boot up' -> 'boots up' is flagged under Errors as a subject-verb agreement Error. must_do 2 is satisfied: 'does the registration of itself' -> 'registers itself' is raised as a Medium Observation (light-verb), not an Error, also satisfying must_not_do 1. With a single surviving Medium Observation, the table maps to 4, and the candidate assigned 4/5, satisfying must_do 3 and not violating must_not_do 2 (score is not 5)."
+}

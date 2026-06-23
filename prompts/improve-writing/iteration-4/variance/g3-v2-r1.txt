@@ -1,0 +1,46 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+The phrasing is standard once the grammar slips are fixed; no non-native collocations survive. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- a user click
++ a user clicks
+```
+
+Subject-verb agreement; singular `a user` takes `clicks`.
+
+### 2. ⚠️ Error
+
+```diff
+- the request are send
++ the request is sent
+```
+
+`request` is singular (`is`), and the passive needs the past participle `sent`.
+
+### 3. ⚠️ Error
+
+```diff
+- without no delay
++ without any delay
+```
+
+Double negative; use `without any delay` (or `with no delay`).
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+When a user clicks the button, the request is sent to the server without any delay.
+
+## Register
+
+Neutral (technical)

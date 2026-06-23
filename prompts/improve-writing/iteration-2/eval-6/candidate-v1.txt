@@ -1,0 +1,44 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean after corrections; one phrasing could be more idiomatic. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- should to make
++ should make
+```
+
+Wrong verb form after modal; modals take the base form without "to".
+
+### 2. ⚠️ Error
+
+```diff
+- the query who is slow
++ the query that is slow
+```
+
+Relative pronoun for things is "that", not "who" (which is for people).
+
+## Observations
+
+### 1. 💡 Medium — concision
+
+```diff
+- make optimization
++ optimize
+```
+
+Native speakers prefer the verb form over the nominal construction in this context.
+
+## Revised Sentence
+
+We should optimize the query that is slow.
+
+## Register
+
+Casual / Neutral (spoken tone)

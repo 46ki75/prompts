@@ -1,0 +1,64 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Systemic light-verb nominalizations (`make the configuration of`, `do the verification of`, `give the notification to`) make it read distinctly non-native; with three surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Observations
+
+### 1. 💡 High — light-verb
+
+```diff
+- we make the configuration of the servers and the installation of the packages
++ we configure the servers and install the packages
+```
+
+Natives use the direct verbs `configure` and `install` rather than the `make the configuration of` / `the installation of` light-verb constructions.
+
+### 2. 💡 High — light-verb
+
+```diff
+- we do the verification of the connections
++ we verify the connections
+```
+
+`verify the connections` is the standard verbal form; the nominalized `do the verification of` reads heavy and non-native.
+
+### 3. 💡 High — light-verb
+
+```diff
+- give the notification to the operators about the readiness of the system
++ notify the operators that the system is ready
+```
+
+`notify the operators` is the idiomatic verb; `give the notification to` is a non-native circumlocution and `the readiness of the system` nominalizes what natives express as `the system is ready`.
+
+### 4. 💡 Medium — collocation
+
+```diff
+- In the beginning, we
++ First, we
+```
+
+For a sequence of steps, natives open with `First,`; `In the beginning` evokes narrative or origin rather than a procedure.
+
+### 5. 💡 Low — concision
+
+```diff
+- After that, we
++ Then we
+```
+
+`Then` is tighter and standard when chaining steps; `After that` is acceptable but wordier.
+
+## Revised Sentence
+
+First, we configure the servers and install the packages. Then we verify the connections and notify the operators that the system is ready.
+
+## Register
+
+Neutral (technical)

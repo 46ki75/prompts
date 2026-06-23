@@ -15,5 +15,6 @@ ignores:
   - "./.agents/**"
   # Agent-generated eval artifacts — not hand-maintained.
   - "./**/iteration-*/**"
+  - "./**/prompt-candidates/**"
   - "./**/LICENSE"
   - "prompts/improve-writing/prompt.md"
