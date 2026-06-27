@@ -1,0 +1,57 @@
+## Naturalness Score
+
+**3/5 — Clear but non-native**
+
+Understandable, but a casual collocation and a wordy relative clause read non-native in a technical/security context. Polish recommended.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- the roles that is required
++ the roles that are required
+```
+
+Subject-verb agreement; `roles` is plural, so it takes `are`.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 High · Idiom — collocation
+
+```diff
+- to finish a job
++ to perform a task
+```
+
+`perform a task` is the standard technical collocation when describing least privilege; `finish a job` reads casual and non-native here.
+
+### 2. 💡 Medium · Idiom — concision
+
+```diff
+- assign only the roles that are required
++ assign only the roles required
+```
+
+The participial `roles required` is tighter and standard in security docs.
+
+### 3. 💡 Low · Style — register
+
+```diff
+- You must assign
++ Assign
+```
+
+Technical docs often use a direct imperative. Keep `You must` if you want to stress the obligation.
+
+## Revised Sentence
+
+Assign only the roles required to perform a task.
+
+## Register
+
+Neutral / Formal (technical)

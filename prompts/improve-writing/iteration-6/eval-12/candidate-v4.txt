@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+One word-form slip (noun for adjective), but errors do not affect the score and 0 Medium/High Observations remain. Polish is optional.
+
+## Errors
+
+### 1. ⚠️ Error
+
+```diff
+- This API is idempotency.
++ This API is idempotent.
+```
+
+`idempotent` is the adjective needed after the copula; `idempotency` is the abstract noun (the property). The Japanese `冪等です` describes the API's state, so the predicate adjective is required.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+This API is idempotent.
+
+## Register
+
+Neutral (technical)
