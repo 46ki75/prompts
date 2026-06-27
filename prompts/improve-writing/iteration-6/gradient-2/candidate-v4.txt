@@ -1,0 +1,70 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Grammatical throughout, but systemic light-verb nominalizations (`doing the migration of`, `making the improvement of`, `giving the consideration to`, `do the notification of`, `gives us the possibility to achieve`) make it read distinctly non-native; with five surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 High · Idiom — light-verb
+
+```diff
+- doing the migration of the legacy services
++ migrating the legacy services
+```
+
+Natives use the direct verb `migrate` rather than the `do the migration of` light-verb construction.
+
+### 2. 💡 High · Idiom — light-verb
+
+```diff
+- making the improvement of the performance
++ improving the performance
+```
+
+`improving the performance` is the standard verbal form; the nominalized `make the improvement of` reads heavy and non-native.
+
+### 3. 💡 High · Idiom — light-verb
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ considering reducing the operational cost
+```
+
+The direct verb `consider` replaces the `give consideration to` light-verb plus a second nominalization (`the reduction of`); chaining both is a clear non-native pattern.
+
+### 4. 💡 High · Idiom — light-verb
+
+```diff
+- do the notification of all the stakeholders in a manual way
++ manually notify all the stakeholders
+```
+
+Natives use the verb `notify` with the adverb `manually`, not the `do the notification of … in a manual way` circumlocution.
+
+### 5. 💡 High · Idiom — light-verb
+
+```diff
+- gives us the possibility to achieve the modernization of the platform
++ lets us modernize the platform
+```
+
+`lets us modernize` is the idiomatic verbal form; `gives us the possibility to achieve the modernization of` is a non-native nominalized circumlocution.
+
+(1 additional lower-impact observation omitted.)
+
+## Revised Sentence
+
+Basically, our team is migrating the legacy services to the cloud. Currently, we are improving the performance and considering reducing the operational cost. After the deployment is finished, we manually notify all the stakeholders. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral / Casual (explanatory tone)

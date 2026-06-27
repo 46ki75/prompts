@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean and clear; one technical-idiom upgrade (`by reference / by value`) would make the comparison semantics read more standard, with one surviving Medium observation. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 Medium · Idiom — technical-idiom
+
+```diff
+- compares references rather than values
++ compares by reference rather than by value
+```
+
+`compares by reference rather than by value` is the standard technical framing: it names the *comparison mode* (reference equality vs. value equality) rather than the operands. Same meaning — learn the `by reference / by value` pattern.
+
+## Revised Sentence
+
+This function compares by reference rather than by value.
+
+## Register
+
+Neutral (technical)

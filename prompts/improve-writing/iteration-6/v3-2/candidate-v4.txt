@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Natural, idiomatic technical English; the only concern is an intent contradiction with the Japanese, which does not affect the score. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+### 1. ⚠️ Possible meaning mismatch
+
+```diff
+- increase the memory usage
++ reduce the memory usage
+```
+
+The English reads as *wanting more memory consumption*, but your Japanese `メモリ使用量を削減したい` states the opposite — you want to **reduce** memory usage. `increase` appears to be a near-pair slip for `reduce`/`decrease`. If you did mean to raise memory usage, ignore this.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

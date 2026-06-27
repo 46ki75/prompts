@@ -1,0 +1,25 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Standard idiomatic technical phrasing that matches the Japanese intent. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

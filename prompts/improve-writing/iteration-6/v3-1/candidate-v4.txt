@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Natural, idiomatic technical English; the only concern is a possible meaning mismatch, which does not affect the score. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+### 1. ⚠️ Possible meaning mismatch
+
+```diff
+- This function has side effects.
++ This function has no side effects.
+```
+
+The English currently reads as *the function does have side effects*. Your Japanese `この関数は副作用がない` states the opposite — that the function has **no** side effects (it is side-effect-free / pure). The English drops the negation, so it asserts the reverse of your stated intent. If you meant the function is free of side effects, use `This function has no side effects`. If you did mean that the function has side effects, ignore this.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)
