@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+A clean, idiomatic technical request with no non-native phrasing; the only thing worth checking is a number consistency, which is surfaced separately and does not affect the score. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+### 1. ⚠️ Possible meaning mismatch
+
+```diff
+- separate the logic and display components
++ separate the logic and the display component
+```
+
+The first sentence says `display components` (plural), but the next sentence refers to `the display component` (singular). As written it could read as if you want to extract several display components. If you intend a single display component, make both singular as shown; if you really do want multiple, keep both plural for consistency. If you already meant one and were just phrasing it loosely, ignore this.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical) — polite request.

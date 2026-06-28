@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+`has side effects` is standard idiomatic technical phrasing with no surviving observations; the meaning mismatch is flagged separately and does not affect the score. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+### 1. ⚠️ Possible meaning mismatch
+
+```diff
+- This function has side effects.
++ This function has no side effects.
+```
+
+The English reads as a statement that the function *does* produce side effects. Your Japanese 「副作用がない」 states the opposite — that the function has **no** side effects (it is side-effect-free / pure). The English contradicts your stated intent. If you meant the function is free of side effects, use `has no side effects`. If you did mean it has side effects, ignore this.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

@@ -1,0 +1,41 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean; one light-verb construction could be more direct, but nothing reads as non-native. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 Medium · Idiom — light-verb
+
+```diff
+- make a comparison of the two approaches
++ compare the two approaches
+```
+
+The direct verb `compare` is the standard technical phrasing; the light-verb `make a comparison of` is grammatical but reads heavier. Learn to prefer the direct verb when one exists.
+
+### 2. 💡 Low · Style — concision
+
+```diff
+- the actual best one
++ the best one
+```
+
+`best` is already a superlative, so `actual` is usually dropped. Keep it if you want emphasis on "the genuinely best, after comparing."
+
+## Revised Sentence
+
+We should compare the two approaches and choose the best one.
+
+## Register
+
+Neutral

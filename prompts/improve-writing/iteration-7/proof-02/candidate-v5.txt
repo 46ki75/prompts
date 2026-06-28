@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean, polite, and idiomatic; one phrasing choice could read more precisely. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 Medium · Idiom — preposition
+
+```diff
+- separate the logic and display components
++ separate the logic from the display components
+```
+
+When expressing decoupling, natives use `separate X from Y`. The original `separate X and Y` is grammatical but reads as a list and can be misparsed (`the logic` + `the display components`, vs. components that do both). Learn the `separate ... from ...` collocation for "pull apart" meaning.
+
+## Revised Sentence
+
+Could you refactor `packages/web-qwik/src/routes/anki/index.tsx`? I would like to separate the logic from the display components. The display component should be located in `packages/web-qwik/src/component/` with a Storybook file.
+
+## Register
+
+Neutral (polite technical request)

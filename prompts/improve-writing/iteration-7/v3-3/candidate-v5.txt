@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**4/5 — Near-native**
+
+Grammatically clean; one light-verb nominalization could read more idiomatically. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 High · Idiom — light-verb
+
+```diff
+- do the validation of the input
++ validate the input
+```
+
+Natives use the direct verb `validate` rather than the `do the validation of` light-verb construction; the nominalized form reads heavy and non-native.
+
+## Revised Sentence
+
+We validate the input before we save it to the database.
+
+## Register
+
+Neutral (technical)
