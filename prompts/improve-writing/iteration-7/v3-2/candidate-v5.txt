@@ -1,0 +1,32 @@
+## Naturalness Score
+
+**5/5 — Native-like**
+
+Natural, idiomatic technical English; the only concern is a meaning mismatch handled in Intent Check, which does not affect the score. Polish is optional.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+### 1. ⚠️ Possible meaning mismatch
+
+```diff
+- increase the memory usage
++ reduce the memory usage
+```
+
+Your Japanese `削減` means **reduce / cut down**, but the English `increase the memory usage` states the opposite — raising it. As written, the sentence reads as *wanting to consume more memory*. If you meant lowering it (per 削減), use `reduce the memory usage`. If you did mean increasing it, ignore this.
+
+## Observations
+
+No observations. The phrasing is already native-like.
+
+## Revised Sentence
+
+No revisions needed.
+
+## Register
+
+Neutral (technical)

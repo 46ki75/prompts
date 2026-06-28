@@ -1,0 +1,70 @@
+## Naturalness Score
+
+**2/5 — Awkward**
+
+Systemic light-verb nominalizations (`doing the migration of`, `making the improvement of`, `do the notification of`, `achieve the modernization of`) make it read distinctly non-native; with five surviving High observations the count guard sets the score to 2. Polish recommended.
+
+## Errors
+
+No errors found.
+
+## Intent Check
+
+No intent concerns.
+
+## Observations
+
+### 1. 💡 High · Idiom — light-verb
+
+```diff
+- doing the migration of the legacy services
++ migrating the legacy services
+```
+
+Natives use the direct verb `migrate` rather than the `do the migration of` light-verb construction.
+
+### 2. 💡 High · Idiom — light-verb
+
+```diff
+- making the improvement of the performance
++ improving the performance
+```
+
+`improving` is the standard verbal form; `making the improvement of` reads heavy and non-native.
+
+### 3. 💡 High · Idiom — light-verb
+
+```diff
+- giving the consideration to the reduction of the operational cost
++ considering reducing the operational cost
+```
+
+Stacked nominalizations (`giving the consideration to`, `the reduction of`) collapse into the direct verbs `consider` and `reduce`.
+
+### 4. 💡 High · Idiom — light-verb
+
+```diff
+- do the notification of all the stakeholders
++ notify all the stakeholders
+```
+
+Natives use the direct verb `notify` rather than the `do the notification of` light-verb construction.
+
+### 5. 💡 High · Idiom — light-verb
+
+```diff
+- achieve the modernization of the platform
++ modernize the platform
+```
+
+The nominalized `achieve the modernization of` is a non-native circumlocution; `modernize the platform` is the standard verbal form.
+
+(3 additional lower-impact observations omitted.)
+
+## Revised Sentence
+
+Basically, our team is migrating the legacy services to the cloud. Currently, we are improving the performance and considering reducing the operational cost. After the deployment is finished, we manually notify all the stakeholders. This approach lets us modernize the platform step by step.
+
+## Register
+
+Neutral
